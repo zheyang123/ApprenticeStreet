@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "745334226543",
+    "project_id": "apprenticestreet-4f270",
+    "storage_bucket": "apprenticestreet-4f270.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:745334226543:android:4091270fcb2cdc8410d79a",
+        "android_client_info": {
+          "package_name": "my.rjtechnology.apprenticestreet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "745334226543-1nr2lsatcmso2l5j44v6tbv8v9remjad.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAL7fTpF8jfDvQe9wSUUTzzBH43x1E2PB0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "745334226543-1nr2lsatcmso2l5j44v6tbv8v9remjad.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

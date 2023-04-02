@@ -3,4 +3,22 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_search_job">Search Job</string>
+    <string name="job_title">Job Title</string>
+    <string name="filters">Filters</string>
+    <string name="industries">Industries</string>
+    <string name="locations">Locations</string>
+    <string name="salaries">Salaries</string>
+    <string name="dummy_job_title">Intern Software Engineer</string>
+    <string name="dummy_company_name">Dummy Enterprise Sdn. Bhd.</string>
+    <string name="company_logo">Company Logo</string>
+    <string name="company_photo">Company Photo</string>
+    <string name="kuala_lumpur">Kuala Lumpur</string>
+    <string name="learning_outcome">Learning Outcome</string>
+
+    <string name="dummy_learning_outcome">
+        • Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus aliquet luctus.\n\n
+        • Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus aliquet luctus.\n\n
+        • Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus aliquet luctus.
+    </string>
 </resources>

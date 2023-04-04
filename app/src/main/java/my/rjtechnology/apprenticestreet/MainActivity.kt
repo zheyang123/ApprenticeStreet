@@ -28,14 +28,15 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications, R.id.navigation_progress
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-        var database = Firebase.database.reference
+       // var database = Firebase.database.reference
         //var myRef = database.getReference("message")
-
+        //database.child("users").child("userId1").setValue("zxc")
+       // database.child("users").child("userId2").setValue("xc1")
 
     }
 }

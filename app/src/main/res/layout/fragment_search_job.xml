@@ -6,6 +6,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.searchjob.SearchJobFragment">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="my.rjtechnology.apprenticestreet.ui.searchjob.SearchJobViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -40,6 +46,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/job_title"
                         android:textColorHint="#616161"
+                        android:text="@={viewModel.query}"
                         tools:ignore="TextContrastCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -61,54 +68,150 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/frame"
                         android:overScrollMode="never"
+                        android:fadeScrollbars="false"
                         android:requiresFadingEdge="horizontal">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
-                            <Button
-                                android:id="@+id/button"
+                            <RelativeLayout
+                                android:id="@+id/industriesButtonContainer"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginEnd="4dp"
                                 android:layout_marginBottom="8dp"
-                                android:text="@string/industries"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toStartOf="@+id/button2"
+                                app:layout_constraintEnd_toStartOf="@+id/locationsButtonContainer"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent">
 
-                            <Button
-                                android:id="@+id/button2"
+                                <Button
+                                    android:id="@+id/industriesButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/industries" />
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignTop="@+id/industriesButton"
+                                    android:layout_alignEnd="@+id/industriesButton"
+                                    android:layout_marginEnd="4dp"
+                                    app:cardBackgroundColor="?attr/colorSecondary"
+                                    app:cardElevation="8dp"
+                                    app:cardCornerRadius="4dp"
+                                    app:contentPaddingTop="2dp"
+                                    app:contentPaddingRight="4dp"
+                                    app:contentPaddingBottom="2dp"
+                                    app:contentPaddingLeft="4dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text='@{viewModel.industryCount == 0 ? "ALL" : `` + viewModel.industryCount}'
+                                        android:textColor="#004D40"
+                                        android:textSize="8sp"
+                                        android:textStyle="bold"
+                                        tools:text="@string/all"
+                                        tools:ignore="SmallSp"/>
+
+                                </androidx.cardview.widget.CardView>
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/locationsButtonContainer"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="4dp"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginEnd="4dp"
                                 android:layout_marginBottom="8dp"
-                                android:text="@string/locations"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toStartOf="@+id/button3"
-                                app:layout_constraintStart_toEndOf="@+id/button"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintEnd_toStartOf="@+id/salariesButtonContainer"
+                                app:layout_constraintStart_toEndOf="@+id/industriesButtonContainer"
+                                app:layout_constraintTop_toTopOf="parent">
 
-                            <Button
-                                android:id="@+id/button3"
+                                <Button
+                                    android:id="@+id/locationsButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/locations" />
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignTop="@+id/locationsButton"
+                                    android:layout_alignEnd="@+id/locationsButton"
+                                    android:layout_marginEnd="4dp"
+                                    app:cardBackgroundColor="?attr/colorSecondary"
+                                    app:cardElevation="8dp"
+                                    app:cardCornerRadius="4dp"
+                                    app:contentPaddingTop="2dp"
+                                    app:contentPaddingRight="4dp"
+                                    app:contentPaddingBottom="2dp"
+                                    app:contentPaddingLeft="4dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text='@{viewModel.locationCount == 0 ? "ALL" : `` + viewModel.locationCount}'
+                                        android:textColor="#004D40"
+                                        android:textSize="8sp"
+                                        android:textStyle="bold"
+                                        tools:text="@string/all"
+                                        tools:ignore="SmallSp" />
+
+                                </androidx.cardview.widget.CardView>
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/salariesButtonContainer"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="4dp"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginEnd="8dp"
                                 android:layout_marginBottom="8dp"
-                                android:text="@string/salaries"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/button2"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintStart_toEndOf="@+id/locationsButtonContainer"
+                                app:layout_constraintTop_toTopOf="parent">
 
+                                <Button
+                                    android:id="@+id/salariesButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/salaries" />
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignTop="@+id/salariesButton"
+                                    android:layout_alignEnd="@+id/salariesButton"
+                                    android:layout_marginEnd="4dp"
+                                    app:cardBackgroundColor="?attr/colorSecondary"
+                                    app:cardElevation="8dp"
+                                    app:cardCornerRadius="4dp"
+                                    app:contentPaddingTop="2dp"
+                                    app:contentPaddingRight="4dp"
+                                    app:contentPaddingBottom="2dp"
+                                    app:contentPaddingLeft="4dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@{@string/min_value(viewModel.minSalaryPerMonth)}"
+                                        android:textColor="#004D40"
+                                        android:textSize="8sp"
+                                        android:textStyle="bold"
+                                        tools:text=">= 1000"
+                                        tools:ignore="SmallSp" />
+
+                                </androidx.cardview.widget.CardView>
+                            </RelativeLayout>
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </HorizontalScrollView>
 
@@ -131,6 +234,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scrollbars="vertical"
+            android:fadeScrollbars="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,24 +1,65 @@
 <resources>
     <string name="app_name">ApprenticeStreet</string>
+
+    <!-- Common -->
+    <string name="all">ALL</string>
+    <string name="icon">Icon</string>
+    <string name="min_value">Min %d</string>
+
+    <!-- Titles -->
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="title_search_job">Search Job</string>
-    <string name="job_title">Job Title</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!-- Filters -->
     <string name="filters">Filters</string>
+    <string name="job_title">Job Title</string>
+
+    <!-- Filter Options -->
     <string name="industries">Industries</string>
     <string name="locations">Locations</string>
     <string name="salaries">Salaries</string>
+
+    <!-- Job Details -->
+    <string name="company_logo">Company Logo</string>
     <string name="dummy_job_title">Intern Software Engineer</string>
     <string name="dummy_company_name">Dummy Enterprise Sdn. Bhd.</string>
-    <string name="company_logo">Company Logo</string>
     <string name="company_photo">Company Photo</string>
-    <string name="kuala_lumpur">Kuala Lumpur</string>
     <string name="learning_outcome">Learning Outcome</string>
-
     <string name="dummy_learning_outcome">
         • Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus aliquet luctus.\n\n
         • Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus aliquet luctus.\n\n
         • Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus aliquet luctus.
     </string>
+
+    <!-- Industries -->
+    <string name="art_media">Art &amp; Media</string>
+    <string name="construction">Construction</string>
+    <string name="engineering">Engineering</string>
+    <string name="healthcare">Healthcare</string>
+    <string name="hotel">Hotel</string>
+    <string name="information_technology">Information Technology</string>
+    <string name="manufacturing">Manufacturing</string>
+    <string name="restaurant">Restaurant</string>
+    <string name="services">Services</string>
+
+    <!-- Locations -->
+    <string name="johor">Johor</string>
+    <string name="kedah">Kedah</string>
+    <string name="kelantan">Kelantan</string>
+    <string name="kuala_lumpur">Kuala Lumpur</string>
+    <string name="melaka">Melaka</string>
+    <string name="negeri_sembilan">Negeri Sembilan</string>
+    <string name="pahang">Pahang</string>
+    <string name="penang">Penang</string>
+    <string name="perak">Perak</string>
+    <string name="perlis">Perlis</string>
+    <string name="sabah">Sabah</string>
+    <string name="sarawak">Sarawak</string>
+    <string name="selangor">Selangor</string>
+    <string name="terangganu">Terangganu</string>
+
+    <!-- Salaries -->
+    <string name="min_salary_per_month">Min Salary (MYR) / Month</string>
 </resources>

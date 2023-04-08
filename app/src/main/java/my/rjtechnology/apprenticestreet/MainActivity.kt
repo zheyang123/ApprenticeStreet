@@ -1,6 +1,7 @@
 package my.rjtechnology.apprenticestreet
 
 import android.os.Bundle
+import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -28,7 +29,10 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
+                R.id.navigation_home,
+                R.id.navigation_dashboard,
+                R.id.navigation_search_job,
+                R.id.navigation_notifications
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -38,5 +42,13 @@ class MainActivity : AppCompatActivity() {
         database.child("users").child("userId1").setValue("zxc")
         database.child("users").child("userId2").setValue("xc1")
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        android.R.id.home -> {
+            findNavController(R.id.nav_host_fragment_activity_main).navigateUp()
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 }

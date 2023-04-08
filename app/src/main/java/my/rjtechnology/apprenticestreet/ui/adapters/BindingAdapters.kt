@@ -2,6 +2,7 @@ package my.rjtechnology.apprenticestreet.ui.adapters
 
 import android.util.TypedValue
 import android.view.ViewGroup.MarginLayoutParams
+import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
 
@@ -11,4 +12,8 @@ import androidx.databinding.BindingAdapter
     ).toInt()
 
     view.requestLayout()
+}
+
+@BindingAdapter("src") fun setImageResource(view: ImageView, value: Int) {
+    view.setImageResource(value)
 }

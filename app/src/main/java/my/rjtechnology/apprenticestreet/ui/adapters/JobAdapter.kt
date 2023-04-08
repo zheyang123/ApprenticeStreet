@@ -7,7 +7,7 @@ import my.rjtechnology.apprenticestreet.databinding.ItemJobBinding
 import my.rjtechnology.apprenticestreet.models.Job
 
 class JobAdapter : RecyclerView.Adapter<JobAdapter.ViewHolder>() {
-    // TODO: Fetch jobs from database
+    // TODO: Fetch jobs from database -> list of jobs
     private val data = List(5) { }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =

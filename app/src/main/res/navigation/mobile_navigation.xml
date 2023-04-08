@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_search_job">
+    app:startDestination="@+id/navigation_home">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -29,6 +29,38 @@
         android:id="@+id/navigation_search_job"
         android:name="my.rjtechnology.apprenticestreet.ui.searchjob.SearchJobFragment"
         android:label="@string/title_search_job"
-        tools:layout="@layout/fragment_search_job" />
+        tools:layout="@layout/fragment_search_job">
+
+        <action
+            android:id="@+id/action_navigation_search_job_to_navigation_industries"
+            app:destination="@id/navigation_industries" />
+
+        <action
+            android:id="@+id/action_navigation_search_job_to_navigation_locations"
+            app:destination="@id/navigation_locations" />
+
+        <action
+            android:id="@+id/action_navigation_search_job_to_navigation_salaries"
+            app:destination="@id/navigation_salaries" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_industries"
+        android:name="my.rjtechnology.apprenticestreet.ui.industries.IndustriesFragment"
+        android:label="@string/industries"
+        tools:layout="@layout/fragment_industries" />
+
+    <fragment
+        android:id="@+id/navigation_locations"
+        android:name="my.rjtechnology.apprenticestreet.ui.locations.LocationsFragment"
+        android:label="@string/locations"
+        tools:layout="@layout/fragment_locations" />
+
+    <fragment
+        android:id="@+id/navigation_salaries"
+        android:name="my.rjtechnology.apprenticestreet.ui.salaries.SalariesFragment"
+        android:label="@string/min_salary_per_month"
+        tools:layout="@layout/fragment_salaries" />
 
 </navigation>

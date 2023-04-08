@@ -20,7 +20,12 @@ class SearchJobFragment : Fragment() {
         val viewModel = ViewModelProvider(requireParentFragment())[SearchJobViewModel::class.java]
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
-        binding.jobList.adapter = JobAdapter()
+        val adapter = JobAdapter()
+        binding.jobList.adapter = adapter
+
+        viewModel.jobRepo.allJobs.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
 
         val navController = findNavController()
 

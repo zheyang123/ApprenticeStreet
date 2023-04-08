@@ -6,7 +6,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable name="filter" type="my.rjtechnology.apprenticestreet.models.Filter" />
+        <variable name="model" type="my.rjtechnology.apprenticestreet.models.Filter" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -34,7 +34,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:src="@{filter.iconRes}"
+                app:src="@{model.iconRes}"
                 tools:ignore="ImageContrastCheck"
                 tools:srcCompat="@mipmap/ic_launcher" />
 
@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="@{filter.label}"
+                android:text="@{model.label}"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView4"
@@ -55,7 +55,7 @@
                 android:id="@+id/checkBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="@={filter.selected}"
+                android:checked="@={model.selected}"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imageView4" />

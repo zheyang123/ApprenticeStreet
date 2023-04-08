@@ -20,7 +20,7 @@ class FilterAdapter(private val lifecycleOwner: LifecycleOwner, private val data
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val filter = data[position]
-        holder.binding.filter = filter
+        holder.binding.model = filter
 
         holder.binding.card.setOnClickListener {
             filter.isSelected.value = !filter.isSelected.value!!

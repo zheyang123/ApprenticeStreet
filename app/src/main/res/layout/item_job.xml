@@ -6,7 +6,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="job" type="my.rjtechnology.apprenticestreet.models.Job" />
+        <import type="android.view.View" />
+        <variable name="model" type="my.rjtechnology.apprenticestreet.models.JobExt" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -17,7 +18,7 @@
         android:layout_marginEnd="8dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        app:marginBottom="@{job.last ? 8.0f : 0.0f}"
+        app:marginBottom="@{model.job.last ? 8.0f : 0.0f}"
         app:cardCornerRadius="4dp"
         app:cardElevation="4dp">
 
@@ -48,11 +49,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="@string/dummy_job_title"
+                android:text="@{model.job.title}"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
-                app:layout_constraintTop_toTopOf="@+id/imageView2" />
+                app:layout_constraintTop_toTopOf="@+id/imageView2"
+                tools:text="@string/dummy_job_title" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -60,9 +62,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
-                android:text="@string/dummy_company_name"
+                android:text="@{model.job.companyName}"
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                tools:text="@string/dummy_company_name" />
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -81,18 +84,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/kuala_lumpur"
+                android:text="@{model.job.location}"
                 app:layout_constraintStart_toStartOf="@+id/imageView2"
-                app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView3"
+                tools:text="@string/kuala_lumpur" />
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="MYR 500 - 1000 per month"
+                android:text="@{@string/salary_range(model.job.minSalary, model.job.maxSalary)}"
+                android:visibility="@{model.job.minSalary != null &amp;&amp; model.job.maxSalary != null ? View.VISIBLE : View.GONE}"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                tools:text="@string/dummy_salary_range" />
 
             <TextView
                 android:id="@+id/textView6"

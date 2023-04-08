@@ -26,6 +26,8 @@
     <string name="dummy_job_title">Intern Software Engineer</string>
     <string name="dummy_company_name">Dummy Enterprise Sdn. Bhd.</string>
     <string name="company_photo">Company Photo</string>
+    <string name="salary_range">MYR %1$d – %2$d per month</string>
+    <string name="dummy_salary_range">MYR 500 – 1000 per month</string>
     <string name="learning_outcome">Learning Outcome</string>
     <string name="dummy_learning_outcome">
         • Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus aliquet luctus.\n\n

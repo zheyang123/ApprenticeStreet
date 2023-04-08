@@ -16,7 +16,7 @@ class JobAdapter : ListAdapter<JobExt, JobAdapter.ViewHolder>(Comparator()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        item.job.isLast = position == itemCount - 1
+        item.isLast = position == itemCount - 1
         holder.binding.model = item
     }
 

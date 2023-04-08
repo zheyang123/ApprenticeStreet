@@ -18,7 +18,7 @@
         android:layout_marginEnd="8dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        app:marginBottom="@{model.job.last ? 8.0f : 0.0f}"
+        app:marginBottom="@{model.last ? 8.0f : 0.0f}"
         app:cardCornerRadius="4dp"
         app:cardElevation="4dp">
 
@@ -117,7 +117,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
-                android:text="@string/dummy_learning_outcome"
+                android:text="@{model.learningOutcomesText}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView6"

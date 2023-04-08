@@ -4,7 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import java.util.UUID
 
 @Entity(
     tableName = "learning_outcomes",
@@ -17,7 +16,7 @@ import java.util.UUID
         )
     ]
 ) data class LearningOutcome(
-    @PrimaryKey val id: UUID,
+    @PrimaryKey val id: String,
     val desc: String,
-    @ColumnInfo(name = "job_id") val jobId: UUID,
+    @ColumnInfo(name = "job_id", index = true) val jobId: String,
 )

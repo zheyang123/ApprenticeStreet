@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.postjob.PostJobFragment">
+    
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="my.rjtechnology.apprenticestreet.ui.postjob.PostJobViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/jobTitleContainer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:endIconMode="clear_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/jobTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/job_title"
+                    android:textColorHint="#616161"
+                    tools:ignore="TextContrastCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                android:id="@+id/location"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="@string/location"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@+id/jobTitleContainer"
+                app:layout_constraintStart_toStartOf="@+id/jobTitleContainer"
+                app:layout_constraintTop_toBottomOf="@+id/jobTitleContainer">
+
+                <AutoCompleteTextView
+                    android:id="@+id/location_filled_exposed_dropdown"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:labelFor="@+id/location_filled_exposed_dropdown"
+                    android:textColorHint="#616161"
+                    tools:ignore="TextContrastCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <CheckBox
+                android:id="@+id/displaySalaries"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/display_salary_range"
+                android:checked="@={viewModel.showSalaries}"
+                app:layout_constraintStart_toStartOf="@+id/location"
+                app:layout_constraintTop_toBottomOf="@+id/location" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/salariesContainer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/location"
+                app:layout_constraintStart_toStartOf="@+id/displaySalaries"
+                app:layout_constraintTop_toBottomOf="@+id/displaySalaries">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/minSalaryContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{viewModel.showSalaries ? View.VISIBLE : View.GONE}"
+                    app:endIconMode="clear_text"
+                    app:layout_constraintEnd_toEndOf="@+id/salariesContainer"
+                    app:layout_constraintStart_toStartOf="@+id/salariesContainer"
+                    app:layout_constraintTop_toTopOf="@+id/salariesContainer">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/minSalary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/min_salary_per_month"
+                        android:inputType="number" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/maxSalaryContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:visibility="@{viewModel.showSalaries ? View.VISIBLE : View.GONE}"
+                    app:endIconMode="clear_text"
+                    app:layout_constraintEnd_toEndOf="@+id/minSalaryContainer"
+                    app:layout_constraintStart_toStartOf="@+id/minSalaryContainer"
+                    app:layout_constraintTop_toBottomOf="@+id/minSalaryContainer">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/maxSalary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/max_salary_per_month"
+                        android:inputType="number" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/jobDesc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
+                app:layout_constraintEnd_toEndOf="@+id/salariesContainer"
+                app:layout_constraintStart_toStartOf="@+id/salariesContainer"
+                app:layout_constraintTop_toBottomOf="@+id/salariesContainer">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/jobDescIcon"
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:contentDescription="@string/job_desc"
+                        android:src="@drawable/job_desc"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/jobDescLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/job_desc"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/jobDescIcon"
+                        app:layout_constraintTop_toTopOf="@+id/jobDescIcon" />
+
+                    <TextView
+                        android:id="@+id/jobDescSummary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/entered_word_count"
+                        app:layout_constraintStart_toStartOf="@+id/jobDescLabel"
+                        app:layout_constraintTop_toBottomOf="@+id/jobDescLabel" />
+
+                    <ImageView
+                        android:id="@+id/showJobDesc"
+                        android:layout_width="32dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:contentDescription="@string/show_more"
+                        android:src="@drawable/next"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/learningOutcome"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/jobDesc"
+                app:layout_constraintStart_toStartOf="@+id/jobDesc"
+                app:layout_constraintTop_toBottomOf="@+id/jobDesc">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/learningOutcomeIcon"
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:contentDescription="@string/learning_outcome"
+                        android:src="@drawable/progress"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/learningOutcomeLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/learning_outcome"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/learningOutcomeIcon"
+                        app:layout_constraintTop_toTopOf="@+id/learningOutcomeIcon" />
+
+                    <TextView
+                        android:id="@+id/learningOutcomeSummary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/entered_progress_count"
+                        app:layout_constraintStart_toStartOf="@+id/learningOutcomeLabel"
+                        app:layout_constraintTop_toBottomOf="@+id/learningOutcomeLabel" />
+
+                    <ImageView
+                        android:id="@+id/showLearningOutcome"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:contentDescription="@string/show_more"
+                        android:src="@drawable/next"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/post_job"
+                app:layout_constraintEnd_toEndOf="@+id/learningOutcome"
+                app:layout_constraintStart_toStartOf="@+id/learningOutcome"
+                app:layout_constraintTop_toBottomOf="@+id/learningOutcome" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

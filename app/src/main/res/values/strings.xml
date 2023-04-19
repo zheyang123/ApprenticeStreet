@@ -1,9 +1,45 @@
 <resources>
     <string name="app_name">ApprenticeStreet</string>
+
+    <!-- Titles -->
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_progress">Progress</string>
+    <string name="title_post_job">Post Job</string>
+
+    <!-- Filters -->
+    <string name="job_title">Job Title</string>
+
+    <!-- Job Details -->
+    <string name="job_desc">Job Description</string>
+    <string name="learning_outcome">Learning Outcome</string>
+
+    <!-- Locations -->
+    <string name="johor">Johor</string>
+    <string name="kedah">Kedah</string>
+    <string name="kelantan">Kelantan</string>
+    <string name="kuala_lumpur">Kuala Lumpur</string>
+    <string name="melaka">Melaka</string>
+    <string name="negeri_sembilan">Negeri Sembilan</string>
+    <string name="pahang">Pahang</string>
+    <string name="penang">Penang</string>
+    <string name="perak">Perak</string>
+    <string name="perlis">Perlis</string>
+    <string name="sabah">Sabah</string>
+    <string name="sarawak">Sarawak</string>
+    <string name="selangor">Selangor</string>
+    <string name="terangganu">Terangganu</string>
+
+    <!-- Salaries -->
+    <string name="min_salary_per_month">Min Salary (MYR) / Month</string>
+    <string name="max_salary_per_month">Max Salary (MYR) / Month</string>
+
+    <!-- Labels -->
+    <string name="location">Location</string>
+    <string name="display_salary_range">Display salary range</string>
+    <string name="entered_word_count">1000 words entered</string>
+    <string name="entered_progress_count">5 progresses entered</string>
+    <string name="show_more">Show more</string>
+    <string name="post_job">Submit Job Posting</string>
 </resources>

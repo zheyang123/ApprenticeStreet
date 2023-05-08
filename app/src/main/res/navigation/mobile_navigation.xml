@@ -5,13 +5,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_progress">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="my.rjtechnology.apprenticestreet.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_progress"
+        android:name="my.rjtechnology.apprenticestreet.ui.progress.progressFragment"
+        android:label="@string/title_progress"
+        tools:layout="@layout/fragment_progress" />
 
     <fragment
         android:id="@+id/navigation_dashboard"

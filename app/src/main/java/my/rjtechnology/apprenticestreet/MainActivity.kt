@@ -32,15 +32,16 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_progress,
                 R.id.navigation_dashboard,
                 R.id.navigation_search_job,
-                R.id.navigation_notifications
+                R.id.navigation_notifications,
+                R.id.navigation_post_job,
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-        var database = Firebase.database.reference
+       // var database = Firebase.database.reference
         //var myRef = database.getReference("message")
-        database.child("users").child("userId1").setValue("zxc")
-        database.child("users").child("userId2").setValue("xc1")
+        //database.child("users").child("userId1").setValue("zxc")
+       // database.child("users").child("userId2").setValue("xc1")
 
     }
 

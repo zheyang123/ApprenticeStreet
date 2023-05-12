@@ -63,4 +63,9 @@
         android:label="@string/min_salary_per_month"
         tools:layout="@layout/fragment_salaries" />
 
+    <fragment
+        android:id="@+id/navigation_post_job"
+        android:name="my.rjtechnology.apprenticestreet.ui.postjob.PostJobFragment"
+        android:label="@string/title_post_job"
+        tools:layout="@layout/fragment_post_job" />
 </navigation>

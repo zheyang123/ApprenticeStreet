@@ -20,6 +20,7 @@ class LocationsFragment : Fragment() {
         val binding = FragmentLocationsBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(requireParentFragment())[LocationsViewModel::class.java]
         binding.locationList.adapter = FilterAdapter(viewLifecycleOwner, viewModel.filters)
+        binding.locationList.setHasFixedSize(true)
         return binding.root
     }
 

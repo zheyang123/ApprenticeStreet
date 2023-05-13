@@ -20,8 +20,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-    val changePage = Intent(this, companyMainActivity::class.java)
-    startActivity(changePage)
+//     val changePage = Intent(this, companyMainActivity::class.java)
+//     startActivity(changePage)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -36,15 +36,16 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_progress,
                 R.id.navigation_dashboard,
                 R.id.navigation_search_job,
-                R.id.navigation_notifications
+                R.id.navigation_notifications,
+                R.id.navigation_post_job,
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
        // var database = Firebase.database.reference
         //var myRef = database.getReference("message")
-      //  database.child("users").child("userId1").setValue("zxc")
-      //  database.child("users").child("userId2").setValue("xc1")
+        //database.child("users").child("userId1").setValue("zxc")
+       // database.child("users").child("userId2").setValue("xc1")
 
     }
 

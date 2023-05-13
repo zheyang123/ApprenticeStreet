@@ -19,4 +19,6 @@ import androidx.room.PrimaryKey
     @PrimaryKey val id: String,
     val desc: String,
     @ColumnInfo(name = "job_id", index = true) val jobId: String,
-)
+) {
+    constructor(): this(id = "", desc = "", jobId = "")
+}

@@ -44,6 +44,7 @@ class SalariesFragment : Fragment() {
             }
         )
 
+        binding.salaryList.setHasFixedSize(true)
         return binding.root
     }
 }

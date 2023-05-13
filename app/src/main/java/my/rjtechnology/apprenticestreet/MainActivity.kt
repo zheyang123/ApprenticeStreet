@@ -1,5 +1,6 @@
 package my.rjtechnology.apprenticestreet
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -18,6 +19,9 @@ class MainActivity : AppCompatActivity() {
 //test
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+//     val changePage = Intent(this, companyMainActivity::class.java)
+//     startActivity(changePage)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

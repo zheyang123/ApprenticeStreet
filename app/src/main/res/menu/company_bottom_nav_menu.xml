@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/navigation_company_home"
+        android:title="home"
+        android:icon="@drawable/ic_home_black_24dp"
+        ></item>
+    <item
+        android:id="@+id/navigation_company_trainee"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="trainee"></item>
+
+    <item android:id="@+id/navigation_company_help"
+        android:title="home"
+        android:icon="@drawable/ic_home_black_24dp"
+        ></item>
+    <item android:id="@+id/navigation_company_joblist"
+        android:title="home"
+        android:icon="@drawable/ic_home_black_24dp"
+        ></item>
+</menu>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,20 +28,42 @@ class progressFragment : Fragment() {
     ): View {
         val progressViewModel =
             ViewModelProvider(this).get(ProgressViewModel::class.java)
-
         _binding = FragmentProgressBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        val companyRecycler:RecyclerView = binding.comapanyRecycle
-        val layoutManager = LinearLayoutManager(activity)
-        //layoutManager.setItemSpacing(10) // 设置 Item 间距
-
-        companyRecycler.layoutManager = layoutManager
-        companyRecycler.setHasFixedSize(true)
         viewModel = ViewModelProvider(requireParentFragment())[ProgressViewModel::class.java]
-        companyRecycler.adapter=AppiledCompanyProgressAdapter(viewLifecycleOwner,viewModel.company)
-        val textView: TextView = binding.textHome
+
+        if(!viewModel.haveJob)
+        {
+
+            val companyRecycler: RecyclerView = binding.comapanyRecycle
+            val layoutManager = LinearLayoutManager(activity)
+            var progressAdapter: AppiledCompanyProgressAdapter= AppiledCompanyProgressAdapter(viewLifecycleOwner, viewModel.arrayList)
+            viewModel.arrayList.add("item0")
+            viewModel.arrayList.add("item1")
+            viewModel.arrayList.add("item2")
+            companyRecycler.layoutManager = layoutManager
+            companyRecycler.setHasFixedSize(true)
+            companyRecycler.adapter = progressAdapter
+            progressAdapter.onItemClick = {
+                Toast.makeText(context, "hi", Toast.LENGTH_SHORT).show()
+            }
+            progressAdapter.onDeleteClick = {
+                var a = progressAdapter.pos
+                Toast.makeText(context, a.toString(), Toast.LENGTH_SHORT).show()
+                viewModel.arrayList.removeAt(a)
+                progressAdapter.notifyDataSetChanged()
+                //companyRecycler.adapter=progressAdapter
+            }
+
+        }
+        else
+        {
+
+        }
+        // val textView: TextView = binding.textHome
+
         progressViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+            // textView.text = it
         }
         return root
     }

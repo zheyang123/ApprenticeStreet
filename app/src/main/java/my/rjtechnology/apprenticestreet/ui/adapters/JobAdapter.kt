@@ -10,13 +10,16 @@ import my.rjtechnology.apprenticestreet.models.JobExt
 
 class JobAdapter : ListAdapter<JobExt, JobAdapter.ViewHolder>(Comparator()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ViewHolder(
-            ItemJobBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        )
+        ViewHolder(ItemJobBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         item.isLast = position == itemCount - 1
+
+        item.learningOutcomesText = item.learningOutcomes.map { it.desc }.fold("") { acc, text ->
+            "$acc•  $text${System.getProperty("line.separator")}${System.getProperty("line.separator")}"
+        }.trimEnd()
+
         holder.binding.model = item
     }
 

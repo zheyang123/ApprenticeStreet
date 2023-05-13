@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import my.rjtechnology.apprenticestreet.Constants
 import my.rjtechnology.apprenticestreet.R
 import my.rjtechnology.apprenticestreet.databinding.FragmentPostJobBinding
 import my.rjtechnology.apprenticestreet.ui.adapters.FilterlessArrayAdapter
@@ -41,6 +43,22 @@ class PostJobFragment : Fragment() {
                 )
             )
         )
+
+        binding.jobDesc.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_post_job_to_navigation_edit_job_desc)
+        }
+
+        binding.learningOutcome.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_post_job_to_navigation_edit_learning_outcome)
+        }
+
+        findNavController()
+            .currentBackStackEntry
+            ?.savedStateHandle
+            ?.getLiveData<Int>(Constants.JOB_DESC_WORD_COUNT_KEY)
+            ?.observe(viewLifecycleOwner) {
+                viewModel.jobDescWordCount.value = it
+            }
 
         return binding.root
     }

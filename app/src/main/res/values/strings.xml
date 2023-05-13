@@ -12,6 +12,8 @@
     <string name="title_search_job">Search Job</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_post_job">Post Job</string>
+    <string name="title_edit_job_desc">Edit Job Description</string>
+    <string name="title_edit_learning_outcome">Edit Learning Outcome</string>
 
     <!-- Filters -->
     <string name="filters">Filters</string>
@@ -71,8 +73,16 @@
     <string name="location">Location</string>
     <string name="display_salary_range">Display salary range</string>
     <string name="job_desc">Job Description</string>
-    <string name="entered_word_count">1000 words entered</string>
+    <string name="entered_word_count">%d words entered</string>
     <string name="entered_progress_count">5 progresses entered</string>
     <string name="show_more">Show more</string>
     <string name="post_job">Submit Job Posting</string>
+
+    <!-- Actions -->
+    <string name="add_new_progress">Add New Progress</string>
+
+    <!-- Error Messages -->
+    <string name="fetch_job_failed_err_msg">
+        Failed to fetch available jobs. Please try again.
+    </string>
 </resources>

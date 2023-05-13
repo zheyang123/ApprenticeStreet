@@ -11,4 +11,15 @@ import androidx.room.*
     val location: String,
     @ColumnInfo(name = "min_salary") val minSalary: Int?,
     @ColumnInfo(name = "max_salary") val maxSalary: Int?,
-)
+) {
+    constructor() : this(
+        id = "",
+        iconUri = null,
+        title = "",
+        companyName = "",
+        companyBannerUri = null,
+        location = "",
+        minSalary = null,
+        maxSalary = null
+    )
+}

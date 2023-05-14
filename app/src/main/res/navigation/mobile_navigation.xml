@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_navigation_search_job_to_navigation_salaries"
             app:destination="@id/navigation_salaries" />
+        <action
+            android:id="@+id/action_navigation_search_job_to_navigation_job_view"
+            app:destination="@id/navigation_job_view" />
 
     </fragment>
 
@@ -89,5 +92,11 @@
         android:name="my.rjtechnology.apprenticestreet.ui.editlearningoutcome.EditLearningOutcomeFragment"
         android:label="@string/title_edit_learning_outcome"
         tools:layout="@layout/fragment_edit_learning_outcome" />
+
+    <fragment
+        android:id="@+id/navigation_job_view"
+        android:name="my.rjtechnology.apprenticestreet.ui.jobView.JobViewFragment"
+        android:label="@string/title_job_view"
+        tools:layout="@layout/fragment_job_view" />
 
 </navigation>

@@ -9,5 +9,7 @@ object Constants {
     // Preference keys
     const val NEXT_JOB_ID_KEY = "nextJobKey"
 
-    const val JOB_DESC_WORD_COUNT_KEY = "jobDescWordCount"
+    // Job keys
+    const val JOB_DESC_KEY = "jobDesc"
+    const val LEARNING_OUTCOME_KEY = "learningOutcome"
 }

@@ -24,18 +24,13 @@ class EditJobDescFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        val jobDesc = viewModel.jobDesc.trim()
 
         findNavController()
             .currentBackStackEntry
             ?.savedStateHandle
             ?.set(
-                Constants.JOB_DESC_WORD_COUNT_KEY,
-                if (jobDesc.isEmpty()) {
-                    0
-                } else {
-                    jobDesc.split("\\s+".toRegex()).size
-                }
+                Constants.JOB_DESC_KEY,
+                viewModel.jobDesc.trim()
             )
     }
 }

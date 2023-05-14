@@ -136,10 +136,11 @@ class SearchJobFragment : Fragment() {
                 viewModel.minSalaryPerMonth.value = it
             }
 
-        adapter.onItemClick= {
-          // Toast.makeText(context,adapter.index.toString(), Toast.LENGTH_SHORT).show()
+        adapter.onItemClick = {
+            findNavController().navigate(R.id.action_navigation_search_job_to_navigation_job_view)
 
         }
+
         return binding.root
     }
 

@@ -1,11 +1,13 @@
 package my.rjtechnology.apprenticestreet.models
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
-@Entity(
+@Parcelize @Entity(
     tableName = "learning_outcomes",
     foreignKeys = [
         ForeignKey(
@@ -19,6 +21,6 @@ import androidx.room.PrimaryKey
     @PrimaryKey val id: String,
     val desc: String,
     @ColumnInfo(name = "job_id", index = true) val jobId: String,
-) {
+) : Parcelable {
     constructor(): this(id = "", desc = "", jobId = "")
 }

@@ -50,6 +50,7 @@ class traineeListAdapter(private val context: LifecycleOwner, private val data: 
             traineeAge.text=item.Age.toString()
             traineeJob.text=item.job
             profileImage.setImageBitmap(item.profileImage)
+
            // companyName.text = item.companyName
             //companyStatus.text=item.status
 //            delete.setOnClickListener{

@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import my.rjtechnology.apprenticestreet.Constants
 import my.rjtechnology.apprenticestreet.R
 import my.rjtechnology.apprenticestreet.databinding.FragmentSearchJobBinding
@@ -17,14 +19,34 @@ class SearchJobFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         val binding = FragmentSearchJobBinding.inflate(inflater, container, false)
-        val viewModel = ViewModelProvider(requireParentFragment())[SearchJobViewModel::class.java]
+
+        val viewModel = ViewModelProvider(
+            requireParentFragment(),
+            SearchJobViewModelFactory(
+                requireActivity().application,
+                onDoing = {
+                    binding.jobListContainer.isRefreshing = true
+                },
+                onDone = {
+                    binding.jobListContainer.isRefreshing = false
+                }
+            )
+        )[SearchJobViewModel::class.java]
+
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         val adapter = JobAdapter()
+        val layoutManager = LinearLayoutManager(requireContext())
+        binding.jobList.layoutManager = layoutManager
         binding.jobList.adapter = adapter
+        binding.jobList.setHasFixedSize(true)
 
         viewModel.jobRepo.allJobs.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+            val state = binding.jobList.layoutManager?.onSaveInstanceState()
+
+            adapter.submitList(it) {
+                binding.jobList.layoutManager?.onRestoreInstanceState(state)
+            }
         }
 
         val navController = findNavController()
@@ -40,6 +62,27 @@ class SearchJobFragment : Fragment() {
         binding.salariesButton.setOnClickListener {
             navController.navigate(R.id.action_navigation_search_job_to_navigation_salaries)
         }
+        
+        binding.jobListContainer.setOnRefreshListener {
+            viewModel.refreshJobs {
+                binding.jobListContainer.isRefreshing = false
+            }
+        }
+
+        binding.jobList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val index = layoutManager.findLastVisibleItemPosition()
+
+                if (index != RecyclerView.NO_POSITION && dy > 0 && index == adapter.itemCount - 1) {
+                    binding.jobListContainer.isRefreshing = true
+
+                    viewModel.getNextJobs {
+                        binding.jobListContainer.isRefreshing = false
+                    }
+                }
+            }
+        })
 
         navController
             .currentBackStackEntry

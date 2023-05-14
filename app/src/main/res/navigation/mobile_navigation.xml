@@ -63,4 +63,31 @@
         android:label="@string/min_salary_per_month"
         tools:layout="@layout/fragment_salaries" />
 
+    <fragment
+        android:id="@+id/navigation_post_job"
+        android:name="my.rjtechnology.apprenticestreet.ui.postjob.PostJobFragment"
+        android:label="@string/title_post_job"
+        tools:layout="@layout/fragment_post_job">
+
+        <action
+            android:id="@+id/action_navigation_post_job_to_navigation_edit_job_desc"
+            app:destination="@id/navigation_edit_job_desc" />
+
+        <action
+            android:id="@+id/action_navigation_post_job_to_navigation_edit_learning_outcome"
+            app:destination="@id/navigation_edit_learning_outcome" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_edit_job_desc"
+        android:name="my.rjtechnology.apprenticestreet.ui.editjobdesc.EditJobDescFragment"
+        android:label="@string/title_edit_job_desc"
+        tools:layout="@layout/fragment_edit_job_desc" />
+
+    <fragment
+        android:id="@+id/navigation_edit_learning_outcome"
+        android:name="my.rjtechnology.apprenticestreet.ui.editlearningoutcome.EditLearningOutcomeFragment"
+        android:label="@string/title_edit_learning_outcome"
+        tools:layout="@layout/fragment_edit_learning_outcome" />
+
 </navigation>

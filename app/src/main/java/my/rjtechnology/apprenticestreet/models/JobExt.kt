@@ -10,9 +10,8 @@ data class JobExt(
     @Relation(parentColumn = "id", entityColumn = "job_id")
     val learningOutcomes: List<LearningOutcome>,
 ) {
-    @Ignore val learningOutcomesText = learningOutcomes.map { it.desc }.fold("") { acc, text ->
-        "$acc•  $text${System.getProperty("line.separator")}${System.getProperty("line.separator")}"
-    }
-
+    @Ignore var learningOutcomesText: String = ""
     @Ignore var isLast: Boolean = false
+
+    constructor() : this(job = Job(), learningOutcomes = listOf())
 }

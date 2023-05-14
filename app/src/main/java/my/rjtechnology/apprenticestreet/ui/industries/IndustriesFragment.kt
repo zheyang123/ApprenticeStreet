@@ -20,6 +20,7 @@ class IndustriesFragment : Fragment() {
         val binding = FragmentIndustriesBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(requireParentFragment())[IndustriesViewModel::class.java]
         binding.industryList.adapter = FilterAdapter(viewLifecycleOwner, viewModel.filters)
+        binding.industryList.setHasFixedSize(true)
         return binding.root
     }
 

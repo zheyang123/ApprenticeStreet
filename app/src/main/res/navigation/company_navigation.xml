@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/company_navigation"
+    app:startDestination="@id/navigation_company_home">
+
+    <fragment
+        android:id="@+id/navigation_company_home"
+        android:name="my.rjtechnology.apprenticestreet.ui.companyHome.CompanyHomeFragment"
+        android:label="CompanyHomeFragment" />
+    <fragment
+        android:id="@+id/navigation_company_trainee"
+        android:name="my.rjtechnology.apprenticestreet.ui.companyTrainee.CompanyTraineeFragment"
+        android:label="CompanyTraineeFragment" />
+    <fragment
+        android:id="@+id/navigation_company_joblist"
+        android:name="my.rjtechnology.apprenticestreet.ui.companyJobList.CompanyJobListFragment"
+        android:label="CompanyJobListFragment" />
+    <fragment
+        android:id="@+id/navigation_company_help"
+        android:name="my.rjtechnology.apprenticestreet.ui.companyHelp.CompanyHelpFragment"
+        android:label="fragment_company_job_list"
+        tools:layout="@layout/fragment_company_job_list" />
+</navigation>

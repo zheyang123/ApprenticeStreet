@@ -23,6 +23,7 @@ class JobAdapter : ListAdapter<JobExt, JobAdapter.ViewHolder>(Comparator()) {
         holder.binding.model = item
     }
 
+    override fun getItemId(position: Int) = getItem(position).job.id.hashCode().toLong()
     class ViewHolder(val binding: ItemJobBinding) : RecyclerView.ViewHolder(binding.root)
 
     private class Comparator : DiffUtil.ItemCallback<JobExt>() {

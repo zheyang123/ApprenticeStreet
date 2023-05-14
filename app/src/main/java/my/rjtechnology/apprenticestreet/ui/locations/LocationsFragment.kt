@@ -31,8 +31,8 @@ class LocationsFragment : Fragment() {
             .currentBackStackEntry
             ?.savedStateHandle
             ?.set(
-                Constants.LOCATION_COUNT_KEY,
-                viewModel.filters.count { it.isSelected.value == true }
+                Constants.LOCATIONS_KEY,
+                viewModel.filters.filter { it.isSelected.value == true }.map { it.label }
             )
     }
 }

@@ -11,7 +11,6 @@ import kotlinx.coroutines.launch
 import my.rjtechnology.apprenticestreet.AppDatabase
 import my.rjtechnology.apprenticestreet.R
 import my.rjtechnology.apprenticestreet.models.JobExt
-import kotlin.streams.toList
 
 class JobRepository(private val context: Context) {
     private val jobDao = AppDatabase.get(context).jobDao()
@@ -30,7 +29,7 @@ class JobRepository(private val context: Context) {
             .child("jobs")
             .orderByKey()
             .startAfter(nextKey)
-            .limitToFirst(4)
+            .limitToFirst(32)
             .get()
             .addOnSuccessListener { snapshot ->
                 scope.launch {
@@ -41,8 +40,9 @@ class JobRepository(private val context: Context) {
                         return@launch
                     }
 
-                    if (nextKey == "") clear()
-                    // insertAll(jobs)
+                    if (nextKey == "") jobDao.clear()
+                    jobDao.insertAll(jobs)
+
                     onDone(jobs.last().job.id)
                 }
             }
@@ -50,9 +50,5 @@ class JobRepository(private val context: Context) {
                 Toast.makeText(context, R.string.fetch_job_failed_err_msg, Toast.LENGTH_LONG)
                     .show()
             }
-    }
-
-    @WorkerThread suspend fun clear() {
-        jobDao.clear()
     }
 }

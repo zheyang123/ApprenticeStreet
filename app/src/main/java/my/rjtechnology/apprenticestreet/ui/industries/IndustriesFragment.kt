@@ -31,8 +31,8 @@ class IndustriesFragment : Fragment() {
             .currentBackStackEntry
             ?.savedStateHandle
             ?.set(
-                Constants.INDUSTRY_COUNT_KEY,
-                viewModel.filters.count { it.isSelected.value == true }
+                Constants.INDUSTRIES_KEY,
+                viewModel.filters.filter { it.isSelected.value == true }.map { it.label }
             )
     }
 }

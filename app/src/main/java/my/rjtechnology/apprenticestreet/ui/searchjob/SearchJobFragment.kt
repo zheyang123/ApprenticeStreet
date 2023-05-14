@@ -36,12 +36,29 @@ class SearchJobFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         val adapter = JobAdapter()
+        adapter.setHasStableIds(true)
         val layoutManager = LinearLayoutManager(requireContext())
         binding.jobList.layoutManager = layoutManager
         binding.jobList.adapter = adapter
         binding.jobList.setHasFixedSize(true)
 
+        viewModel.industries.observe(viewLifecycleOwner) {
+            viewModel.syncFilteredJobs()
+        }
+
+        viewModel.locations.observe(viewLifecycleOwner) {
+            viewModel.syncFilteredJobs()
+        }
+
+        viewModel.minSalaryPerMonth.observe(viewLifecycleOwner) {
+            viewModel.syncFilteredJobs()
+        }
+
         viewModel.jobRepo.allJobs.observe(viewLifecycleOwner) {
+            viewModel.syncFilteredJobs()
+        }
+
+        viewModel.filteredJobs.observe(viewLifecycleOwner) {
             val state = binding.jobList.layoutManager?.onSaveInstanceState()
 
             adapter.submitList(it) {
@@ -87,17 +104,17 @@ class SearchJobFragment : Fragment() {
         navController
             .currentBackStackEntry
             ?.savedStateHandle
-            ?.getLiveData<Int>(Constants.INDUSTRY_COUNT_KEY)
-            ?.observe(viewLifecycleOwner) {
-                viewModel.industryCount.value = it
+            ?.getLiveData<List<String>>(Constants.INDUSTRIES_KEY)
+            ?.observe(viewLifecycleOwner) {industries ->
+                viewModel.industries.value = industries
             }
 
         navController
             .currentBackStackEntry
             ?.savedStateHandle
-            ?.getLiveData<Int>(Constants.LOCATION_COUNT_KEY)
+            ?.getLiveData<List<String>>(Constants.LOCATIONS_KEY)
             ?.observe(viewLifecycleOwner) {
-                viewModel.locationCount.value = it
+                viewModel.locations.value = it
             }
 
         navController

@@ -145,7 +145,8 @@ class SearchJobFragment : Fragment() {
             }
 
         adapter.onItemClick = {
-            findNavController().navigate(R.id.action_navigation_search_job_to_navigation_job_view)
+            findNavController()
+                .navigate(SearchJobFragmentDirections.actionNavigationSearchJobToNavigationJobView(it))
         }
 
         return binding.root

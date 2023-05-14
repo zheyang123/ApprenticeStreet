@@ -20,8 +20,8 @@ import kotlinx.parcelize.Parcelize
 ) data class LearningOutcome(
     @PrimaryKey val id: String,
     val desc: String,
-    val progress:Boolean,
+    val progress: Boolean = false,
     @ColumnInfo(name = "job_id", index = true) val jobId: String,
 ) : Parcelable {
-    constructor(): this(id = "",progress=false, desc = "", jobId = "")
+    constructor(): this(id = "", progress=false, desc = "", jobId = "")
 }

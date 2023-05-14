@@ -118,4 +118,5 @@
         Make sure you have at least one progress in learning outcome
     </string>
     <string name="post_job_failed_err_msg">Failed to post a new job. Please try again.</string>
+    <string name="floatingbutton">floatingbutton</string>
 </resources>

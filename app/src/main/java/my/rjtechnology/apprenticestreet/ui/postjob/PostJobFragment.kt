@@ -64,11 +64,11 @@ class PostJobFragment : Fragment() {
         )
 
         binding.jobDesc.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_post_job_to_navigation_edit_job_desc)
+            findNavController().navigate(R.id.action_nav_postJob_to_nav_job_desc)
         }
 
         binding.learningOutcome.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_post_job_to_navigation_edit_learning_outcome)
+            findNavController().navigate(R.id.action_nav_postJob_to_nav_learning_outcome)
         }
 
         binding.submit.setOnClickListener {

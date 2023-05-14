@@ -31,6 +31,6 @@ import kotlin.streams.toList
                 .flatMap { it.learningOutcomes.parallelStream() }
                 .toList()
                 .toTypedArray()
-      )
+        )
     }
 }

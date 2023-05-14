@@ -39,8 +39,9 @@
                     android:id="@+id/jobTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/job_title"
+                    android:hint="@string/required_job_title"
                     android:textColorHint="#616161"
+                    android:text="@={viewModel.jobTitle}"
                     tools:ignore="TextContrastCheck" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -51,7 +52,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="@string/location"
+                android:hint="@string/required_location"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="@+id/jobTitleContainer"
                 app:layout_constraintStart_toStartOf="@+id/jobTitleContainer"
@@ -64,6 +65,7 @@
                     android:inputType="none"
                     android:labelFor="@+id/location_filled_exposed_dropdown"
                     android:textColorHint="#616161"
+                    android:text="@={viewModel.location}"
                     tools:ignore="TextContrastCheck" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -101,7 +103,8 @@
                         android:id="@+id/minSalary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/min_salary_per_month"
+                        android:hint="@string/required_min_salary_per_month"
+                        android:text="@={viewModel.minSalary}"
                         android:inputType="number" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -121,7 +124,8 @@
                         android:id="@+id/maxSalary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/max_salary_per_month"
+                        android:hint="@string/required_max_salary_per_month"
+                        android:text="@={viewModel.maxSalary}"
                         android:inputType="number" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -239,7 +243,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@string/entered_progress_count"
+                        android:text="@{@string/entered_progress_count(viewModel.learningOutcome.size)}"
                         app:layout_constraintStart_toStartOf="@+id/learningOutcomeLabel"
                         app:layout_constraintTop_toBottomOf="@+id/learningOutcomeLabel" />
 

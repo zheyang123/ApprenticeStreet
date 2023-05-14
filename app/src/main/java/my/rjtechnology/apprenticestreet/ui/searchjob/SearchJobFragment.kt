@@ -1,5 +1,6 @@
 package my.rjtechnology.apprenticestreet.ui.searchjob
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,15 +17,21 @@ import my.rjtechnology.apprenticestreet.databinding.FragmentSearchJobBinding
 import my.rjtechnology.apprenticestreet.ui.adapters.JobAdapter
 
 class SearchJobFragment : Fragment() {
+    private lateinit var viewModel: SearchJobViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         val binding = FragmentSearchJobBinding.inflate(inflater, container, false)
 
-        val viewModel = ViewModelProvider(
+        viewModel = ViewModelProvider(
             requireParentFragment(),
             SearchJobViewModelFactory(
                 requireActivity().application,
+                requireActivity()
+                    .getPreferences(Context.MODE_PRIVATE)
+                    .getString(Constants.NEXT_JOB_ID_KEY, "")
+                    .toString(),
                 onDoing = {
                     binding.jobListContainer.isRefreshing = true
                 },
@@ -37,12 +44,33 @@ class SearchJobFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         val adapter = JobAdapter()
+        adapter.setHasStableIds(true)
         val layoutManager = LinearLayoutManager(requireContext())
         binding.jobList.layoutManager = layoutManager
         binding.jobList.adapter = adapter
         binding.jobList.setHasFixedSize(true)
 
+        viewModel.query.observe(viewLifecycleOwner) {
+            viewModel.syncFilteredJobs()
+        }
+
+        viewModel.industries.observe(viewLifecycleOwner) {
+            viewModel.syncFilteredJobs()
+        }
+
+        viewModel.locations.observe(viewLifecycleOwner) {
+            viewModel.syncFilteredJobs()
+        }
+
+        viewModel.minSalaryPerMonth.observe(viewLifecycleOwner) {
+            viewModel.syncFilteredJobs()
+        }
+
         viewModel.jobRepo.allJobs.observe(viewLifecycleOwner) {
+            viewModel.syncFilteredJobs()
+        }
+
+        viewModel.filteredJobs.observe(viewLifecycleOwner) {
             val state = binding.jobList.layoutManager?.onSaveInstanceState()
 
             adapter.submitList(it) {
@@ -88,17 +116,17 @@ class SearchJobFragment : Fragment() {
         navController
             .currentBackStackEntry
             ?.savedStateHandle
-            ?.getLiveData<Int>(Constants.INDUSTRY_COUNT_KEY)
+            ?.getLiveData<List<String>>(Constants.INDUSTRIES_KEY)
             ?.observe(viewLifecycleOwner) {
-                viewModel.industryCount.value = it
+                viewModel.industries.value = it
             }
 
         navController
             .currentBackStackEntry
             ?.savedStateHandle
-            ?.getLiveData<Int>(Constants.LOCATION_COUNT_KEY)
+            ?.getLiveData<List<String>>(Constants.LOCATIONS_KEY)
             ?.observe(viewLifecycleOwner) {
-                viewModel.locationCount.value = it
+                viewModel.locations.value = it
             }
 
         navController
@@ -109,10 +137,20 @@ class SearchJobFragment : Fragment() {
                 viewModel.minSalaryPerMonth.value = it
             }
 
-        adapter.onItemClick= {
-          // Toast.makeText(context,adapter.index.toString(), Toast.LENGTH_SHORT).show()
+        adapter.onItemClick = {
+            findNavController().navigate(R.id.action_navigation_search_job_to_navigation_job_view)
 
         }
+
         return binding.root
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        requireActivity().getPreferences(Context.MODE_PRIVATE)
+            .edit()
+            .putString(Constants.NEXT_JOB_ID_KEY, viewModel.nextJobKey)
+            .apply()
     }
 }

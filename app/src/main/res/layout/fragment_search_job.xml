@@ -113,7 +113,7 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text='@{viewModel.industryCount == 0 ? "ALL" : `` + viewModel.industryCount}'
+                                        android:text='@{viewModel.industries.size() == 0 ? "ALL" : `` + viewModel.industries.size()}'
                                         android:textColor="#004D40"
                                         android:textSize="8sp"
                                         android:textStyle="bold"
@@ -159,7 +159,7 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text='@{viewModel.locationCount == 0 ? "ALL" : `` + viewModel.locationCount}'
+                                        android:text='@{viewModel.locations.size() == 0 ? "ALL" : `` + viewModel.locations.size()}'
                                         android:textColor="#004D40"
                                         android:textSize="8sp"
                                         android:textStyle="bold"

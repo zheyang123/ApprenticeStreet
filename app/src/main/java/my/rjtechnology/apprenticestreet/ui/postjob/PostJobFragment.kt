@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import my.rjtechnology.apprenticestreet.Constants
@@ -52,12 +53,79 @@ class PostJobFragment : Fragment() {
             findNavController().navigate(R.id.action_navigation_post_job_to_navigation_edit_learning_outcome)
         }
 
+        binding.submit.setOnClickListener {
+            // Validations
+            if (viewModel.jobTitle.trim().isEmpty()) {
+                binding.jobTitle.error = getString(R.string.empty_field_err_msg)
+                return@setOnClickListener
+            }
+
+            if (viewModel.location.isEmpty()) {
+                binding.jobTitle.error = getString(R.string.empty_field_err_msg)
+                return@setOnClickListener
+            }
+
+            if (viewModel.showSalaries.value == true) {
+                val minSalary = viewModel.minSalary.toIntOrNull()
+                val maxSalary = viewModel.maxSalary.toIntOrNull()
+
+                if (minSalary == null) {
+                    binding.minSalary.error = getString(R.string.empty_field_err_msg)
+                    return@setOnClickListener
+                }
+
+                if (maxSalary == null) {
+                    binding.maxSalary.error = getString(R.string.empty_field_err_msg)
+                    return@setOnClickListener
+                }
+
+                if (minSalary > maxSalary) {
+                    binding.maxSalary.error = getString(R.string.invalid_salaries_err_msg)
+                    return@setOnClickListener
+                }
+            }
+
+            if (viewModel.jobDesc.value!!.trim().isEmpty()) {
+                binding.jobTitle.error = getString(R.string.empty_field_err_msg)
+                return@setOnClickListener
+            }
+
+            val size = myArrayList.size
+
+            if (size < 1) {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.no_learning_outcome_err_msg),
+                    Toast.LENGTH_LONG
+                ).show()
+
+                return@setOnClickListener
+            }
+
+            // Commit
+
+            val a = viewModel.jobTitle
+            val b = viewModel.location
+            val c = viewModel.showSalaries.value
+            val d = viewModel.minSalary
+            val e = viewModel.maxSalary
+            val f = viewModel.jobDesc.value
+        }
+
         findNavController()
             .currentBackStackEntry
             ?.savedStateHandle
-            ?.getLiveData<Int>(Constants.JOB_DESC_WORD_COUNT_KEY)
+            ?.getLiveData<String>(Constants.JOB_DESC_KEY)
             ?.observe(viewLifecycleOwner) {
-                viewModel.jobDescWordCount.value = it
+                viewModel.jobDesc.value = it
+            }
+
+        findNavController()
+            .currentBackStackEntry
+            ?.savedStateHandle
+            ?.getLiveData<List<String>>(Constants.LEARNING_OUTCOME_KEY)
+            ?.observe(viewLifecycleOwner) {
+                viewModel.learningOutcome.value = it
             }
 
         return binding.root

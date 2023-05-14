@@ -250,5 +250,31 @@
                 tools:listitem="@layout/item_job" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/to_top_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            android:src="@drawable/baseline_arrow_upward_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView"
+            android:contentDescription="@string/to_top" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/to_bottom_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:contentDescription="@string/to_bottom"
+            android:src="@drawable/baseline_arrow_downward_24"
+            app:layout_constraintBottom_toBottomOf="@+id/job_list_container"
+            app:layout_constraintEnd_toEndOf="@+id/job_list_container"
+            tools:ignore="ImageContrastCheck" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

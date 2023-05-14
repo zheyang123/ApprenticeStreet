@@ -137,7 +137,13 @@ class PostJobFragment : Fragment() {
             } else binding.learningOutcomeErrorIcon.visibility = View.GONE
 
             // Commit
-            viewModel.submit()
+
+            val a = viewModel.jobTitle
+            val b = viewModel.location
+            val c = viewModel.showSalaries.value
+            val d = viewModel.minSalary
+            val e = viewModel.maxSalary
+            val f = viewModel.jobDesc.value
         }
 
         findNavController()

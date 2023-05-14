@@ -14,10 +14,10 @@
         android:theme="@style/Theme.ApprenticeStreet"
         tools:targetApi="31">
         <activity
-            android:name=".companyMainActivity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".companyMainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"

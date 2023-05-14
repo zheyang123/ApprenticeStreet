@@ -16,10 +16,36 @@
     <fragment
         android:id="@+id/navigation_company_joblist"
         android:name="my.rjtechnology.apprenticestreet.ui.companyJobList.CompanyJobListFragment"
-        android:label="CompanyJobListFragment" />
+        android:label="CompanyJobListFragment" >
+        <action
+            android:id="@+id/action_navigation_company_joblist_to_nav_postJob"
+            app:destination="@id/nav_postJob" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_company_help"
         android:name="my.rjtechnology.apprenticestreet.ui.companyHelp.CompanyHelpFragment"
         android:label="fragment_company_job_list"
         tools:layout="@layout/fragment_company_job_list" />
+    <fragment
+        android:id="@+id/nav_postJob"
+        android:name="my.rjtechnology.apprenticestreet.ui.postjob.PostJobFragment"
+        android:label="fragment_post_job"
+        tools:layout="@layout/fragment_post_job" >
+        <action
+            android:id="@+id/action_nav_postJob_to_editJobDescFragment"
+            app:destination="@id/nav_job_desc" />
+        <action
+            android:id="@+id/action_nav_postJob_to_editLearningOutcomeFragment2"
+            app:destination="@id/nav_leaning_outcome" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_job_desc"
+        android:name="my.rjtechnology.apprenticestreet.ui.editjobdesc.EditJobDescFragment"
+        android:label="fragment_edit_job_desc"
+        tools:layout="@layout/fragment_edit_job_desc" />
+    <fragment
+        android:id="@+id/nav_leaning_outcome"
+        android:name="my.rjtechnology.apprenticestreet.ui.editlearningoutcome.EditLearningOutcomeFragment"
+        android:label="fragment_edit_learning_outcome"
+        tools:layout="@layout/fragment_edit_learning_outcome" />
 </navigation>

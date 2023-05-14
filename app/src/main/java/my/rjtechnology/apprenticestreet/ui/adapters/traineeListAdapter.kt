@@ -8,13 +8,13 @@ import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import my.rjtechnology.apprenticestreet.R
-import my.rjtechnology.apprenticestreet.models.AppiledProgress
+import my.rjtechnology.apprenticestreet.models.Trainee
 
-class traineeListAdapter(private val context: LifecycleOwner, private val data: List<AppiledProgress>) :
+class traineeListAdapter(private val context: LifecycleOwner, private val data: List<Trainee>) :
     RecyclerView.Adapter<traineeListAdapter.ViewHolder>() {
 
-    var onItemClick:((AppiledProgress)->Unit)?=null
-    var onDeleteClick:((AppiledProgress)->Unit)?=null
+    var onItemClick:((Trainee)->Unit)?=null
+  //  var onDeleteClick:((companyTrainee)->Unit)?=null
     var pos = 0
     public
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -40,18 +40,22 @@ class traineeListAdapter(private val context: LifecycleOwner, private val data: 
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val traineeName: TextView = itemView.findViewById(R.id.pgCardViewTraineeName)
-        private val traineeAge: TextView = itemView.findViewById(R.id.pgCradViewStatus)
+        private val traineeAge: TextView = itemView.findViewById(R.id.pgCradViewAge)
         private val traineeJob: TextView = itemView.findViewById(R.id.pgCardViewJob)
         val profileImage:ImageView =itemView.findViewById(R.id.profileImage)
-        val delete:ImageView =itemView.findViewById(R.id.deleteView)
+       // val delete:ImageView =itemView.findViewById(R.id.deleteView)
 
-        fun bind(item:AppiledProgress,index: Int) {
+        fun bind(item:Trainee, index: Int) {
+            traineeName.text= item.name
+            traineeAge.text=item.Age.toString()
+            traineeJob.text=item.job
+            profileImage.setImageBitmap(item.profileImage)
            // companyName.text = item.companyName
             //companyStatus.text=item.status
-            delete.setOnClickListener{
-                pos = index
-                onDeleteClick?.invoke(item)
-            }
+//            delete.setOnClickListener{
+//                pos = index
+//                onDeleteClick?.invoke(item)
+//            }
         }
     }
 }

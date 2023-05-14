@@ -37,7 +37,7 @@ class AppiledCompanyProgressAdapter(private val context: LifecycleOwner, private
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val companyName: TextView = itemView.findViewById(R.id.pgCradViewCompanyName)
+        private val companyName: TextView = itemView.findViewById(R.id.pgCardViewCompanyName)
         private val companyStatus: TextView = itemView.findViewById(R.id.pgCradViewStatus)
         val delete:ImageView =itemView.findViewById(R.id.deleteView)
 

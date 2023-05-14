@@ -80,6 +80,9 @@
     <string name="Status">Status</string>
     <string name="learnig_outcome">Learning Outcome</string>
     <string name="apply_job">Apply for this job now</string>
+    <string name="age">Age</string>
+    <string name="job">Job</string>
+    <string name="hintForOutcome">enter a item will learn in your job</string>
     <!-- Actions -->
     <string name="add_new_progress">Add New Progress</string>
 

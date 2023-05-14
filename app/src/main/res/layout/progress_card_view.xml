@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cardView2"
+        android:id="@+id/pgTraineeListCardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/pgCradViewCompanyName"
+            android:id="@+id/pgCardViewCompanyName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -32,7 +32,7 @@
             android:layout_marginTop="20dp"
             android:text="@string/Status"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pgCradViewCompanyName" />
+            app:layout_constraintTop_toBottomOf="@+id/pgCardViewTraineeName" />
 
         <ImageView
             android:id="@+id/deleteView"
@@ -55,7 +55,7 @@
             android:layout_marginTop="20dp"
             android:text="TextView"
             app:layout_constraintStart_toEndOf="@+id/textView10"
-            app:layout_constraintTop_toBottomOf="@+id/pgCradViewCompanyName" />
+            app:layout_constraintTop_toBottomOf="@+id/pgCardViewTraineeName" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

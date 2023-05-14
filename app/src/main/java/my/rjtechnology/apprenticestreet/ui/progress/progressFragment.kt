@@ -1,5 +1,7 @@
 package my.rjtechnology.apprenticestreet.ui.progress
 
+import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -54,9 +56,21 @@ class progressFragment : Fragment() {
             }
             progressAdapter.onDeleteClick = {
                 var a = progressAdapter.pos
-                Toast.makeText(context, a.toString(), Toast.LENGTH_SHORT).show()
-                viewModel.appliedJobList.removeAt(a)
-                progressAdapter.notifyDataSetChanged()
+                val builder = AlertDialog.Builder(requireActivity() as Context)
+                builder.setTitle("Confirmation")
+                builder.setMessage("Are you sure you want to perform this action?")
+                builder.setPositiveButton("Yes") { dialog, which ->
+
+                    Toast.makeText(context, a.toString(), Toast.LENGTH_SHORT).show()
+                    viewModel.appliedJobList.removeAt(a)
+                    progressAdapter.notifyDataSetChanged()
+                }
+                builder.setNegativeButton("No") { dialog, which ->
+                    // 用户选择了 No，什么也不做
+                }
+                builder.show()
+
+
                 //companyRecycler.adapter=progressAdapter
             }
 

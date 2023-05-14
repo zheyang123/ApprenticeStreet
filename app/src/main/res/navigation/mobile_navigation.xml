@@ -8,23 +8,43 @@
     app:startDestination="@+id/navigation_progress">
 
     <fragment
-        android:id="@+id/navigation_progress"
-        android:name="my.rjtechnology.apprenticestreet.ui.progress.progressFragment"
-        android:label="@string/title_progress"
-        tools:layout="@layout/fragment_progress" />
+        android:id="@+id/navigation_post_job"
+        android:name="my.rjtechnology.apprenticestreet.ui.postjob.PostJobFragment"
+        android:label="@string/title_post_job"
+        tools:layout="@layout/fragment_post_job">
 
+        <action
+            android:id="@+id/action_navigation_post_job_to_navigation_edit_job_desc"
+            app:destination="@id/navigation_edit_job_desc" />
+
+        <action
+            android:id="@+id/action_navigation_post_job_to_navigation_edit_learning_outcome"
+            app:destination="@id/navigation_edit_learning_outcome" />
+    </fragment>
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="my.rjtechnology.apprenticestreet.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
+        android:id="@+id/navigation_edit_job_desc"
+        android:name="my.rjtechnology.apprenticestreet.ui.editjobdesc.EditJobDescFragment"
+        android:label="@string/title_edit_job_desc"
+        tools:layout="@layout/fragment_edit_job_desc" />
+    <action
+        android:id="@+id/action_navigation_post_job_to_navigation_edit_learning_outcome"
+        app:destination="@id/navigation_edit_learning_outcome" />
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="my.rjtechnology.apprenticestreet.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
-
+        android:id="@+id/navigation_edit_learning_outcome"
+        android:name="my.rjtechnology.apprenticestreet.ui.editlearningoutcome.EditLearningOutcomeFragment"
+        android:label="@string/title_edit_learning_outcome"
+        tools:layout="@layout/fragment_edit_learning_outcome" />
+    <action
+        android:id="@+id/action_navigation_post_job_to_navigation_edit_job_desc"
+        app:destination="@id/navigation_edit_job_desc" />
+    <action
+        android:id="@+id/action_navigation_search_job_to_navigation_locations"
+        app:destination="@id/navigation_locations" />
+    <fragment
+        android:id="@+id/navigation_locations"
+        android:name="my.rjtechnology.apprenticestreet.ui.locations.LocationsFragment"
+        android:label="@string/locations"
+        tools:layout="@layout/fragment_locations" />
     <fragment
         android:id="@+id/navigation_search_job"
         android:name="my.rjtechnology.apprenticestreet.ui.searchjob.SearchJobFragment"
@@ -47,56 +67,46 @@
             app:destination="@id/navigation_job_view" />
 
     </fragment>
-
-    <fragment
-        android:id="@+id/navigation_industries"
-        android:name="my.rjtechnology.apprenticestreet.ui.industries.IndustriesFragment"
-        android:label="@string/industries"
-        tools:layout="@layout/fragment_industries" />
-
-    <fragment
-        android:id="@+id/navigation_locations"
-        android:name="my.rjtechnology.apprenticestreet.ui.locations.LocationsFragment"
-        android:label="@string/locations"
-        tools:layout="@layout/fragment_locations" />
-
-    <fragment
-        android:id="@+id/navigation_salaries"
-        android:name="my.rjtechnology.apprenticestreet.ui.salaries.SalariesFragment"
-        android:label="@string/min_salary_per_month"
-        tools:layout="@layout/fragment_salaries" />
-
-    <fragment
-        android:id="@+id/navigation_post_job"
-        android:name="my.rjtechnology.apprenticestreet.ui.postjob.PostJobFragment"
-        android:label="@string/title_post_job"
-        tools:layout="@layout/fragment_post_job">
-
-        <action
-            android:id="@+id/action_navigation_post_job_to_navigation_edit_job_desc"
-            app:destination="@id/navigation_edit_job_desc" />
-
-        <action
-            android:id="@+id/action_navigation_post_job_to_navigation_edit_learning_outcome"
-            app:destination="@id/navigation_edit_learning_outcome" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/navigation_edit_job_desc"
-        android:name="my.rjtechnology.apprenticestreet.ui.editjobdesc.EditJobDescFragment"
-        android:label="@string/title_edit_job_desc"
-        tools:layout="@layout/fragment_edit_job_desc" />
-
-    <fragment
-        android:id="@+id/navigation_edit_learning_outcome"
-        android:name="my.rjtechnology.apprenticestreet.ui.editlearningoutcome.EditLearningOutcomeFragment"
-        android:label="@string/title_edit_learning_outcome"
-        tools:layout="@layout/fragment_edit_learning_outcome" />
-
     <fragment
         android:id="@+id/navigation_job_view"
         android:name="my.rjtechnology.apprenticestreet.ui.jobView.JobViewFragment"
         android:label="@string/title_job_view"
         tools:layout="@layout/fragment_job_view" />
+    <action
+        android:id="@+id/action_navigation_search_job_to_navigation_salaries"
+        app:destination="@id/navigation_salaries" />
+    <action
+        android:id="@+id/action_navigation_search_job_to_navigation_job_view"
+        app:destination="@id/navigation_job_view" />
+    <fragment
+        android:id="@+id/navigation_salaries"
+        android:name="my.rjtechnology.apprenticestreet.ui.salaries.SalariesFragment"
+        android:label="@string/min_salary_per_month"
+        tools:layout="@layout/fragment_salaries" />
+    <fragment
+        android:id="@+id/navigation_industries"
+        android:name="my.rjtechnology.apprenticestreet.ui.industries.IndustriesFragment"
+        android:label="@string/industries"
+        tools:layout="@layout/fragment_industries" />
+    <action
+        android:id="@+id/action_navigation_search_job_to_navigation_industries"
+        app:destination="@id/navigation_industries" />
+    <fragment
+        android:id="@+id/navigation_progress"
+        android:name="my.rjtechnology.apprenticestreet.ui.progress.progressFragment"
+        android:label="@string/title_progress"
+        tools:layout="@layout/fragment_progress" />
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="my.rjtechnology.apprenticestreet.ui.dashboard.DashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="my.rjtechnology.apprenticestreet.ui.postjob.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
 
 </navigation>

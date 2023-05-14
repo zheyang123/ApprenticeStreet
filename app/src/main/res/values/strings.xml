@@ -111,4 +111,5 @@
     <string name="no_learning_outcome_err_msg">
         Make sure you have at least one progress in learning outcome
     </string>
+    <string name="floatingbutton">floatingbutton</string>
 </resources>

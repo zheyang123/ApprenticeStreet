@@ -42,9 +42,9 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-       // var database = Firebase.database.reference
+      //  var database = Firebase.database.reference
         //var myRef = database.getReference("message")
-        //database.child("users").child("userId1").setValue("zxc")
+      // database.child("users").child("userId1").setValue("zxc")
        // database.child("users").child("userId2").setValue("xc1")
 
     }

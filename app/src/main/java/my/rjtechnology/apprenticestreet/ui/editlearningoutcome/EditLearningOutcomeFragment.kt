@@ -38,8 +38,6 @@ class EditLearningOutcomeFragment : Fragment() {
         progressAdapter.onItemClick = {
             Toast.makeText(context, "hi", Toast.LENGTH_SHORT).show()
         }
-
-
             addNewProgressButton.setOnClickListener {
                 val job = jobEditText.text.toString().trim()
 

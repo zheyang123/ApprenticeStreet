@@ -46,11 +46,11 @@ class PostJobFragment : Fragment() {
         )
 
         binding.jobDesc.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_post_job_to_navigation_edit_job_desc)
+            findNavController().navigate(R.id.action_nav_postJob_to_editJobDescFragment)
         }
 
         binding.learningOutcome.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_post_job_to_navigation_edit_learning_outcome)
+            findNavController().navigate(R.id.action_nav_postJob_to_editLearningOutcomeFragment2)
         }
 
         binding.submit.setOnClickListener {
@@ -90,17 +90,17 @@ class PostJobFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            val size = myArrayList.size
+            //val size = myArrayList.size
 
-            if (size < 1) {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.no_learning_outcome_err_msg),
-                    Toast.LENGTH_LONG
-                ).show()
-
-                return@setOnClickListener
-            }
+//            if (size < 1) {
+//                Toast.makeText(
+//                    requireContext(),
+//                    getString(R.string.no_learning_outcome_err_msg),
+//                    Toast.LENGTH_LONG
+//                ).show()
+//
+//                return@setOnClickListener
+//            }
 
             // Commit
 

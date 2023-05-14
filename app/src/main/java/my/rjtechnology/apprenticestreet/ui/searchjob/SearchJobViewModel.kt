@@ -2,6 +2,7 @@ package my.rjtechnology.apprenticestreet.ui.searchjob
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
@@ -9,16 +10,23 @@ import my.rjtechnology.apprenticestreet.models.JobExt
 import my.rjtechnology.apprenticestreet.repo.JobRepository
 
 class SearchJobViewModel(
-    application: Application, onDoing: () -> Unit = {}, onDone: () -> Unit = {}
+    application: Application,
+    nextJobKey: String = "",
+    onDoing: () -> Unit = {},
+    onDone: () -> Unit = {}
 ) : AndroidViewModel(application) {
 
-    var query = ""
-    val industries = MutableLiveData<List<String>>(listOf())
-    val locations = MutableLiveData<List<String>>(listOf())
+    val query = MutableLiveData("")
+    val industries = MutableLiveData(listOf<String>())
+    val locations = MutableLiveData(listOf<String>())
     val minSalaryPerMonth = MutableLiveData(0)
     val jobRepo = JobRepository(application)
-    val filteredJobs = MutableLiveData<List<JobExt>>(listOf())
-    var nextJobKey = ""
+
+    private val _filteredJobs = MutableLiveData(listOf<JobExt>())
+    val filteredJobs: LiveData<List<JobExt>> get() = _filteredJobs
+
+    var nextJobKey = nextJobKey
+        private set
 
     init {
         viewModelScope.launch {
@@ -26,7 +34,7 @@ class SearchJobViewModel(
                 viewModelScope,
                 onDoing = onDoing,
                 onDone = {
-                    nextJobKey = it
+                    this@SearchJobViewModel.nextJobKey = it
                     onDone()
                 }
             )
@@ -48,8 +56,10 @@ class SearchJobViewModel(
     }
 
     fun syncFilteredJobs() {
-        filteredJobs.value = jobRepo.allJobs.value?.filter { job ->
-            (industries.value?.isEmpty() == true ||
+        _filteredJobs.value = jobRepo.allJobs.value?.filter { job ->
+            query.value!!.lowercase().replace("\\s+".toRegex(), "") in
+                job.job.title.lowercase().replace("\\s+".toRegex(), "") &&
+                (industries.value?.isEmpty() == true ||
                 industries.value?.contains(job.job.industry) == true) &&
                 (locations.value?.isEmpty() == true ||
                 locations.value?.contains(job.job.location) == true) &&

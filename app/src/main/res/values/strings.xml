@@ -77,7 +77,9 @@
     <string name="entered_progress_count">5 progresses entered</string>
     <string name="show_more">Show more</string>
     <string name="post_job">Submit Job Posting</string>
-
+    <string name="Status">Status</string>
+    <string name="learnig_outcome">Learning Outcome</string>
+    <string name="apply_job">Apply for this job now</string>
     <!-- Actions -->
     <string name="add_new_progress">Add New Progress</string>
 

@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import my.rjtechnology.apprenticestreet.databinding.FragmentProgressBinding
+import my.rjtechnology.apprenticestreet.models.AppiledProgress
 import my.rjtechnology.apprenticestreet.ui.adapters.AppiledCompanyProgressAdapter
 
 class progressFragment : Fragment() {
@@ -37,10 +37,15 @@ class progressFragment : Fragment() {
 
             val companyRecycler: RecyclerView = binding.comapanyRecycle
             val layoutManager = LinearLayoutManager(activity)
-            var progressAdapter: AppiledCompanyProgressAdapter= AppiledCompanyProgressAdapter(viewLifecycleOwner, viewModel.arrayList)
-            viewModel.arrayList.add("item0")
-            viewModel.arrayList.add("item1")
-            viewModel.arrayList.add("item2")
+            val trainee1 = AppiledProgress()
+            val trainee2 = AppiledProgress()
+            trainee1.companyName="asd"
+            trainee2.companyName="sssssss"
+            trainee2.status="rejected"
+            viewModel.appliedJobList.add(trainee1)
+            viewModel.appliedJobList.add(trainee2)
+            var progressAdapter: AppiledCompanyProgressAdapter= AppiledCompanyProgressAdapter(viewLifecycleOwner, viewModel.appliedJobList)
+
             companyRecycler.layoutManager = layoutManager
             companyRecycler.setHasFixedSize(true)
             companyRecycler.adapter = progressAdapter
@@ -50,7 +55,7 @@ class progressFragment : Fragment() {
             progressAdapter.onDeleteClick = {
                 var a = progressAdapter.pos
                 Toast.makeText(context, a.toString(), Toast.LENGTH_SHORT).show()
-                viewModel.arrayList.removeAt(a)
+                viewModel.appliedJobList.removeAt(a)
                 progressAdapter.notifyDataSetChanged()
                 //companyRecycler.adapter=progressAdapter
             }

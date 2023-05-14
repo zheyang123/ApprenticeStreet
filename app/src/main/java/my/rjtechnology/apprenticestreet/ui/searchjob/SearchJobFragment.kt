@@ -1,5 +1,6 @@
 package my.rjtechnology.apprenticestreet.ui.searchjob
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,15 +16,21 @@ import my.rjtechnology.apprenticestreet.databinding.FragmentSearchJobBinding
 import my.rjtechnology.apprenticestreet.ui.adapters.JobAdapter
 
 class SearchJobFragment : Fragment() {
+    private lateinit var viewModel: SearchJobViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         val binding = FragmentSearchJobBinding.inflate(inflater, container, false)
 
-        val viewModel = ViewModelProvider(
+        viewModel = ViewModelProvider(
             requireParentFragment(),
             SearchJobViewModelFactory(
                 requireActivity().application,
+                requireActivity()
+                    .getPreferences(Context.MODE_PRIVATE)
+                    .getString(Constants.NEXT_JOB_ID_KEY, "")
+                    .toString(),
                 onDoing = {
                     binding.jobListContainer.isRefreshing = true
                 },
@@ -41,6 +48,10 @@ class SearchJobFragment : Fragment() {
         binding.jobList.layoutManager = layoutManager
         binding.jobList.adapter = adapter
         binding.jobList.setHasFixedSize(true)
+
+        viewModel.query.observe(viewLifecycleOwner) {
+            viewModel.syncFilteredJobs()
+        }
 
         viewModel.industries.observe(viewLifecycleOwner) {
             viewModel.syncFilteredJobs()
@@ -105,8 +116,8 @@ class SearchJobFragment : Fragment() {
             .currentBackStackEntry
             ?.savedStateHandle
             ?.getLiveData<List<String>>(Constants.INDUSTRIES_KEY)
-            ?.observe(viewLifecycleOwner) {industries ->
-                viewModel.industries.value = industries
+            ?.observe(viewLifecycleOwner) {
+                viewModel.industries.value = it
             }
 
         navController
@@ -125,6 +136,19 @@ class SearchJobFragment : Fragment() {
                 viewModel.minSalaryPerMonth.value = it
             }
 
+        adapter.onItemClick= {
+          // Toast.makeText(context,adapter.index.toString(), Toast.LENGTH_SHORT).show()
+
+        }
         return binding.root
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        requireActivity().getPreferences(Context.MODE_PRIVATE)
+            .edit()
+            .putString(Constants.NEXT_JOB_ID_KEY, viewModel.nextJobKey)
+            .apply()
     }
 }

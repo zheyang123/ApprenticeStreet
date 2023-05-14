@@ -1,4 +1,5 @@
 package my.rjtechnology.apprenticestreet.ui.adapters
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,17 +8,16 @@ import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import my.rjtechnology.apprenticestreet.R
-import my.rjtechnology.apprenticestreet.models.AppiledProgress
 
-class AppiledCompanyProgressAdapter(private val context: LifecycleOwner, private val data: List<AppiledProgress>) :
-    RecyclerView.Adapter<AppiledCompanyProgressAdapter.ViewHolder>() {
+class newProgressAdapter (private val context: LifecycleOwner, private val data: List<String>) :
+    RecyclerView.Adapter<newProgressAdapter.ViewHolder>() {
 
-    var onItemClick:((AppiledProgress)->Unit)?=null
-    var onDeleteClick:((AppiledProgress)->Unit)?=null
+    var onItemClick:((String)->Unit)?=null
+    var onDeleteClick:((String)->Unit)?=null
     var pos = 0
     public
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.progress_card_view, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.add_progree_card_view, parent, false)
         return ViewHolder(view)
     }
 
@@ -37,13 +37,11 @@ class AppiledCompanyProgressAdapter(private val context: LifecycleOwner, private
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val companyName: TextView = itemView.findViewById(R.id.pgCardViewCompanyName)
-        private val companyStatus: TextView = itemView.findViewById(R.id.pgCradViewStatus)
-        val delete:ImageView =itemView.findViewById(R.id.deleteView)
+        private val companyName: TextView = itemView.findViewById(R.id.pgCardViewNewProgress)
+        val delete: ImageView =itemView.findViewById(R.id.deleteView)
 
-        fun bind(item:AppiledProgress,index: Int) {
-            companyName.text = item.companyName
-            companyStatus.text=item.status
+        fun bind(item: String, index: Int) {
+            companyName.text = item
             delete.setOnClickListener{
                 pos = index
                 onDeleteClick?.invoke(item)
@@ -51,4 +49,3 @@ class AppiledCompanyProgressAdapter(private val context: LifecycleOwner, private
         }
     }
 }
-

@@ -11,7 +11,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import my.rjtechnology.apprenticestreet.Constants
 import my.rjtechnology.apprenticestreet.databinding.FragmentEditLearningOutcomeBinding
 import my.rjtechnology.apprenticestreet.ui.adapters.AppiledCompanyProgressAdapter
 import my.rjtechnology.apprenticestreet.ui.adapters.newProgressAdapter
@@ -68,5 +70,14 @@ class EditLearningOutcomeFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        findNavController()
+            .currentBackStackEntry
+            ?.savedStateHandle
+            ?.set(Constants.LEARNING_OUTCOME_KEY, viewModel.progressList)
     }
 }

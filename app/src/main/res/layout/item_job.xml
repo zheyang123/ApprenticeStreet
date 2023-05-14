@@ -67,18 +67,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView3"
                 tools:text="@string/dummy_company_name" />
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="0dp"
-                android:layout_height="64dp"
-                android:layout_marginTop="16dp"
-                android:contentDescription="@string/company_photo"
-                android:scaleType="centerCrop"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4"
-                app:srcCompat="@drawable/common_google_signin_btn_text_dark" />
-
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
@@ -86,7 +74,7 @@
                 android:layout_marginTop="8dp"
                 android:text="@{model.job.location}"
                 app:layout_constraintStart_toStartOf="@+id/imageView2"
-                app:layout_constraintTop_toBottomOf="@+id/imageView3"
+                app:layout_constraintTop_toBottomOf="@+id/imageView2"
                 tools:text="@string/kuala_lumpur" />
 
             <TextView

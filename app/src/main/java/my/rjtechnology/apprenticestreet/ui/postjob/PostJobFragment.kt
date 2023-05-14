@@ -22,6 +22,24 @@ class PostJobFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        binding.industryFilledExposedDropdown.setAdapter(
+            FilterlessArrayAdapter(
+                requireContext(),
+                R.layout.item_dropdown_menu_popup,
+                arrayOf(
+                    "Art & Media",
+                    "Construction",
+                    "Engineering",
+                    "Healthcare",
+                    "Hotel",
+                    "Information Technology",
+                    "Manufacturing",
+                    "Restaurant",
+                    "Services",
+                )
+            )
+        )
+
         binding.locationFilledExposedDropdown.setAdapter(
             FilterlessArrayAdapter(
                 requireContext(),
@@ -58,12 +76,17 @@ class PostJobFragment : Fragment() {
             if (viewModel.jobTitle.trim().isEmpty()) {
                 binding.jobTitle.error = getString(R.string.empty_field_err_msg)
                 return@setOnClickListener
-            }
+            } else binding.jobTitle.error = null
+
+            if (viewModel.industry.isEmpty()) {
+                binding.industry.error = getString(R.string.empty_field_err_msg)
+                return@setOnClickListener
+            } else binding.industry.error = null
 
             if (viewModel.location.isEmpty()) {
-                binding.jobTitle.error = getString(R.string.empty_field_err_msg)
+                binding.location.error = getString(R.string.empty_field_err_msg)
                 return@setOnClickListener
-            }
+            } else binding.location.error = null
 
             if (viewModel.showSalaries.value == true) {
                 val minSalary = viewModel.minSalary.toIntOrNull()
@@ -72,27 +95,38 @@ class PostJobFragment : Fragment() {
                 if (minSalary == null) {
                     binding.minSalary.error = getString(R.string.empty_field_err_msg)
                     return@setOnClickListener
-                }
+                } else binding.minSalary.error = null
 
                 if (maxSalary == null) {
                     binding.maxSalary.error = getString(R.string.empty_field_err_msg)
                     return@setOnClickListener
-                }
+                } else binding.maxSalary.error = null
 
                 if (minSalary > maxSalary) {
+                    binding.minSalary.error = getString(R.string.invalid_salaries_err_msg)
                     binding.maxSalary.error = getString(R.string.invalid_salaries_err_msg)
                     return@setOnClickListener
+                } else {
+                    binding.minSalary.error = null
+                    binding.maxSalary.error = null
                 }
             }
 
             if (viewModel.jobDesc.value!!.trim().isEmpty()) {
-                binding.jobTitle.error = getString(R.string.empty_field_err_msg)
+                binding.jobDescErrorIcon.visibility = View.VISIBLE
+
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.empty_job_desc_err_msg),
+                    Toast.LENGTH_LONG
+                ).show()
+
                 return@setOnClickListener
-            }
+            } else binding.jobDescErrorIcon.visibility = View.GONE
 
-            val size = myArrayList.size
+            if (viewModel.learningOutcome.value!!.isEmpty()) {
+                binding.learningOutcomeErrorIcon.visibility = View.VISIBLE
 
-            if (size < 1) {
                 Toast.makeText(
                     requireContext(),
                     getString(R.string.no_learning_outcome_err_msg),
@@ -100,16 +134,10 @@ class PostJobFragment : Fragment() {
                 ).show()
 
                 return@setOnClickListener
-            }
+            } else binding.learningOutcomeErrorIcon.visibility = View.GONE
 
             // Commit
-
-            val a = viewModel.jobTitle
-            val b = viewModel.location
-            val c = viewModel.showSalaries.value
-            val d = viewModel.minSalary
-            val e = viewModel.maxSalary
-            val f = viewModel.jobDesc.value
+            viewModel.submit()
         }
 
         findNavController()

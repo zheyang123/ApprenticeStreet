@@ -4,6 +4,7 @@ import android.os.Parcelable
 import androidx.room.Embedded
 import androidx.room.Ignore
 import androidx.room.Relation
+import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize data class JobExt(
@@ -13,7 +14,7 @@ import kotlinx.parcelize.Parcelize
     val learningOutcomes: List<LearningOutcome>,
 ): Parcelable {
     @Ignore var learningOutcomesText: String = ""
-    @Ignore var isLast: Boolean = false
+    @IgnoredOnParcel @Ignore var isLast: Boolean = false
 
     constructor() : this(job = Job(), learningOutcomes = listOf())
 }

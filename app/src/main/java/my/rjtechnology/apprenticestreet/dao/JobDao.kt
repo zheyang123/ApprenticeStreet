@@ -33,4 +33,9 @@ import kotlin.streams.toList
                 .toTypedArray()
         )
     }
+
+    @Transaction suspend fun insert(job: JobExt) {
+        insert(job.job)
+        insertAll(*job.learningOutcomes.toTypedArray())
+    }
 }

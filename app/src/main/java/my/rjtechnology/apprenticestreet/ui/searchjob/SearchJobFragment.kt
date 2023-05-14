@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -113,6 +112,14 @@ class SearchJobFragment : Fragment() {
             }
         })
 
+        binding.toTopButton.setOnClickListener {
+            binding.jobList.scrollToPosition(0)
+        }
+
+        binding.toBottomButton.setOnClickListener {
+            binding.jobList.scrollToPosition(adapter.itemCount - 1)
+        }
+
         navController
             .currentBackStackEntry
             ?.savedStateHandle
@@ -139,7 +146,6 @@ class SearchJobFragment : Fragment() {
 
         adapter.onItemClick = {
             findNavController().navigate(R.id.action_navigation_search_job_to_navigation_job_view)
-
         }
 
         return binding.root

@@ -42,7 +42,7 @@ class JobRepository(private val context: Context) {
                     }
 
                     if (nextKey == "") clear()
-                    // insertAll(jobs)
+                    jobDao.insertAll(jobs)
                     onDone(jobs.last().job.id)
                 }
             }

@@ -20,13 +20,16 @@ import my.rjtechnology.apprenticestreet.ui.adapters.newProgressAdapter
 import my.rjtechnology.apprenticestreet.ui.progress.ProgressViewModel
 
 class EditLearningOutcomeFragment : Fragment() {
+    private var _binding: FragmentEditLearningOutcomeBinding? = null
+    private val binding get() = _binding!!
     private lateinit var viewModel: EditLearningOutcomeViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentEditLearningOutcomeBinding.inflate(inflater, container, false)
+        _binding = FragmentEditLearningOutcomeBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(requireParentFragment())[EditLearningOutcomeViewModel::class.java]
-        binding.viewModel=viewModel
+        binding.viewModel = viewModel
         val jobEditText =binding.jobEditText
         val addNewProgressButton = binding.addNewProgress
 
@@ -77,5 +80,7 @@ class EditLearningOutcomeFragment : Fragment() {
             .currentBackStackEntry
             ?.savedStateHandle
             ?.set(Constants.LEARNING_OUTCOME_KEY, viewModel.progressList)
+
+        _binding = null
     }
 }

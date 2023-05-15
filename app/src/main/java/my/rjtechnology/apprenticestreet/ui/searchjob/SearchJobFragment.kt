@@ -16,12 +16,14 @@ import my.rjtechnology.apprenticestreet.databinding.FragmentSearchJobBinding
 import my.rjtechnology.apprenticestreet.ui.adapters.JobAdapter
 
 class SearchJobFragment : Fragment() {
+    private var _binding: FragmentSearchJobBinding? = null
+    private val binding get() = _binding!!
     private lateinit var viewModel: SearchJobViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentSearchJobBinding.inflate(inflater, container, false)
+        _binding = FragmentSearchJobBinding.inflate(inflater, container, false)
 
         viewModel = ViewModelProvider(
             requireParentFragment(),
@@ -100,9 +102,25 @@ class SearchJobFragment : Fragment() {
         binding.jobList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                val index = layoutManager.findLastVisibleItemPosition()
+                val firstVisibleIndex = layoutManager.findFirstVisibleItemPosition()
+                val lastVisibleIndex = layoutManager.findLastVisibleItemPosition()
 
-                if (index != RecyclerView.NO_POSITION && dy > 0 && index == adapter.itemCount - 1) {
+                binding.toTopButton.visibility = if (firstVisibleIndex == 0) {
+                    View.GONE
+                } else {
+                    View.VISIBLE
+                }
+
+                binding.toBottomButton.visibility = if (lastVisibleIndex == adapter.itemCount - 1) {
+                    View.GONE
+                } else {
+                    View.VISIBLE
+                }
+
+                if (
+                    lastVisibleIndex != RecyclerView.NO_POSITION && dy > 0 &&
+                    lastVisibleIndex == adapter.itemCount - 1
+                ) {
                     binding.jobListContainer.isRefreshing = true
 
                     viewModel.getNextJobs {
@@ -114,10 +132,12 @@ class SearchJobFragment : Fragment() {
 
         binding.toTopButton.setOnClickListener {
             binding.jobList.scrollToPosition(0)
+            binding.toBottomButton.visibility = View.VISIBLE
         }
 
         binding.toBottomButton.setOnClickListener {
             binding.jobList.scrollToPosition(adapter.itemCount - 1)
+            binding.toTopButton.visibility = View.VISIBLE
         }
 
         navController
@@ -159,5 +179,10 @@ class SearchJobFragment : Fragment() {
             .edit()
             .putString(Constants.NEXT_JOB_ID_KEY, viewModel.nextJobKey)
             .apply()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

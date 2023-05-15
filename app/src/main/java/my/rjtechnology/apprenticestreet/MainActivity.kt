@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_dashboard,
                 R.id.navigation_search_job,
                 R.id.navigation_notifications,
-                R.id.navigation_post_job,
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

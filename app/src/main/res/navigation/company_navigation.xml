@@ -8,11 +8,12 @@
     <fragment
         android:id="@+id/navigation_company_home"
         android:name="my.rjtechnology.apprenticestreet.ui.companyHome.CompanyHomeFragment"
-        android:label="CompanyHomeFragment" />
+        android:label="Company Home" />
+
     <fragment
         android:id="@+id/navigation_company_trainee"
         android:name="my.rjtechnology.apprenticestreet.ui.companyTrainee.CompanyTraineeFragment"
-        android:label="CompanyTraineeFragment" >
+        android:label="Company Trainee" >
         <action
             android:id="@+id/action_navigation_company_trainee_to_traineeDetailFragment"
             app:destination="@id/nav_trainee_detail" />
@@ -20,7 +21,8 @@
     <fragment
         android:id="@+id/navigation_company_joblist"
         android:name="my.rjtechnology.apprenticestreet.ui.companyJobList.CompanyJobListFragment"
-        android:label="CompanyJobListFragment" >
+        android:label="Company Job List">
+
         <action
             android:id="@+id/action_navigation_company_joblist_to_nav_postJob"
             app:destination="@id/nav_postJob" />
@@ -28,29 +30,32 @@
     <fragment
         android:id="@+id/navigation_company_help"
         android:name="my.rjtechnology.apprenticestreet.ui.companyHelp.CompanyHelpFragment"
-        android:label="fragment_company_job_list"
+        android:label="Company Help"
         tools:layout="@layout/fragment_company_job_list" />
     <fragment
         android:id="@+id/nav_postJob"
         android:name="my.rjtechnology.apprenticestreet.ui.postjob.PostJobFragment"
-        android:label="fragment_post_job"
-        tools:layout="@layout/fragment_post_job" >
+        android:label="@string/title_post_job"
+        tools:layout="@layout/fragment_post_job">
+
         <action
-            android:id="@+id/action_nav_postJob_to_editJobDescFragment"
+            android:id="@+id/action_nav_postJob_to_nav_job_desc"
             app:destination="@id/nav_job_desc" />
         <action
-            android:id="@+id/action_nav_postJob_to_editLearningOutcomeFragment2"
-            app:destination="@id/nav_leaning_outcome" />
+            android:id="@+id/action_nav_postJob_to_nav_learning_outcome"
+            app:destination="@id/nav_learning_outcome" />
+
     </fragment>
     <fragment
         android:id="@+id/nav_job_desc"
         android:name="my.rjtechnology.apprenticestreet.ui.editjobdesc.EditJobDescFragment"
-        android:label="fragment_edit_job_desc"
+        android:label="@string/title_edit_job_desc"
         tools:layout="@layout/fragment_edit_job_desc" />
+
     <fragment
-        android:id="@+id/nav_leaning_outcome"
+        android:id="@+id/nav_learning_outcome"
         android:name="my.rjtechnology.apprenticestreet.ui.editlearningoutcome.EditLearningOutcomeFragment"
-        android:label="fragment_edit_learning_outcome"
+        android:label="@string/title_edit_learning_outcome"
         tools:layout="@layout/fragment_edit_learning_outcome" />
     <fragment
         android:id="@+id/nav_trainee_detail"

@@ -87,6 +87,9 @@
     <string name="job_applied">Applied Job</string>
     <string name="Approve">Approve</string>
     <string name="Deline">Deline</string>
+    <string name="required_industry">
+        Industry <b><font color="#FF0000">*</font></b>
+    </string>
     <string name="required_location">
         Location <b><font color="#FF0000">*</font></b>
     </string>
@@ -103,6 +106,8 @@
 
     <!-- Actions -->
     <string name="add_new_progress">Add New Progress</string>
+    <string name="to_bottom">Go to bottom</string>
+    <string name="to_top">Go to top</string>
 
     <!-- Error Messages -->
     <string name="fetch_job_failed_err_msg">
@@ -112,9 +117,11 @@
         Min salary must be less than or equal to max salary
     </string>
     <string name="empty_field_err_msg">This field cannot be empty</string>
+    <string name="empty_job_desc_err_msg">Job description must not be empty</string>
     <string name="no_learning_outcome_err_msg">
         Make sure you have at least one progress in learning outcome
     </string>
+    <string name="post_job_failed_err_msg">Failed to post a new job. Please try again.</string>
     <string name="floatingbutton">floatingbutton</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -1,11 +1,20 @@
 package my.rjtechnology.apprenticestreet.ui.postjob
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
+import my.rjtechnology.apprenticestreet.models.Job
+import my.rjtechnology.apprenticestreet.models.JobExt
+import my.rjtechnology.apprenticestreet.models.LearningOutcome
+import my.rjtechnology.apprenticestreet.repo.JobRepository
+import java.util.UUID
 
-class PostJobViewModel : ViewModel() {
+class PostJobViewModel(application: Application) : AndroidViewModel(application) {
     var jobTitle = ""
+    var industry = ""
     var location = ""
     val showSalaries = MutableLiveData(false)
     var minSalary = ""
@@ -21,6 +30,33 @@ class PostJobViewModel : ViewModel() {
         }
     }
 
-    fun areSalariesValid() =
-        minSalary == "" || maxSalary == "" || minSalary.toInt() <= maxSalary.toInt()
+    private val jobRepo = JobRepository(application)
+
+    fun submit() {
+        viewModelScope.launch {
+            val jobId = UUID.randomUUID().toString()
+
+            jobRepo.insert(
+                JobExt(
+                    job = Job(
+                        id = jobId,
+                        title = jobTitle.trim(),
+                        desc = jobDesc.value.toString(),
+                        industry = industry,
+                        companyName =  "Yee Lee Marketing Sdn Bhd", // TODO: Integrate with user module
+                        location = location,
+                        minSalary = minSalary.toIntOrNull(),
+                        maxSalary = maxSalary.toIntOrNull()
+                    ),
+                    learningOutcomes = learningOutcome.value!!.map {
+                        LearningOutcome(
+                            id = UUID.randomUUID().toString(),
+                            desc = it,
+                            jobId = jobId
+                        )
+                    }
+                )
+            )
+        }
+    }
 }

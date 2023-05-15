@@ -29,7 +29,7 @@ class JobRepository(private val context: Context) {
             .child("jobs")
             .orderByKey()
             .startAfter(nextKey)
-            .limitToFirst(32)
+            .limitToFirst(1000)
             .get()
             .addOnSuccessListener { snapshot ->
                 scope.launch {
@@ -50,5 +50,29 @@ class JobRepository(private val context: Context) {
                 Toast.makeText(context, R.string.fetch_job_failed_err_msg, Toast.LENGTH_LONG)
                     .show()
             }
+    }
+
+    @WorkerThread suspend fun insert(job: JobExt) {
+        jobDao.insert(job)
+
+        Firebase.database.reference
+            .child("jobs")
+            .child(job.job.id)
+            .setValue(job)
+            .addOnFailureListener {
+                Toast.makeText(context, R.string.post_job_failed_err_msg, Toast.LENGTH_LONG).show()
+            }
+
+        Firebase.database.reference
+            .child("jobs")
+            .child(job.job.id)
+            .child("last")
+            .removeValue()
+
+        Firebase.database.reference
+            .child("jobs")
+            .child(job.job.id)
+            .child("learningOutcomesText")
+            .removeValue()
     }
 }

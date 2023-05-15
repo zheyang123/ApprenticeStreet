@@ -17,7 +17,7 @@ import my.rjtechnology.apprenticestreet.ui.companyTrainee.CompanyTraineeViewMode
 
 class CompanyApprovalFragment : Fragment() {
     private lateinit var viewModel:CompanyApprovalViewModel
-    private var _binding: FragmentDashboardBinding? = null
+    private var _binding: FragmentCompanyApprovalBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -40,7 +40,7 @@ class CompanyApprovalFragment : Fragment() {
 
 
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentCompanyApprovalBinding.inflate(inflater, container, false)
         val root: View = binding.root
         // Inflate the layout for this fragment
         return binding.root

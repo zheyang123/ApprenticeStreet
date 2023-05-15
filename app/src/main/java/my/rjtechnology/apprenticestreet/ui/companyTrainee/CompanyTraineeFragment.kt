@@ -21,7 +21,7 @@ import my.rjtechnology.apprenticestreet.ui.companyJobList.CompanyJobListViewMode
 
 
 class CompanyTraineeFragment : Fragment() {
-    private var _binding: FragmentDashboardBinding? = null
+    private var _binding: FragmentCompanyTraineeBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel:CompanyTraineeViewModel
     override fun onCreateView(
@@ -50,7 +50,7 @@ class CompanyTraineeFragment : Fragment() {
         fab.setOnClickListener {
            // val navController = findNavController().navigate(R.id.action_navigation_company_trainee_to_traineeDetailFragment)
         }
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentCompanyTraineeBinding.inflate(inflater, container, false)
         val root: View = binding.root
         return binding.root
         // Inflate the layout for this fragment

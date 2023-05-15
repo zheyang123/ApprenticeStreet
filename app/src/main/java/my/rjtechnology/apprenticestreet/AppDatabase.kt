@@ -6,13 +6,15 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import my.rjtechnology.apprenticestreet.dao.JobApplicationDao
 import my.rjtechnology.apprenticestreet.dao.JobDao
+import my.rjtechnology.apprenticestreet.dao.LoginDao
 import my.rjtechnology.apprenticestreet.models.Job
 import my.rjtechnology.apprenticestreet.models.LearningOutcome
 
-@Database(entities = [Job::class, LearningOutcome::class, ], version = 1, exportSchema = false)
+@Database(entities = [Job::class, LearningOutcome::class,LoginActivity.User::class,LoginActivity.Company::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun jobDao(): JobDao
     abstract fun jobApplicationDao(): JobApplicationDao
+    abstract fun LoginDao(): LoginDao
 
     companion object {
         @Volatile private var INSTANCE: AppDatabase? = null

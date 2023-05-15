@@ -7,16 +7,16 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope.coroutineContext
 import kotlinx.coroutines.launch
-import my.rjtechnology.apprenticestreet.MainActivity
-import my.rjtechnology.apprenticestreet.R
-import my.rjtechnology.apprenticestreet.SelectUserActivity
-import java.util.*
+import my.rjtechnology.apprenticestreet.dao.LoginDao
 
 class LoginActivity : AppCompatActivity() {
 
@@ -38,9 +38,12 @@ class LoginActivity : AppCompatActivity() {
                     scope.launch {
                         val users = snapshot.children.map { child -> child.getValue<User>()!! }
                         loginButton.setOnClickListener{
+                            lifecycleScope.launch { AppDatabase.get(this@LoginActivity).LoginDao().clearUser()}
+                            lifecycleScope.launch { AppDatabase.get(this@LoginActivity).LoginDao().clearCompany()}
                             val emailOrUsernameText = emailOrUsername.text.toString().trim()
                             val passwordText = password.text.toString().trim()
                             var find:Boolean = false
+
                             for(user in users){
                                 if (user.email == emailOrUsernameText && user.password == passwordText){
                                     Toast.makeText(this@LoginActivity, user.status, Toast.LENGTH_SHORT).show()
@@ -50,6 +53,7 @@ class LoginActivity : AppCompatActivity() {
                                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
                                         startActivity(intent)
                                         Toast.makeText(this@LoginActivity, "Login Successful", Toast.LENGTH_SHORT).show()
+                                     lifecycleScope.launch { AppDatabase.get(this@LoginActivity).LoginDao().insert(user)}
                                         break
                                     }else
                                     {
@@ -71,6 +75,7 @@ class LoginActivity : AppCompatActivity() {
                                                     val intent2 = Intent(this@LoginActivity, companyMainActivity::class.java)
                                                     startActivity(intent2)
                                                     Toast.makeText(this@LoginActivity, "Login Successful", Toast.LENGTH_SHORT).show()
+
                                                     break
                                                 }else
                                                 {
@@ -104,8 +109,8 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    data class User(
-        val id: String,
+    @Entity(tableName = "user") data class User(
+        @PrimaryKey val id: String,
         val status:String,
         val email: String,
         val password: String
@@ -113,8 +118,8 @@ class LoginActivity : AppCompatActivity() {
     {
         constructor() : this("", "", "", "")
     }
-    data class Company(
-        val id: String,
+    @Entity(tableName = "company") data class Company(
+       @PrimaryKey val id: String,
         val status:String,
         val companyEmail: String,
         val companyPassword: String

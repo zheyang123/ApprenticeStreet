@@ -80,9 +80,13 @@
     <string name="post_job">Submit Job Posting</string>
     <string name="Status">Status</string>
     <string name="apply_job">Apply for this job now</string>
+    <string name="Fire">Fire</string>
     <string name="required_job_title">
         Job Title <b><font color="#FF0000">*</font></b>
     </string>
+    <string name="job_applied">Applied Job</string>
+    <string name="Approve">Approve</string>
+    <string name="Deline">Deline</string>
     <string name="required_location">
         Location <b><font color="#FF0000">*</font></b>
     </string>
@@ -112,4 +116,6 @@
         Make sure you have at least one progress in learning outcome
     </string>
     <string name="floatingbutton">floatingbutton</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

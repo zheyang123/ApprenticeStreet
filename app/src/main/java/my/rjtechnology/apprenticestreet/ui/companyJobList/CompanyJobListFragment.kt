@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import my.rjtechnology.apprenticestreet.R
 import my.rjtechnology.apprenticestreet.databinding.FragmentCompanyJobListBinding
+import my.rjtechnology.apprenticestreet.databinding.FragmentDashboardBinding
 import my.rjtechnology.apprenticestreet.databinding.FragmentEditLearningOutcomeBinding
 import my.rjtechnology.apprenticestreet.ui.adapters.newProgressAdapter
 import my.rjtechnology.apprenticestreet.ui.editlearningoutcome.EditLearningOutcomeViewModel
@@ -23,7 +24,8 @@ class CompanyJobListFragment : Fragment() {
 
 
     private lateinit var viewModel:CompanyJobListViewModel
-
+    private var _binding: FragmentDashboardBinding? = null
+    private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -63,12 +65,15 @@ class CompanyJobListFragment : Fragment() {
         fab.setOnClickListener {
             val navController = findNavController().navigate(R.id.action_navigation_company_joblist_to_nav_postJob)
         }
+
+        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        val root: View = binding.root
         return binding.root
 
-        // Inflate the layout for this fragment
-      //  return inflater.inflate(R.layout.fragment_company_job_list, container, false)
-
     }
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }

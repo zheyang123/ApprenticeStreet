@@ -12,7 +12,11 @@
     <fragment
         android:id="@+id/navigation_company_trainee"
         android:name="my.rjtechnology.apprenticestreet.ui.companyTrainee.CompanyTraineeFragment"
-        android:label="CompanyTraineeFragment" />
+        android:label="CompanyTraineeFragment" >
+        <action
+            android:id="@+id/action_navigation_company_trainee_to_traineeDetailFragment"
+            app:destination="@id/nav_trainee_detail" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_company_joblist"
         android:name="my.rjtechnology.apprenticestreet.ui.companyJobList.CompanyJobListFragment"
@@ -48,4 +52,9 @@
         android:name="my.rjtechnology.apprenticestreet.ui.editlearningoutcome.EditLearningOutcomeFragment"
         android:label="fragment_edit_learning_outcome"
         tools:layout="@layout/fragment_edit_learning_outcome" />
+    <fragment
+        android:id="@+id/nav_trainee_detail"
+        android:name="my.rjtechnology.apprenticestreet.ui.traineeDetail.TraineeDetailFragment"
+        android:label="fragment_trainee_detail"
+        tools:layout="@layout/fragment_trainee_detail" />
 </navigation>

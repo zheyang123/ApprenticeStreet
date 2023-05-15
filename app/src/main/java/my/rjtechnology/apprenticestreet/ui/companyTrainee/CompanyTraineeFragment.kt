@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import my.rjtechnology.apprenticestreet.R
 import my.rjtechnology.apprenticestreet.databinding.FragmentCompanyJobListBinding
 import my.rjtechnology.apprenticestreet.databinding.FragmentCompanyTraineeBinding
+import my.rjtechnology.apprenticestreet.databinding.FragmentDashboardBinding
 import my.rjtechnology.apprenticestreet.models.companyTrainee
 import my.rjtechnology.apprenticestreet.ui.adapters.newProgressAdapter
 import my.rjtechnology.apprenticestreet.ui.adapters.traineeListAdapter
@@ -20,6 +21,8 @@ import my.rjtechnology.apprenticestreet.ui.companyJobList.CompanyJobListViewMode
 
 
 class CompanyTraineeFragment : Fragment() {
+    private var _binding: FragmentDashboardBinding? = null
+    private val binding get() = _binding!!
     private lateinit var viewModel:CompanyTraineeViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,16 +41,24 @@ class CompanyTraineeFragment : Fragment() {
         binding.traineeRecycler.layoutManager = layoutManager
         binding.traineeRecycler.setHasFixedSize(true)
         binding.traineeRecycler.adapter = progressAdapter
-
+        progressAdapter.onItemClick = {
+            val navController = findNavController().navigate(R.id.action_navigation_company_trainee_to_traineeDetailFragment)
+        }
 
         val fab = binding.traineeFloatingbutton
 
         fab.setOnClickListener {
-            val navController = findNavController().navigate(R.id.action_navigation_company_joblist_to_nav_postJob)
+           // val navController = findNavController().navigate(R.id.action_navigation_company_trainee_to_traineeDetailFragment)
         }
+        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        val root: View = binding.root
         return binding.root
         // Inflate the layout for this fragment
 
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 

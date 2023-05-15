@@ -1,4 +1,4 @@
-package my.rjtechnology.apprenticestreet.ui.postjob.notifications
+package my.rjtechnology.apprenticestreet.ui.notifications
 
 import android.os.Bundle
 import android.view.LayoutInflater

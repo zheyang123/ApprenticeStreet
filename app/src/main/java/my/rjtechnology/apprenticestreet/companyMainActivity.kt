@@ -3,14 +3,12 @@ package my.rjtechnology.apprenticestreet
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import my.rjtechnology.apprenticestreet.databinding.ActivityCompanyMainBinding
-import my.rjtechnology.apprenticestreet.databinding.ActivityMainBinding
 
 class companyMainActivity : AppCompatActivity() {
 

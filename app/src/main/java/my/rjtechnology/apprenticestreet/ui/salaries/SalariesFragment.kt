@@ -12,10 +12,13 @@ import my.rjtechnology.apprenticestreet.models.SimpleFilter
 import my.rjtechnology.apprenticestreet.ui.adapters.SimpleFilterAdapter
 
 class SalariesFragment : Fragment() {
+    private var _binding: FragmentSalariesBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentSalariesBinding.inflate(inflater, container, false)
+        _binding = FragmentSalariesBinding.inflate(inflater, container, false)
 
         binding.salaryList.adapter = SimpleFilterAdapter(
             viewLifecycleOwner,
@@ -46,5 +49,10 @@ class SalariesFragment : Fragment() {
 
         binding.salaryList.setHasFixedSize(true)
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

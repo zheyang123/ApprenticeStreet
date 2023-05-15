@@ -7,34 +7,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import my.rjtechnology.apprenticestreet.R
 import my.rjtechnology.apprenticestreet.databinding.FragmentCompanyJobListBinding
-import my.rjtechnology.apprenticestreet.databinding.FragmentDashboardBinding
-import my.rjtechnology.apprenticestreet.databinding.FragmentEditLearningOutcomeBinding
 import my.rjtechnology.apprenticestreet.ui.adapters.newProgressAdapter
-import my.rjtechnology.apprenticestreet.ui.editlearningoutcome.EditLearningOutcomeViewModel
-
 
 class CompanyJobListFragment : Fragment() {
 
 
     private lateinit var viewModel:CompanyJobListViewModel
-    private var _binding: FragmentDashboardBinding? = null
+    private var _binding: FragmentCompanyJobListBinding? = null
     private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val binding = FragmentCompanyJobListBinding.inflate(inflater, container, false)
-
+    ): View {
+        _binding = FragmentCompanyJobListBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(requireParentFragment())[CompanyJobListViewModel::class.java]
-
-        binding.viewModel=viewModel
+        binding.viewModel = viewModel
         //val addNewProgressButton = binding.addNewProgress
 
         val layoutManager = LinearLayoutManager(activity)
@@ -66,14 +59,11 @@ class CompanyJobListFragment : Fragment() {
             val navController = findNavController().navigate(R.id.action_navigation_company_joblist_to_nav_postJob)
         }
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-        val root: View = binding.root
         return binding.root
-
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }

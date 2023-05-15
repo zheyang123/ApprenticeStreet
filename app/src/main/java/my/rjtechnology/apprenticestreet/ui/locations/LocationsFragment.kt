@@ -12,12 +12,14 @@ import my.rjtechnology.apprenticestreet.databinding.FragmentLocationsBinding
 import my.rjtechnology.apprenticestreet.ui.adapters.FilterAdapter
 
 class LocationsFragment : Fragment() {
+    private var _binding: FragmentLocationsBinding? = null
+    private val binding get() = _binding!!
     private lateinit var viewModel: LocationsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentLocationsBinding.inflate(inflater, container, false)
+        _binding = FragmentLocationsBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(requireParentFragment())[LocationsViewModel::class.java]
         binding.locationList.adapter = FilterAdapter(viewLifecycleOwner, viewModel.filters)
         binding.locationList.setHasFixedSize(true)
@@ -34,5 +36,7 @@ class LocationsFragment : Fragment() {
                 Constants.LOCATIONS_KEY,
                 viewModel.filters.filter { it.isSelected.value == true }.map { it.label }
             )
+
+        _binding = null
     }
 }

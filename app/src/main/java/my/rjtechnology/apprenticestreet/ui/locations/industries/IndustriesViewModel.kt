@@ -1,4 +1,4 @@
-package my.rjtechnology.apprenticestreet.ui.industries
+package my.rjtechnology.apprenticestreet.ui.locations.industries
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

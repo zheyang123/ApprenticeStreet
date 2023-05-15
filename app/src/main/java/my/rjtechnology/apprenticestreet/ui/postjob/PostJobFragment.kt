@@ -14,10 +14,13 @@ import my.rjtechnology.apprenticestreet.databinding.FragmentPostJobBinding
 import my.rjtechnology.apprenticestreet.ui.adapters.FilterlessArrayAdapter
 
 class PostJobFragment : Fragment() {
+    private var _binding: FragmentPostJobBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentPostJobBinding.inflate(inflater, container, false)
+        _binding = FragmentPostJobBinding.inflate(inflater, container, false)
         val viewModel = ViewModelProvider(this)[PostJobViewModel::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -163,5 +166,10 @@ class PostJobFragment : Fragment() {
             }
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

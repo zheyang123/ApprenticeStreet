@@ -1,4 +1,4 @@
-package my.rjtechnology.apprenticestreet.ui.industries
+package my.rjtechnology.apprenticestreet.ui.locations.industries
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,12 +12,14 @@ import my.rjtechnology.apprenticestreet.databinding.FragmentIndustriesBinding
 import my.rjtechnology.apprenticestreet.ui.adapters.FilterAdapter
 
 class IndustriesFragment : Fragment() {
+    private var _binding: FragmentIndustriesBinding? = null
+    private val binding get() = _binding!!
     private lateinit var viewModel: IndustriesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentIndustriesBinding.inflate(inflater, container, false)
+        _binding = FragmentIndustriesBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(requireParentFragment())[IndustriesViewModel::class.java]
         binding.industryList.adapter = FilterAdapter(viewLifecycleOwner, viewModel.filters)
         binding.industryList.setHasFixedSize(true)
@@ -34,5 +36,7 @@ class IndustriesFragment : Fragment() {
                 Constants.INDUSTRIES_KEY,
                 viewModel.filters.filter { it.isSelected.value == true }.map { it.label }
             )
+
+        _binding = null
     }
 }

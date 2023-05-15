@@ -7,28 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import my.rjtechnology.apprenticestreet.R
 import my.rjtechnology.apprenticestreet.databinding.FragmentCompanyApprovalBinding
-import my.rjtechnology.apprenticestreet.databinding.FragmentDashboardBinding
 import my.rjtechnology.apprenticestreet.ui.adapters.CompanyApprovalAdapter
-import my.rjtechnology.apprenticestreet.ui.adapters.newProgressAdapter
-import my.rjtechnology.apprenticestreet.ui.companyTrainee.CompanyTraineeViewModel
-
 
 class CompanyApprovalFragment : Fragment() {
-    private lateinit var viewModel:CompanyApprovalViewModel
     private var _binding: FragmentCompanyApprovalBinding? = null
     private val binding get() = _binding!!
+    private lateinit var viewModel: CompanyApprovalViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val binding = FragmentCompanyApprovalBinding.inflate(inflater, container, false)
-
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentCompanyApprovalBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(requireParentFragment())[CompanyApprovalViewModel::class.java]
-        binding.viewModel=viewModel
-
+        binding.viewModel = viewModel
 
         val layoutManager = LinearLayoutManager(activity)
 
@@ -38,16 +30,12 @@ class CompanyApprovalFragment : Fragment() {
         binding.companyApproveReclcyer.setHasFixedSize(true)
         binding.companyApproveReclcyer.adapter = progressAdapter
 
-
-
-        _binding = FragmentCompanyApprovalBinding.inflate(inflater, container, false)
-        val root: View = binding.root
         // Inflate the layout for this fragment
         return binding.root
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }

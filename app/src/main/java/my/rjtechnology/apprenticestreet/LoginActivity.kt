@@ -16,7 +16,6 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope.coroutineContext
 import kotlinx.coroutines.launch
-import my.rjtechnology.apprenticestreet.dao.LoginDao
 
 class LoginActivity : AppCompatActivity() {
 
@@ -38,8 +37,8 @@ class LoginActivity : AppCompatActivity() {
                     scope.launch {
                         val users = snapshot.children.map { child -> child.getValue<User>()!! }
                         loginButton.setOnClickListener{
-                            lifecycleScope.launch { AppDatabase.get(this@LoginActivity).LoginDao().clearUser()}
-                            lifecycleScope.launch { AppDatabase.get(this@LoginActivity).LoginDao().clearCompany()}
+                            lifecycleScope.launch { AppDatabase.get(this@LoginActivity).loginDao().clearUser()}
+                            lifecycleScope.launch { AppDatabase.get(this@LoginActivity).loginDao().clearCompany()}
                             val emailOrUsernameText = emailOrUsername.text.toString().trim()
                             val passwordText = password.text.toString().trim()
                             var find:Boolean = false
@@ -53,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
                                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
                                         startActivity(intent)
                                         Toast.makeText(this@LoginActivity, "Login Successful", Toast.LENGTH_SHORT).show()
-                                     lifecycleScope.launch { AppDatabase.get(this@LoginActivity).LoginDao().insert(user)}
+                                     lifecycleScope.launch { AppDatabase.get(this@LoginActivity).loginDao().insert(user)}
                                         break
                                     }else
                                     {

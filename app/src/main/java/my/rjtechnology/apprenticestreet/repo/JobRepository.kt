@@ -13,13 +13,13 @@ import my.rjtechnology.apprenticestreet.R
 import my.rjtechnology.apprenticestreet.models.JobExt
 
 class JobRepository(private val context: Context) {
-    private val jobDao = AppDatabase.get(context).jobDao()
-    val allJobs = jobDao.getAll()
+    private val dao = AppDatabase.get(context).jobDao()
+    val allJobs = dao.getAll()
 
     @WorkerThread suspend fun init(
         scope: CoroutineScope, onDoing: () -> Unit = {}, onDone: (String) -> Unit = {}
     ) {
-        if (jobDao.hasItem()) return
+        if (dao.hasItem()) return
         onDoing()
         getAll(scope, onDone = onDone)
     }
@@ -40,8 +40,8 @@ class JobRepository(private val context: Context) {
                         return@launch
                     }
 
-                    if (nextKey == "") jobDao.clear()
-                    jobDao.insertAll(jobs)
+                    if (nextKey == "") dao.clear()
+                    dao.insertAll(jobs)
 
                     onDone(jobs.last().job.id)
                 }
@@ -53,7 +53,7 @@ class JobRepository(private val context: Context) {
     }
 
     @WorkerThread suspend fun insert(job: JobExt) {
-        jobDao.insert(job)
+        dao.insert(job)
 
         Firebase.database.reference
             .child("jobs")

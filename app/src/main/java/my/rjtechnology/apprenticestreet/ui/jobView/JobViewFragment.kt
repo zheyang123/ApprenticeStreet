@@ -35,7 +35,9 @@ class JobViewFragment : Fragment() {
         }
 
         binding.viewJobApplyJob.setOnClickListener {
-
+            viewModel.apply(args.job) {
+                findNavController().navigateUp()
+            }
         }
 
         return binding.root

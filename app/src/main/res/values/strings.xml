@@ -90,4 +90,54 @@
     </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Lim Ming Yan strings below -->
+    <string name="start_title">Sign In Here</string>
+    <string name="start_sub_title">
+        Nice to meet you, come and join for work!
+        <br><b>Login</b> if you already have an account.</br>
+        <br><b>Register</b> to get started with the app.</br>
+    </string>
+    <string name="register_btn">REGISTER</string>
+    <string name="login_btn">LOGIN</string>
+    <string name="login_title">Login to Apprentice Street</string>
+    <string name="login_sub_title">
+        <font color="#00C9B8"><b>Login</b></font> if you already have an account.
+    </string>
+    <string name="login_email">Your email or username</string>
+    <string name="login_password">Your password</string>
+    <string name="login_forgot_pw">Forgot Password?</string>
+
+    <string name="login_havent_account">
+        I don\'t have an account.
+    </string>
+    <string name="register_title">Create a user account</string>
+
+    <string name="register_sub_title">
+        <font color="#00C9B8"><b>Register</b></font> to get started.
+    </string>
+    <string name="register_fullname">Your full name</string>
+    <string name="register_email">Your email</string>
+    <string name="register_username">Your username</string>
+    <string name="register_password">Your password</string>
+    <string name="register_confirm_password">Confirm Password</string>
+
+    <string name="register_have_account">
+        I already have an account
+        <font color="00C9B8"><b>Login</b></font>
+    </string>
+    <string name="logout_btn">LOGOUT</string>
+    <string name="register_company_page">Create Company Page</string>
+    <string name="register_company_name">Company Name</string>
+    <string name="register_manager_name">Manager name</string>
+    <string name="register_contact_no">Contact No</string>
+    <string name="register_company_email">Company Email</string>
+    <string name="register_company_username">Username</string>
+    <string name="register_company_password">Password</string>
+    <string name="register_company_confirm_password">Confirm Password</string>
+    <string name="confirm_status">Are you a worker or a company?</string>
+    <string name="register_company_btn">REGISTER</string>
+    <string name="register_button">REGISTER</string>
+
+
 </resources>

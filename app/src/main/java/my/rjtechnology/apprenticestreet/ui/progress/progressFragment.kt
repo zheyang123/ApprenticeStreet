@@ -39,13 +39,7 @@ class progressFragment : Fragment() {
 
             val companyRecycler: RecyclerView = binding.comapanyRecycle
             val layoutManager = LinearLayoutManager(activity)
-            val trainee1 = AppiledProgress()
-            val trainee2 = AppiledProgress()
-            trainee1.companyName="asd"
-            trainee2.companyName="sssssss"
-            trainee2.status="rejected"
-            viewModel.appliedJobList.add(trainee1)
-            viewModel.appliedJobList.add(trainee2)
+
             var progressAdapter: AppiledCompanyProgressAdapter= AppiledCompanyProgressAdapter(viewLifecycleOwner, viewModel.appliedJobList)
 
             companyRecycler.layoutManager = layoutManager

@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import my.rjtechnology.apprenticestreet.databinding.FragmentJobViewBinding
+import my.rjtechnology.apprenticestreet.models.JobApplication
 
 
 class JobViewFragment : Fragment() {
@@ -35,7 +36,8 @@ class JobViewFragment : Fragment() {
         }
 
         binding.viewJobApplyJob.setOnClickListener {
-
+            viewModel.apply(args.job)
+            findNavController().navigateUp()
         }
 
         return binding.root

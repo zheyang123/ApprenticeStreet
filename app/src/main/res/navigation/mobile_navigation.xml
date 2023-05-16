@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_progress">
+    app:startDestination="@id/navigation_search_job">
 
     <fragment
         android:id="@+id/navigation_post_job"

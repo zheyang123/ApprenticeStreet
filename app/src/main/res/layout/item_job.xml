@@ -18,6 +18,7 @@
         android:layout_marginEnd="8dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
+        android:animateLayoutChanges="true"
         app:marginBottom="@{model.last ? 8.0f : 0.0f}"
         app:cardCornerRadius="4dp"
         app:cardElevation="4dp">

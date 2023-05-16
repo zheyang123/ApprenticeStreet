@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import my.rjtechnology.apprenticestreet.AppDatabase
 import my.rjtechnology.apprenticestreet.models.Job
 import my.rjtechnology.apprenticestreet.models.JobExt
 import my.rjtechnology.apprenticestreet.models.LearningOutcome
@@ -31,10 +32,12 @@ class PostJobViewModel(application: Application) : AndroidViewModel(application)
     }
 
     private val jobRepo = JobRepository(application)
+    private val loginDao = AppDatabase.get(application).loginDao()
 
     fun submit() {
         viewModelScope.launch {
             val jobId = UUID.randomUUID().toString()
+            val company = loginDao.getCompany()
 
             jobRepo.insert(
                 JobExt(
@@ -43,7 +46,8 @@ class PostJobViewModel(application: Application) : AndroidViewModel(application)
                         title = jobTitle.trim(),
                         desc = jobDesc.value.toString(),
                         industry = industry,
-                        companyName =  "Yee Lee Marketing Sdn Bhd", // TODO: Integrate with user module
+                        companyId = company.id,
+                        companyName = company.companyName,
                         location = location,
                         minSalary = minSalary.toIntOrNull(),
                         maxSalary = maxSalary.toIntOrNull()

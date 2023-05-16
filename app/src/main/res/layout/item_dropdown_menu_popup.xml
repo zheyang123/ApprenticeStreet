@@ -10,6 +10,7 @@
         android:padding="16dp"
         android:ellipsize="end"
         android:maxLines="1"
+        android:animateLayoutChanges="true"
         android:textAppearance="?attr/textAppearanceSubtitle1"
         tools:text="@string/johor" />
 </layout>

@@ -52,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
                                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
                                         startActivity(intent)
                                         Toast.makeText(this@LoginActivity, "Login Successful", Toast.LENGTH_SHORT).show()
-                                     lifecycleScope.launch { AppDatabase.get(this@LoginActivity).loginDao().insert(user)}
+                                        lifecycleScope.launch { AppDatabase.get(this@LoginActivity).loginDao().insert(user)}
                                         break
                                     }else
                                     {
@@ -74,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
                                                     val intent2 = Intent(this@LoginActivity, companyMainActivity::class.java)
                                                     startActivity(intent2)
                                                     Toast.makeText(this@LoginActivity, "Login Successful", Toast.LENGTH_SHORT).show()
-
+                                                    lifecycleScope.launch { AppDatabase.get(this@LoginActivity).loginDao().insert(company) }
                                                     break
                                                 }else
                                                 {
@@ -112,19 +112,26 @@ class LoginActivity : AppCompatActivity() {
         @PrimaryKey val id: String,
         val status:String,
         val email: String,
-        val password: String
+        val password: String,
+        val fullName: String,
+        val username: String,
     )
     {
-        constructor() : this("", "", "", "")
+        constructor() : this("", "", "", "", "", "")
     }
+
     @Entity(tableName = "company") data class Company(
        @PrimaryKey val id: String,
         val status:String,
         val companyEmail: String,
-        val companyPassword: String
+        val companyPassword: String,
+        val companyName: String,
+        val managerName: String,
+        val contactNo: String,
+        val companyUsername: String,
     )
     {
-        constructor() : this("", "", "", "")
+        constructor() : this("", "", "", "", "", "", "", "")
     }
 
 

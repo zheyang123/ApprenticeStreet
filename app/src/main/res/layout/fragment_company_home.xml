@@ -1,17 +1,307 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.companyHelp.CompanyHelpFragment"
-    android:animateLayoutChanges="true">
+    android:layout_centerHorizontal="true">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/userProfileLinear2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Home"
-        android:textSize="25dp"
-        android:layout_centerInParent="true"/>
+        android:layout_marginTop="64dp"
+        android:paddingLeft="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/companyNameImg"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:srcCompat="@drawable/ic_location_24" />
+
+        <TextView
+            android:id="@+id/companyHomeLabel3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="Company Name:"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/companyNameEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:background="@null"
+            android:text="Name"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:enabled="false"
+            tools:ignore="TouchTargetSizeCheck" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_below="@id/userProfileLinear2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp" />
+
+    <LinearLayout
+        android:id="@+id/userProfileLinear3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/userProfileLinear2"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/companyUserNameImg"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:srcCompat="@drawable/ic_company_24" />
+
+        <TextView
+            android:id="@+id/companyHomeLabel2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="User Name:"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/companyUserNameEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:background="@null"
+            android:text="Name"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:enabled="false"
+            tools:ignore="TouchTargetSizeCheck" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_below="@id/userProfileLinear3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp" />
+
+    <LinearLayout
+        android:id="@+id/companyHomeLinear3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/userProfileLinear3"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="10dp" >
+
+        <ImageView
+            android:id="@+id/companyIDImg"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:srcCompat="@drawable/ic_grid_3x3_24" />
+
+        <TextView
+            android:id="@+id/companyHomeLabel4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="Company ID:"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/companyIDGet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:background="@null"
+            android:text="UID"
+            android:textSize="18sp"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_below="@id/companyHomeLinear3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp" />
+
+    <LinearLayout
+        android:id="@+id/companyHomeLinear4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/companyHomeLinear3"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="10dp" >
+
+        <ImageView
+            android:id="@+id/emailImg"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:srcCompat="@drawable/ic_email_24" />
+
+        <TextView
+            android:id="@+id/companyHomeLabel5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="Company Email:"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/companyEmailEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:background="@null"
+            android:text="email@example.com"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            tools:ignore="TouchTargetSizeCheck" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_below="@id/companyHomeLinear4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp" />
+
+    <LinearLayout
+        android:id="@+id/companyHomeLinear5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/companyHomeLinear4"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="10dp" >
+
+        <ImageView
+            android:id="@+id/companyManagerImg"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:srcCompat="@drawable/ic_person_24" />
+
+        <TextView
+            android:id="@+id/companyHomeLabel6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="Manager Name:"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/managerNameEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:background="@null"
+            android:text="Name"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            tools:ignore="TouchTargetSizeCheck" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_below="@id/companyHomeLinear5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp" />
+
+    <LinearLayout
+        android:id="@+id/companyHomeLinear6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/companyHomeLinear5"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="10dp" >
+
+        <ImageView
+            android:id="@+id/userCompanyImg"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:srcCompat="@drawable/ic_phone_24" />
+
+        <TextView
+            android:id="@+id/companyHomeLabel7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="Contact Number:"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/companyContactEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:background="@null"
+            android:text="03-13456789"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            tools:ignore="TouchTargetSizeCheck" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_below="@id/companyHomeLinear6"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp" />
+
+    <LinearLayout
+        android:id="@+id/userProfLinear8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/companyHomeLinear6"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentEnd="true"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/companyEditProfButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/defaultColor2"
+            android:text="Edit Profile" />
+
+        <Button
+            android:id="@+id/companyLogoutButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/defaultColor3"
+            android:text="LOGOUT" />
+
+    </LinearLayout>
 
 </RelativeLayout>

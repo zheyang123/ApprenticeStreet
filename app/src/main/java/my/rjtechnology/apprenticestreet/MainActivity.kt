@@ -22,6 +22,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+//     val changePage = Intent(this, companyMainActivity::class.java)
+//     startActivity(changePage)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

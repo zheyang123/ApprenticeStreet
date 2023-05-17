@@ -52,8 +52,8 @@ class RegisterUserActivity : AppCompatActivity() {
                 fullNameEditText.text.toString(),
                 emailEditText.text.toString(),
                 usernameEditText.text.toString(),
-                passwordEditText.text.toString()
-
+                passwordEditText.text.toString(),
+                false
             )
             // save the user data to database or perform other actions
             var database = Firebase.database.reference
@@ -88,5 +88,6 @@ data class User(
     val fullName: String,
     val email: String,
     val username: String,
-    val password: String
+    val password: String,
+    val profileOk: Boolean
 )

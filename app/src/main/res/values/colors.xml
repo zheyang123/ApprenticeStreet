@@ -12,7 +12,8 @@
     <color name="grey">#888888</color>
     <color name="grey_light">#F0F0F0</color>
 
-
-
-
+    <color name="gray">#6E6969</color>
+    <color name="defaultColor1">#420C77</color>
+    <color name="defaultColor2">#DEC7EE</color>
+    <color name="defaultColor3">#94A8ED</color>
 </resources>

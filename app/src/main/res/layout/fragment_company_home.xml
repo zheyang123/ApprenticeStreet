@@ -6,7 +6,7 @@
     android:layout_centerHorizontal="true">
 
     <ImageView
-        android:id="@+id/companyHomeImage"
+        android:id="@+id/companyProfileImageEdit"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_alignParentStart="true"
@@ -17,10 +17,10 @@
         android:layout_marginEnd="150dp" />
 
     <LinearLayout
-        android:id="@+id/companyHomeLinear2"
+        android:id="@+id/userProfileLinear2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/companyHomeImage"
+        android:layout_below="@id/companyProfileImageEdit"
         android:layout_marginTop="8dp"
         android:paddingLeft="10dp"
         android:orientation="horizontal">
@@ -55,7 +55,7 @@
     </LinearLayout>
 
     <View
-        android:layout_below="@id/companyHomeLinear2"
+        android:layout_below="@id/userProfileLinear2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/gray"
@@ -66,7 +66,7 @@
         android:id="@+id/companyHomeLinear3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/companyHomeLinear2"
+        android:layout_below="@id/userProfileLinear2"
         android:orientation="horizontal"
         android:layout_marginTop="8dp"
         android:paddingLeft="10dp" >

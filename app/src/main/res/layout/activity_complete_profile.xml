@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CompleteProfile">
+
+    <TextView
+        android:background="@color/defaultColor3"
+        android:textColor="@color/defaultColor1"
+        android:id="@+id/completeProfLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Complete Your Profile before Finding for Jobs"
+        android:textSize="36sp"
+        android:textAlignment="center"/>
+
+    <ImageView
+        android:id="@+id/userUploadImage"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_below="@id/completeProfLabel"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="150dp"
+        android:tooltipText="Insert Profile Pic"
+        app:srcCompat="@drawable/ic_add_photo_alternate_24" />
+
+    <LinearLayout
+        android:id="@+id/completeProfLinear1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userUploadImage"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/defaultColor1"
+            android:text="Age: "
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/userAgeComplete"
+            tools:ignore="TouchTargetSizeCheck"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="18 ~ 99"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/completeProfLinear2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/completeProfLinear1"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/defaultColor1"
+
+            android:text="Contact Number: "
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/userContactComplete"
+            tools:ignore="TouchTargetSizeCheck"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="012-3456789"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/completeProfLinear3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/completeProfLinear2"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/defaultColor1"
+            android:text="Level of Education: "
+            android:textSize="16sp"/>
+
+        <Spinner
+            android:id="@+id/spinnerLOEComplete"
+            tools:ignore="TouchTargetSizeCheck"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/Level_of_Education"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/completeProfLinear4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/completeProfLinear3"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/defaultColor1"
+            android:text="Working Experience: "
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/userWorkExpComplete"
+            tools:ignore="TouchTargetSizeCheck"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="None, 1 Year etc."
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/completeProfLinear5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/completeProfLinear4"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/defaultColor1"
+            android:text="Language Skills: "
+            android:textSize="16sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/languageSkillBM"
+                    android:textSize="16sp"/>
+
+                <RatingBar
+                    android:id="@+id/bmRatingBarComplete"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:isIndicator="false"
+                    android:numStars="5"
+                    android:paddingTop="3dp"
+                    android:paddingLeft="8dp"
+                    android:layout_marginLeft="6dp"
+                    android:progressTint="@color/defaultColor1"
+                    android:rating="1"
+                    android:stepSize="1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/languageSkillEN"
+                    android:textSize="16sp"/>
+
+                <RatingBar
+                    android:id="@+id/englishRatingBarComplete"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:isIndicator="false"
+                    android:numStars="5"
+                    android:paddingTop="3dp"
+                    android:paddingLeft="8dp"
+                    android:layout_marginLeft="64dp"
+                    android:progressTint="@color/defaultColor1"
+                    android:rating="2"
+                    android:stepSize="1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/languageSkillCH"
+                    android:textSize="16sp"/>
+
+                <RatingBar
+                    android:id="@+id/chineseRatingBarComplete"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:isIndicator="false"
+                    android:numStars="5"
+                    android:paddingTop="3dp"
+                    android:paddingLeft="8dp"
+                    android:layout_marginLeft="59dp"
+                    android:progressTint="@color/defaultColor1"
+                    android:rating="3"
+                    android:stepSize="1" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/completeProfLinear6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/completeProfLinear5"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/completeProfButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/defaultColor3"
+            android:text="Complete Profile" />
+
+    </LinearLayout>
+
+</RelativeLayout>

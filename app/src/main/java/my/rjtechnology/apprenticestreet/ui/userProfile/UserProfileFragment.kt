@@ -1,6 +1,13 @@
 package my.rjtechnology.apprenticestreet.ui.userProfile
 
+import android.app.Activity
+import android.content.ContentValues.TAG
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +19,12 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import my.rjtechnology.apprenticestreet.LoginActivity
 import my.rjtechnology.apprenticestreet.R
 import my.rjtechnology.apprenticestreet.databinding.FragmentUserProfileBinding
 import my.rjtechnology.apprenticestreet.models.UserProfile
+import java.io.ByteArrayOutputStream
 
 class UserProfileFragment : Fragment() {
     var userProfile = UserProfile()
@@ -23,7 +33,12 @@ class UserProfileFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private val storage = Firebase.storage
+    private val storageRef = storage.reference
+    private var bit: Bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
+    private val PICK_IMAGE_REQUEST_CODE = 1
 
+    private lateinit var userPfp: ImageView
     private lateinit var age: EditText
     private lateinit var contact: EditText
     private lateinit var email: EditText
@@ -50,6 +65,7 @@ class UserProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        userPfp = binding.userProfileImageEdit
         age = binding.userAgeEdit
         contact = binding.userContactEdit
         email = binding.userEmailEdit
@@ -66,6 +82,21 @@ class UserProfileFragment : Fragment() {
         // Fetch the user profile data from the database
         val database = Firebase.database
         val userProfileRef = database.reference.child("User Profiles").child("12345")
+
+        val imageRef = storageRef.child("UserProfilePics").child("12345")
+
+        // Download the image as a byte array
+        imageRef.getBytes(Long.MAX_VALUE).addOnSuccessListener { bytes ->
+            // Image download successful, handle the byte array
+            val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+            userPfp.setImageBitmap(bitmap)
+            bit = bitmap
+            // Use the bitmap as needed
+        }.addOnFailureListener { exception ->
+            // Handle any errors that occurred during image download
+            Log.e(TAG, "Failed to download image: ${exception.message}")
+        }
+
 
         userProfileRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -93,6 +124,7 @@ class UserProfileFragment : Fragment() {
             }
         })
 
+        userPfp.isEnabled = false
         username.isEnabled = false
         email.isEnabled = false
         age.isEnabled = false
@@ -107,10 +139,17 @@ class UserProfileFragment : Fragment() {
         contact.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
         workExp.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
 
+        userPfp.setOnClickListener {
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "image/*"
+            startActivityForResult(intent, 1)
+        }
+
         editProfileButton.setOnClickListener {
             if (editProfileButton.text == "Edit Profile") {
                 // Switch to edit mode
                 editProfileButton.text = "Save Profile"
+                userPfp.isEnabled = true
                 username.isEnabled = true
                 email.isEnabled = true
                 age.isEnabled = true
@@ -121,6 +160,7 @@ class UserProfileFragment : Fragment() {
                 enRating.setIsIndicator(false)
                 chRating.setIsIndicator(false)
 
+                userPfp.imageAlpha = 128
                 username.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray))
                 email.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray))
                 age.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray))
@@ -129,6 +169,19 @@ class UserProfileFragment : Fragment() {
             } else {
                 // Save profile changes and switch back to view mode
                 editProfileButton.text = "Edit Profile"
+
+                userPfp.isEnabled = false
+                username.isEnabled = false
+                email.isEnabled = false
+                age.isEnabled = false
+                loe.isEnabled = false
+                contact.isEnabled = false
+                workExp.isEnabled = false
+                bmRating.setIsIndicator(true)
+                enRating.setIsIndicator(true)
+                chRating.setIsIndicator(true)
+
+                userPfp.imageAlpha = 255
                 username.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
                 email.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
                 age.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
@@ -165,15 +218,98 @@ class UserProfileFragment : Fragment() {
 
                 var database = Firebase.database.reference
                 database.child("User Profiles").child("12345").setValue(userProfile)
+                    .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        // Data write operation successful
+                        Toast.makeText(requireContext(), "Profile saved successfully", Toast.LENGTH_SHORT)
+                            .show()
+                        // Perform further actions if needed
+                    } else {
+                        // Data write operation failed
+                        Toast.makeText(requireContext(), "Profile save failed", Toast.LENGTH_SHORT).show()
+                    }
+                    uploadImage()
+                }
             }
         }
 
+        logoutButton.setOnClickListener {
+            // Perform logout actions here
+            // For example, you can clear user session or navigate to the login screen
+
+            // Clear user session and navigate to login screen
+            // Replace LoginActivity::class.java with your actual login activity
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            startActivity(intent)
+            requireActivity().finish()
+        }
     }
 
     private fun getIndexOfLOE(loe: String): Int {
         val loeArray = resources.getStringArray(R.array.Level_of_Education)
         return loeArray.indexOf(loe)
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == PICK_IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
+            val selectedImageUri: Uri? = data.data
+
+            if (selectedImageUri != null) {
+                loadImageFromUri(selectedImageUri)
+            } else {
+                Toast.makeText(requireContext(), "Failed to retrieve selected image", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+    }
+    private fun loadImageFromUri(uri: Uri) {
+        try {
+            val inputStream = requireContext().contentResolver.openInputStream(uri)
+            val bitmap = BitmapFactory.decodeStream(inputStream)
+            binding.userProfileImageEdit.setImageBitmap(bitmap)
+            bit = bitmap
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(requireContext(), "Failed to load image", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun uploadImage() {
+        val imageId = "12345" // Replace with your desired ID or use a dynamic ID
+        val imageRef = storageRef.child("UserProfilePics").child(imageId)
+
+        try {
+            //val inputStream = contentResolver.openInputStream(uri)
+            val byteArrayOutputStream = ByteArrayOutputStream()
+            bit.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+            val data = byteArrayOutputStream.toByteArray()
+
+            val uploadTask = imageRef.putBytes(data)
+            uploadTask.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    imageRef.downloadUrl.addOnSuccessListener { downloadUrl ->
+                        // Image upload successful
+                        val imageUrl = downloadUrl.toString()
+                        // Save the imageUrl to the user profile or perform further actions
+                        Toast.makeText(requireContext(), "Image Upload Successful", Toast.LENGTH_SHORT).show()
+                    }.addOnFailureListener {
+                        // Handle download URL retrieval failure
+                        Toast.makeText(requireContext(), "Failed to retrieve download URL", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    // Handle upload failure
+                    Toast.makeText(requireContext(), "Image Upload Failed", Toast.LENGTH_SHORT).show()
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(requireContext(), "Failed to upload image", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -1,20 +1,20 @@
 package my.rjtechnology.apprenticestreet.ui.progress
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.*
+import kotlinx.coroutines.launch
+import my.rjtechnology.apprenticestreet.AppDatabase
+import my.rjtechnology.apprenticestreet.dao.LoginDao
+import my.rjtechnology.apprenticestreet.models.AppiledProgress
 
-class ProgressViewModel : ViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    private val _companyName = MutableLiveData<List<String>>().apply {
-        value = listOf("item1", "item2", "item3")
-    }
-    val arrayList = ArrayList<String>()
-    val company = listOf("item1", "item2", "item3")
-    val text: LiveData<String> = _text
-    val companyName: LiveData<List<String>> = _companyName
+class ProgressViewModel ( private val application: Application):AndroidViewModel(application){
+// ProgressViewModel( private val application: Application , private val onDone: (String) -> Unit ={}) : AndroidViewModel(application){
+  //ProgressViewModel( private val application: Application , private val onDone: (String) -> Unit = {}) : AndroidViewModel(application){
+//
+    var appliedJobList = ArrayList<AppiledProgress>()
+    var id = ""
     val haveJob:Boolean = false
+
+
+
 }

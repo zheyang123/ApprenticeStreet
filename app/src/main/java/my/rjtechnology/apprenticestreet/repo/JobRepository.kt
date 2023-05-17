@@ -11,16 +11,15 @@ import kotlinx.coroutines.launch
 import my.rjtechnology.apprenticestreet.AppDatabase
 import my.rjtechnology.apprenticestreet.R
 import my.rjtechnology.apprenticestreet.models.JobExt
-import kotlin.streams.toList
 
 class JobRepository(private val context: Context) {
-    private val jobDao = AppDatabase.get(context).jobDao()
-    val allJobs = jobDao.getAll()
+    private val dao = AppDatabase.get(context).jobDao()
+    val allJobs = dao.getAll()
 
     @WorkerThread suspend fun init(
         scope: CoroutineScope, onDoing: () -> Unit = {}, onDone: (String) -> Unit = {}
     ) {
-        if (jobDao.hasItem()) return
+        if (dao.hasItem()) return
         onDoing()
         getAll(scope, onDone = onDone)
     }
@@ -30,7 +29,7 @@ class JobRepository(private val context: Context) {
             .child("jobs")
             .orderByKey()
             .startAfter(nextKey)
-            .limitToFirst(4)
+            .limitToFirst(1000)
             .get()
             .addOnSuccessListener { snapshot ->
                 scope.launch {
@@ -41,8 +40,9 @@ class JobRepository(private val context: Context) {
                         return@launch
                     }
 
-                    if (nextKey == "") clear()
-                    // insertAll(jobs)
+                    if (nextKey == "") dao.clear()
+                    dao.insertAll(jobs)
+
                     onDone(jobs.last().job.id)
                 }
             }
@@ -52,7 +52,27 @@ class JobRepository(private val context: Context) {
             }
     }
 
-    @WorkerThread suspend fun clear() {
-        jobDao.clear()
+    @WorkerThread suspend fun insert(job: JobExt) {
+        dao.insert(job)
+
+        Firebase.database.reference
+            .child("jobs")
+            .child(job.job.id)
+            .setValue(job)
+            .addOnFailureListener {
+                Toast.makeText(context, R.string.post_job_failed_err_msg, Toast.LENGTH_LONG).show()
+            }
+
+        Firebase.database.reference
+            .child("jobs")
+            .child(job.job.id)
+            .child("last")
+            .removeValue()
+
+        Firebase.database.reference
+            .child("jobs")
+            .child(job.job.id)
+            .child("learningOutcomesText")
+            .removeValue()
     }
 }

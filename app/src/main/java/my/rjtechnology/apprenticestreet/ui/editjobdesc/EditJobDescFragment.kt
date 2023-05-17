@@ -11,12 +11,14 @@ import my.rjtechnology.apprenticestreet.Constants
 import my.rjtechnology.apprenticestreet.databinding.FragmentEditJobDescBinding
 
 class EditJobDescFragment : Fragment() {
+    private var _binding: FragmentEditJobDescBinding? = null
+    private val binding get() = _binding!!
     private lateinit var viewModel: EditJobDescViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentEditJobDescBinding.inflate(inflater, container, false)
+        _binding = FragmentEditJobDescBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(requireParentFragment())[EditJobDescViewModel::class.java]
         binding.viewModel = viewModel
         return binding.root
@@ -24,18 +26,15 @@ class EditJobDescFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        val jobDesc = viewModel.jobDesc.trim()
 
         findNavController()
             .currentBackStackEntry
             ?.savedStateHandle
             ?.set(
-                Constants.JOB_DESC_WORD_COUNT_KEY,
-                if (jobDesc.isEmpty()) {
-                    0
-                } else {
-                    jobDesc.split("\\s+".toRegex()).size
-                }
+                Constants.JOB_DESC_KEY,
+                viewModel.jobDesc.trim()
             )
+
+        _binding = null
     }
 }

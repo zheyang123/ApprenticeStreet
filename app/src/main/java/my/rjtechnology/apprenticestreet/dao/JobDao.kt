@@ -24,13 +24,18 @@ import kotlin.streams.toList
     suspend fun updateAll(vararg learningOutcomes: LearningOutcome)
 
     @Transaction suspend fun insertAll(jobs: List<JobExt>) {
-//        jobDao.insertAll(*jobs.parallelStream().map { it.job }.toList().toTypedArray())
-//
-//        jobDao.insertAll(
-//            *jobs.parallelStream()
-//                .flatMap { it.learningOutcomes.parallelStream() }
-//                .toList()
-//                .toTypedArray()
-//        )
+        insertAll(*jobs.parallelStream().map { it.job }.toList().toTypedArray())
+
+        insertAll(
+            *jobs.parallelStream()
+                .flatMap { it.learningOutcomes.parallelStream() }
+                .toList()
+                .toTypedArray()
+        )
+    }
+
+    @Transaction suspend fun insert(job: JobExt) {
+        insert(job.job)
+        insertAll(*job.learningOutcomes.toTypedArray())
     }
 }

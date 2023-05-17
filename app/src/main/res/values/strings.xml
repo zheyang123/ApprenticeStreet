@@ -14,6 +14,8 @@
     <string name="title_post_job">Post Job</string>
     <string name="title_edit_job_desc">Edit Job Description</string>
     <string name="title_edit_learning_outcome">Edit Learning Outcome</string>
+    <string name="title_job_view">Job View</string>
+    <string name="title_job_desc">Job Description</string>
 
     <!-- Filters -->
     <string name="filters">Filters</string>
@@ -74,7 +76,7 @@
     <string name="display_salary_range">Display salary range</string>
     <string name="job_desc">Job Description</string>
     <string name="entered_word_count">%d words entered</string>
-    <string name="entered_progress_count">5 progresses entered</string>
+    <string name="entered_progress_count">%d progresses entered</string>
     <string name="show_more">Show more</string>
     <string name="post_job">Submit Job Posting</string>
     <string name="languageSkillBM">Bahasa Melayu</string>
@@ -86,14 +88,104 @@
         <item>SPM</item>
         <item>Diploma or higher education level</item>
     </string-array>
-    
+
+    <string name="Status">Status</string>
+    <string name="apply_job">Apply for this job now</string>
+    <string name="Fire">Fire</string>
+    <string name="required_job_title">
+        Job Title <b><font color="#FF0000">*</font></b>
+    </string>
+    <string name="job_applied">Applied Job</string>
+    <string name="Approve">Approve</string>
+    <string name="Deline">Deline</string>
+    <string name="required_industry">
+        Industry <b><font color="#FF0000">*</font></b>
+    </string>
+    <string name="required_location">
+        Location <b><font color="#FF0000">*</font></b>
+    </string>
+    <string name="required_min_salary_per_month">
+        Min Salary (MYR) / Month <b><font color="#FF0000">*</font></b>
+    </string>
+    <string name="required_max_salary_per_month">
+        Max Salary (MYR) / Month <b><font color="#FF0000">*</font></b>
+    </string>
+
+    <string name="age">Age</string>
+    <string name="job">Job</string>
+    <string name="hintForOutcome">enter a item will learn in your job</string>
+
     <!-- Actions -->
     <string name="add_new_progress">Add New Progress</string>
+    <string name="to_bottom">Go to bottom</string>
+    <string name="to_top">Go to top</string>
 
     <!-- Error Messages -->
     <string name="fetch_job_failed_err_msg">
         Failed to fetch available jobs. Please try again.
     </string>
+    <string name="invalid_salaries_err_msg">
+        Min salary must be less than or equal to max salary
+    </string>
+    <string name="empty_field_err_msg">This field cannot be empty</string>
+    <string name="empty_job_desc_err_msg">Job description must not be empty</string>
+    <string name="no_learning_outcome_err_msg">
+        Make sure you have at least one progress in learning outcome
+    </string>
+    <string name="post_job_failed_err_msg">Failed to post a new job. Please try again.</string>
+    <string name="floatingbutton">floatingbutton</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Lim Ming Yan strings below -->
+    <string name="start_title">Sign In Here</string>
+    <string name="start_sub_title">
+        Nice to meet you, come and join for work!
+        <br><b>Login</b> if you already have an account.</br>
+        <br><b>Register</b> to get started with the app.</br>
+    </string>
+    <string name="register_btn">REGISTER</string>
+    <string name="login_btn">LOGIN</string>
+    <string name="login_title">Login to Apprentice Street</string>
+    <string name="login_sub_title">
+        <font color="#00C9B8"><b>Login</b></font> if you already have an account.
+    </string>
+    <string name="login_email">Your email or username</string>
+    <string name="login_password">Your password</string>
+    <string name="login_forgot_pw">Forgot Password?</string>
+
+    <string name="login_havent_account">
+        I don\'t have an account.
+    </string>
+    <string name="register_title">Create a user account</string>
+
+    <string name="register_sub_title">
+        <font color="#00C9B8"><b>Register</b></font> to get started.
+    </string>
+    <string name="register_fullname">Your full name</string>
+    <string name="register_email">Your email</string>
+    <string name="register_username">Your username</string>
+    <string name="register_password">Your password</string>
+    <string name="register_confirm_password">Confirm Password</string>
+
+    <string name="register_have_account">
+        I already have an account
+        <font color="00C9B8"><b>Login</b></font>
+    </string>
+    <string name="logout_btn">LOGOUT</string>
+    <string name="register_company_page">Create Company Page</string>
+    <string name="register_company_name">Company Name</string>
+    <string name="register_manager_name">Manager name</string>
+    <string name="register_contact_no">Contact No</string>
+    <string name="register_company_email">Company Email</string>
+    <string name="register_company_username">Username</string>
+    <string name="register_company_password">Password</string>
+    <string name="register_company_confirm_password">Confirm Password</string>
+    <string name="confirm_status">Are you a worker or a company?</string>
+    <string name="register_company_btn">REGISTER</string>
+    <string name="register_button">REGISTER</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_complete_profile">completeProfile</string>

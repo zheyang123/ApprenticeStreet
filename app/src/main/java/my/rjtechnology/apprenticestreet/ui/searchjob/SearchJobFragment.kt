@@ -1,10 +1,12 @@
 package my.rjtechnology.apprenticestreet.ui.searchjob
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,15 +17,22 @@ import my.rjtechnology.apprenticestreet.databinding.FragmentSearchJobBinding
 import my.rjtechnology.apprenticestreet.ui.adapters.JobAdapter
 
 class SearchJobFragment : Fragment() {
+    private var _binding: FragmentSearchJobBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var viewModel: SearchJobViewModel
+    var id=""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentSearchJobBinding.inflate(inflater, container, false)
-
-        val viewModel = ViewModelProvider(
+        _binding = FragmentSearchJobBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(
             requireParentFragment(),
             SearchJobViewModelFactory(
                 requireActivity().application,
+                requireActivity()
+                    .getPreferences(Context.MODE_PRIVATE)
+                    .getString(Constants.NEXT_JOB_ID_KEY, "")
+                    .toString(),
                 onDoing = {
                     binding.jobListContainer.isRefreshing = true
                 },
@@ -36,12 +45,33 @@ class SearchJobFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         val adapter = JobAdapter()
+        adapter.setHasStableIds(true)
         val layoutManager = LinearLayoutManager(requireContext())
         binding.jobList.layoutManager = layoutManager
         binding.jobList.adapter = adapter
         binding.jobList.setHasFixedSize(true)
 
+        viewModel.query.observe(viewLifecycleOwner) {
+            viewModel.syncFilteredJobs()
+        }
+
+        viewModel.industries.observe(viewLifecycleOwner) {
+            viewModel.syncFilteredJobs()
+        }
+
+        viewModel.locations.observe(viewLifecycleOwner) {
+            viewModel.syncFilteredJobs()
+        }
+
+        viewModel.minSalaryPerMonth.observe(viewLifecycleOwner) {
+            viewModel.syncFilteredJobs()
+        }
+
         viewModel.jobRepo.allJobs.observe(viewLifecycleOwner) {
+            viewModel.syncFilteredJobs()
+        }
+
+        viewModel.filteredJobs.observe(viewLifecycleOwner) {
             val state = binding.jobList.layoutManager?.onSaveInstanceState()
 
             adapter.submitList(it) {
@@ -72,9 +102,25 @@ class SearchJobFragment : Fragment() {
         binding.jobList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                val index = layoutManager.findLastVisibleItemPosition()
+                val firstVisibleIndex = layoutManager.findFirstVisibleItemPosition()
+                val lastVisibleIndex = layoutManager.findLastVisibleItemPosition()
 
-                if (index != RecyclerView.NO_POSITION && dy > 0 && index == adapter.itemCount - 1) {
+                binding.toTopButton.visibility = if (firstVisibleIndex == 0) {
+                    View.GONE
+                } else {
+                    View.VISIBLE
+                }
+
+                binding.toBottomButton.visibility = if (lastVisibleIndex == adapter.itemCount - 1) {
+                    View.GONE
+                } else {
+                    View.VISIBLE
+                }
+
+                if (
+                    lastVisibleIndex != RecyclerView.NO_POSITION && dy > 0 &&
+                    lastVisibleIndex == adapter.itemCount - 1
+                ) {
                     binding.jobListContainer.isRefreshing = true
 
                     viewModel.getNextJobs {
@@ -84,20 +130,30 @@ class SearchJobFragment : Fragment() {
             }
         })
 
+        binding.toTopButton.setOnClickListener {
+            binding.jobList.scrollToPosition(0)
+            binding.toBottomButton.visibility = View.VISIBLE
+        }
+
+        binding.toBottomButton.setOnClickListener {
+            binding.jobList.scrollToPosition(adapter.itemCount - 1)
+            binding.toTopButton.visibility = View.VISIBLE
+        }
+
         navController
             .currentBackStackEntry
             ?.savedStateHandle
-            ?.getLiveData<Int>(Constants.INDUSTRY_COUNT_KEY)
+            ?.getLiveData<List<String>>(Constants.INDUSTRIES_KEY)
             ?.observe(viewLifecycleOwner) {
-                viewModel.industryCount.value = it
+                viewModel.industries.value = it
             }
 
         navController
             .currentBackStackEntry
             ?.savedStateHandle
-            ?.getLiveData<Int>(Constants.LOCATION_COUNT_KEY)
+            ?.getLiveData<List<String>>(Constants.LOCATIONS_KEY)
             ?.observe(viewLifecycleOwner) {
-                viewModel.locationCount.value = it
+                viewModel.locations.value = it
             }
 
         navController
@@ -108,6 +164,25 @@ class SearchJobFragment : Fragment() {
                 viewModel.minSalaryPerMonth.value = it
             }
 
+        adapter.onItemClick = {
+            findNavController()
+                .navigate(SearchJobFragmentDirections.actionNavigationSearchJobToNavigationJobView(it))
+        }
+
         return binding.root
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        requireActivity().getPreferences(Context.MODE_PRIVATE)
+            .edit()
+            .putString(Constants.NEXT_JOB_ID_KEY, viewModel.nextJobKey)
+            .apply()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -7,12 +7,13 @@ import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import my.rjtechnology.apprenticestreet.R
+import my.rjtechnology.apprenticestreet.models.AppiledProgress
 
-class AppiledCompanyProgressAdapter(private val context: LifecycleOwner, private val data: List<String>) :
+class AppiledCompanyProgressAdapter(private val context: LifecycleOwner, private val data: List<AppiledProgress>) :
     RecyclerView.Adapter<AppiledCompanyProgressAdapter.ViewHolder>() {
 
-    var onItemClick:((String)->Unit)?=null
-    var onDeleteClick:((String)->Unit)?=null
+    var onItemClick:((AppiledProgress)->Unit)?=null
+    var onDeleteClick:((AppiledProgress)->Unit)?=null
     var pos = 0
     public
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,12 +37,13 @@ class AppiledCompanyProgressAdapter(private val context: LifecycleOwner, private
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val textView: TextView = itemView.findViewById(R.id.pgCradViewCompanyName)
+        private val companyName: TextView = itemView.findViewById(R.id.pgCardViewCompanyName)
+        private val companyStatus: TextView = itemView.findViewById(R.id.pgCradViewStatus)
         val delete:ImageView =itemView.findViewById(R.id.deleteView)
 
-        fun bind(item: String,index: Int) {
-
-            textView.text = item
+        fun bind(item:AppiledProgress,index: Int) {
+            companyName.text = item.companyName
+            companyStatus.text=item.status
             delete.setOnClickListener{
                 pos = index
                 onDeleteClick?.invoke(item)

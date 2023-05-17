@@ -3,23 +3,25 @@ package my.rjtechnology.apprenticestreet
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import my.rjtechnology.apprenticestreet.databinding.ActivityCompanyMainBinding
-import my.rjtechnology.apprenticestreet.databinding.ActivityMainBinding
 
 class companyMainActivity : AppCompatActivity() {
-
+    private lateinit var viewModel: CompanyMainActivityViewModel
 
     private lateinit var binding: ActivityCompanyMainBinding
             override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
                 binding = ActivityCompanyMainBinding.inflate(layoutInflater)
                 setContentView(binding.root)
+                viewModel = ViewModelProvider(this).get(CompanyMainActivityViewModel::class.java)
+                val id = intent.getStringExtra("id")
+                viewModel.id.value = id
 
                 val navView: BottomNavigationView = binding.companyNavView
 

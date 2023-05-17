@@ -36,6 +36,9 @@ android {
         viewBinding true
         dataBinding true
     }
+    lintOptions {
+        disable 'TextFieldSize'
+    }
 }
 
 dependencies {
@@ -49,6 +52,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     implementation 'com.google.firebase:firebase-database-ktx:20.2.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.firebase:firebase-storage-ktx:20.2.0'
 
     // Room
     def room_version = "2.5.1"

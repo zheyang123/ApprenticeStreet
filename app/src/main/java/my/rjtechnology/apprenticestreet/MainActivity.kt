@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity() {
         //var myRef = database.getReference("message")
         //database.child("users").child("userId1").setValue("zxc")
        // database.child("users").child("userId2").setValue("xc1")
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {

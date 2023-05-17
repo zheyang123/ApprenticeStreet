@@ -1,10 +1,10 @@
-package my.rjtechnology.apprenticestreet.ui.notifications
+package my.rjtechnology.apprenticestreet.ui.userProfile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class NotificationsViewModel : ViewModel() {
+class UserProfileViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is notifications Fragment"

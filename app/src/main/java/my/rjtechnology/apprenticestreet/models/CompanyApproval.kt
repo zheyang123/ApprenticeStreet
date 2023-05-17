@@ -3,8 +3,8 @@ package my.rjtechnology.apprenticestreet.models
 import android.graphics.Bitmap
 
 class CompanyApproval {
-    val traineeName=""
-    val traineeID=""
+    var traineeName=""
+    var traineeID=""
     val profileImage =  Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
-    val job=""
+    var job=""
 }

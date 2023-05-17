@@ -7,19 +7,14 @@ import my.rjtechnology.apprenticestreet.AppDatabase
 import my.rjtechnology.apprenticestreet.dao.LoginDao
 import my.rjtechnology.apprenticestreet.models.AppiledProgress
 
-class  ProgressViewModel( private val application: Application , private val onDone: (String) -> Unit ={}) : AndroidViewModel(application){
+class ProgressViewModel ( private val application: Application):AndroidViewModel(application){
+// ProgressViewModel( private val application: Application , private val onDone: (String) -> Unit ={}) : AndroidViewModel(application){
   //ProgressViewModel( private val application: Application , private val onDone: (String) -> Unit = {}) : AndroidViewModel(application){
-//ProgressViewModel ( private val application: Application):AndroidViewModel(application)
+//
     var appliedJobList = ArrayList<AppiledProgress>()
     var id = ""
     val haveJob:Boolean = false
 
-  init {
 
-       viewModelScope.launch {
-         //  AppDatabase.get(application).loginDao().getUser().id
-            onDone(AppDatabase.get(application).loginDao().getUser().id)
-       }
-   }
 
 }

@@ -40,7 +40,8 @@ class CompanyTraineeFragment : Fragment() {
         val fab = binding.traineeFloatingbutton
 
         fab.setOnClickListener {
-           // val navController = findNavController().navigate(R.id.action_navigation_company_trainee_to_traineeDetailFragment)
+
+            val navController = findNavController().navigate(R.id.action_navigation_company_trainee_to_nav_company_approval)
         }
 
         return binding.root

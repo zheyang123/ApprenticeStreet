@@ -49,8 +49,11 @@ class LoginActivity : AppCompatActivity() {
                                     find = true
                                     if (user.status == "User")
                                     {
-                                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                                        startActivity(intent)
+                                        val intent = Intent(this@LoginActivity, MainActivity::class.java).also {
+                                            it.putExtra("id",user.id)
+                                            startActivity(it)
+                                        }
+
                                         Toast.makeText(this@LoginActivity, "Login Successful", Toast.LENGTH_SHORT).show()
                                         lifecycleScope.launch { AppDatabase.get(this@LoginActivity).loginDao().insert(user)}
                                         break
@@ -71,8 +74,10 @@ class LoginActivity : AppCompatActivity() {
                                         for (company in companies) {
                                             if (company.companyEmail == emailOrUsernameText && company.companyPassword == passwordText) {
                                                 if (company.status == "Company") {
-                                                    val intent2 = Intent(this@LoginActivity, companyMainActivity::class.java)
-                                                    startActivity(intent2)
+                                                    val intent2 = Intent(this@LoginActivity, companyMainActivity::class.java).also {it.putExtra("id",company.id)
+                                                        startActivity(it)
+                                                    }
+
                                                     Toast.makeText(this@LoginActivity, "Login Successful", Toast.LENGTH_SHORT).show()
                                                     lifecycleScope.launch { AppDatabase.get(this@LoginActivity).loginDao().insert(company) }
                                                     break

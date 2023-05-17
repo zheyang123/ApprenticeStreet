@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_navigation_company_trainee_to_traineeDetailFragment"
             app:destination="@id/nav_trainee_detail" />
+        <action
+            android:id="@+id/action_navigation_company_trainee_to_nav_company_approval"
+            app:destination="@id/nav_company_approval" />
     </fragment>
     <fragment
         android:id="@+id/navigation_company_joblist"
@@ -62,4 +65,8 @@
         android:name="my.rjtechnology.apprenticestreet.ui.traineeDetail.TraineeDetailFragment"
         android:label="fragment_trainee_detail"
         tools:layout="@layout/fragment_trainee_detail" />
+    <fragment
+        android:id="@+id/nav_company_approval"
+        android:name="my.rjtechnology.apprenticestreet.ui.companyApproval.CompanyApprovalFragment"
+        tools:layout="@layout/fragment_company_approval" />
 </navigation>

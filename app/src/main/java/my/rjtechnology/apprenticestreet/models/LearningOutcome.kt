@@ -19,7 +19,7 @@ import kotlinx.parcelize.Parcelize
     ]
 ) data class LearningOutcome(
     @PrimaryKey val id: String,
-    val desc: String,
+    var desc: String,
     val progress: Boolean = false,
     @ColumnInfo(name = "job_id", index = true) val jobId: String,
 ) : Parcelable {

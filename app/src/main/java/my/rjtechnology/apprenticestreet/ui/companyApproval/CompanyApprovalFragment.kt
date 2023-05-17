@@ -100,7 +100,7 @@ class CompanyApprovalFragment : Fragment() {
                    readTraineeName(apList.userId,progressAdapter)
                     readJobName(apList.jobId,progressAdapter)
                    a.learningOutcome = readlearningOutcome(apList.jobId)
-                    if(apList.status!="Rejected")
+                    if(apList.status != "Rejected")
                     viewModel.approvalList.add(a)
                 }
                 progressAdapter.notifyDataSetChanged()

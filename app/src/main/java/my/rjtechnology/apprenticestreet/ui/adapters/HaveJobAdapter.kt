@@ -21,7 +21,7 @@ class HaveJobAdapter(private val context: LifecycleOwner, private val data: List
     var pos = 0
     public
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.trainee_details_card_view, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.have_job_card_view, parent, false)
         return ViewHolder(view)
     }
 
@@ -41,19 +41,19 @@ class HaveJobAdapter(private val context: LifecycleOwner, private val data: List
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val learningOutcome: TextView = itemView.findViewById(R.id.learningOurcomeCheckbox)
+        private val learningOutcomeText:TextView = itemView.findViewById(R.id.learningOutcomeDesc)
         private val isDone:ImageView = itemView.findViewById(R.id.isDoneImage)
         //  val delete: ImageView =itemView.findViewById(R.id.deleteView)
 
         fun bind(item: LearningOutcome, index: Int) {
-            learningOutcome.setText(item.desc)
-            if(item.progress)
-            {
-                isDone.setImageBitmap(BitmapFactory.decodeResource(contexts.resources, R.drawable.ic_green_check))
-
+            learningOutcomeText.setText(item.desc.toString())
+            if (item.progress) {
+                isDone.setImageResource(R.drawable.ic_green_check)
+            } else {
+                isDone.setImageResource(R.drawable.ic_grey_check_foreground)
             }
-            else
-                isDone.setImageBitmap(BitmapFactory.decodeResource(contexts.resources, R.drawable.ic_add_foreground))
+
+
 //            delete.setOnClickListener{
 //                pos = index
 //                onDeleteClick?.invoke(item)

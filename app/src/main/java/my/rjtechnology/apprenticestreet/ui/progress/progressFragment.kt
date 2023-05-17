@@ -25,8 +25,10 @@ import my.rjtechnology.apprenticestreet.MainViewModel
 import my.rjtechnology.apprenticestreet.databinding.FragmentProgressBinding
 import my.rjtechnology.apprenticestreet.models.AppiledProgress
 import my.rjtechnology.apprenticestreet.models.JobApplication
+import my.rjtechnology.apprenticestreet.models.LearningOutcome
 
 import my.rjtechnology.apprenticestreet.ui.adapters.AppiledCompanyProgressAdapter
+import my.rjtechnology.apprenticestreet.ui.adapters.HaveJobAdapter
 import my.rjtechnology.apprenticestreet.ui.adapters.traineeListAdapter
 import my.rjtechnology.apprenticestreet.ui.searchjob.SearchJobViewModelFactory
 
@@ -57,9 +59,9 @@ class progressFragment : Fragment() {
         val root: View = binding.root
         //Toast.makeText(requireContext(), viewModel.id, Toast.LENGTH_SHORT).show()
 
-
         var progressAdapter:AppiledCompanyProgressAdapter  = AppiledCompanyProgressAdapter(viewLifecycleOwner,viewModel.appliedJobList)
-        if(!accepted)
+        var progressAdapter1:HaveJobAdapter  = HaveJobAdapter(viewLifecycleOwner,viewModel.learningOutcome,requireContext())
+        if(!viewModel.haveJob)
         {
 
             val companyRecycler: RecyclerView = binding.comapanyRecycle
@@ -86,6 +88,7 @@ class progressFragment : Fragment() {
                     Toast.makeText(context, a.toString(), Toast.LENGTH_SHORT).show()
                     viewModel.appliedJobList.removeAt(a)
                     val ref = FirebaseDatabase.getInstance().getReference("jobApplications").child(viewModel.id).child(it.companyId)
+
                     ref.removeValue()
                     progressAdapter.notifyDataSetChanged()
                 }
@@ -99,6 +102,20 @@ class progressFragment : Fragment() {
         }
         else
         {
+            val companyRecycler: RecyclerView = binding.comapanyRecycle
+            val layoutManager = LinearLayoutManager(activity)
+            val learningOutcome= LearningOutcome()
+            learningOutcome.desc = "asdasd"
+            viewModel.learningOutcome.add(learningOutcome)
+            learningOutcome.desc ="asddddsss"
+            viewModel.learningOutcome.add(learningOutcome)
+            // Toast.makeText(context,id, Toast.LENGTH_SHORT).show()
+//
+
+            companyRecycler.layoutManager = layoutManager
+            companyRecycler.setHasFixedSize(true)
+            companyRecycler.adapter = progressAdapter1
+
 
         }
         mViewModel.id.observe(viewLifecycleOwner) { id ->

@@ -141,6 +141,7 @@ class PostJobFragment : Fragment() {
 
             // Commit
             viewModel.submit()
+            Toast.makeText(context, getString(R.string.post_job_success_msg), Toast.LENGTH_SHORT).show()
         }
 
         findNavController()

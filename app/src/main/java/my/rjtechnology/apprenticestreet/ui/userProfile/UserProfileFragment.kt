@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -21,13 +22,15 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import my.rjtechnology.apprenticestreet.LoginActivity
+import my.rjtechnology.apprenticestreet.MainViewModel
 import my.rjtechnology.apprenticestreet.R
 import my.rjtechnology.apprenticestreet.databinding.FragmentUserProfileBinding
 import my.rjtechnology.apprenticestreet.models.UserProfile
+import my.rjtechnology.apprenticestreet.ui.progress.ProgressViewModel
 import java.io.ByteArrayOutputStream
 
 class UserProfileFragment : Fragment() {
-    var userProfile = UserProfile()
+    private var userProfile = UserProfile()
 
     private var _binding: FragmentUserProfileBinding? = null
     // This property is only valid between onCreateView and
@@ -52,19 +55,30 @@ class UserProfileFragment : Fragment() {
     private lateinit var editProfileButton: Button
     private lateinit var logoutButton: Button
 
+    private lateinit var viewModel: UserProfileViewModel
+    private lateinit var mViewModel: MainViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
+        viewModel = ViewModelProvider(requireParentFragment())[UserProfileViewModel::class.java]
         _binding = FragmentUserProfileBinding.inflate(inflater, container, false)
+        mViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         return binding.root
         }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mViewModel.id.observe(viewLifecycleOwner) { id ->
+            viewModel.id = id
+            callUI()
+        }
+    }
+
+    private fun callUI() {
         userPfp = binding.userProfileImageEdit
         age = binding.userAgeEdit
         contact = binding.userContactEdit
@@ -81,9 +95,9 @@ class UserProfileFragment : Fragment() {
 
         // Fetch the user profile data from the database
         val database = Firebase.database
-        val userProfileRef = database.reference.child("User Profiles").child("12345")
+        val userProfileRef = database.reference.child("User Profiles").child(viewModel.id)
 
-        val imageRef = storageRef.child("UserProfilePics").child("12345")
+        val imageRef = storageRef.child("UserProfilePics").child(viewModel.id)
 
         // Download the image as a byte array
         imageRef.getBytes(Long.MAX_VALUE).addOnSuccessListener { bytes ->
@@ -96,7 +110,6 @@ class UserProfileFragment : Fragment() {
             // Handle any errors that occurred during image download
             Log.e(TAG, "Failed to download image: ${exception.message}")
         }
-
 
         userProfileRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -217,19 +230,19 @@ class UserProfileFragment : Fragment() {
                 userProfile.userCHSkill = updatedCHRating
 
                 var database = Firebase.database.reference
-                database.child("User Profiles").child("12345").setValue(userProfile)
+                database.child("User Profiles").child(viewModel.id).setValue(userProfile)
                     .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        // Data write operation successful
-                        Toast.makeText(requireContext(), "Profile saved successfully", Toast.LENGTH_SHORT)
-                            .show()
-                        // Perform further actions if needed
-                    } else {
-                        // Data write operation failed
-                        Toast.makeText(requireContext(), "Profile save failed", Toast.LENGTH_SHORT).show()
+                        if (task.isSuccessful) {
+                            // Data write operation successful
+                            Toast.makeText(requireContext(), "Profile saved successfully", Toast.LENGTH_SHORT)
+                                .show()
+                            // Perform further actions if needed
+                        } else {
+                            // Data write operation failed
+                            Toast.makeText(requireContext(), "Profile save failed", Toast.LENGTH_SHORT).show()
+                        }
+                        uploadImage()
                     }
-                    uploadImage()
-                }
             }
         }
 
@@ -278,8 +291,7 @@ class UserProfileFragment : Fragment() {
     }
 
     private fun uploadImage() {
-        val imageId = "12345" // Replace with your desired ID or use a dynamic ID
-        val imageRef = storageRef.child("UserProfilePics").child(imageId)
+        val imageRef = storageRef.child("UserProfilePics").child(viewModel.id)
 
         try {
             //val inputStream = contentResolver.openInputStream(uri)

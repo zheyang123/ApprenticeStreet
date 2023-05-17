@@ -5,23 +5,11 @@
     android:layout_height="match_parent"
     android:layout_centerHorizontal="true">
 
-    <ImageView
-        android:id="@+id/companyProfileImageEdit"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="150dp" />
-
     <LinearLayout
         android:id="@+id/userProfileLinear2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/companyProfileImageEdit"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="64dp"
         android:paddingLeft="10dp"
         android:orientation="horizontal">
 
@@ -29,7 +17,7 @@
             android:id="@+id/companyNameImg"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            app:srcCompat="@drawable/ic_company_24" />
+            app:srcCompat="@drawable/ic_location_24" />
 
         <TextView
             android:id="@+id/companyHomeLabel3"
@@ -63,10 +51,56 @@
         android:layout_marginBottom="4dp" />
 
     <LinearLayout
-        android:id="@+id/companyHomeLinear3"
+        android:id="@+id/userProfileLinear3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/userProfileLinear2"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/companyUserNameImg"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:srcCompat="@drawable/ic_company_24" />
+
+        <TextView
+            android:id="@+id/companyHomeLabel2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="User Name:"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/companyUserNameEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:background="@null"
+            android:text="Name"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:enabled="false"
+            tools:ignore="TouchTargetSizeCheck" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_below="@id/userProfileLinear3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp" />
+
+    <LinearLayout
+        android:id="@+id/companyHomeLinear3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/userProfileLinear3"
         android:orientation="horizontal"
         android:layout_marginTop="8dp"
         android:paddingLeft="10dp" >
@@ -242,55 +276,10 @@
         android:layout_marginBottom="4dp" />
 
     <LinearLayout
-        android:id="@+id/companyHomeLinear7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/companyHomeLinear6"
-        android:orientation="horizontal"
-        android:layout_marginTop="8dp"
-        android:paddingLeft="10dp" >
-
-        <ImageView
-            android:id="@+id/companyLocationImg"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            app:srcCompat="@drawable/ic_location_24" />
-
-        <TextView
-            android:id="@+id/companyHomeLabel8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:text="Address:"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:background="@null"
-            tools:ignore="TouchTargetSizeCheck"
-            android:id="@+id/companyLocationEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:textColor="@color/black"
-            android:text="Level 10, 1 Sentral, Jalan Rakyat, Kuala Lumpur Sentral, 50706 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur"
-            android:textSize="18sp" />
-
-    </LinearLayout>
-
-    <View
-        android:layout_below="@id/companyHomeLinear7"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/gray"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp" />
-
-    <LinearLayout
         android:id="@+id/userProfLinear8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/companyHomeLinear7"
+        android:layout_below="@id/companyHomeLinear6"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="16dp"
         android:layout_alignParentEnd="true"

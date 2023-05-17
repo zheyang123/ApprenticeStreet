@@ -1,14 +1,19 @@
 package my.rjtechnology.apprenticestreet
 
 import android.app.Activity
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseApp
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -19,20 +24,24 @@ import java.io.ByteArrayOutputStream
 class CompleteProfile : AppCompatActivity() {
     private lateinit var binding: ActivityCompleteProfileBinding
     private var userProfile = UserProfile()
-
+    var id = ""
     private var bit: Bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
     private val PICK_IMAGE_REQUEST_CODE = 1
     private val storage = Firebase.storage
     private val storageRef = storage.reference
+    var namePass = ""
+    var emailPass = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FirebaseApp.initializeApp(this)
         binding = ActivityCompleteProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        id = intent.getStringExtra("id").toString()
         val uploadImg = binding.userUploadImage
         val completeProfileButton = binding.completeProfButton
+        getEmail()
+        getName()
 
         uploadImg.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
@@ -83,6 +92,8 @@ class CompleteProfile : AppCompatActivity() {
             }
 
             // Create a UserProfile object with the retrieved values
+            userProfile.userName = namePass
+            userProfile.userEmail = emailPass
             userProfile.userAge = ageValue
             userProfile.userContact = contactValue
             userProfile.userLevelOfEducation = loeValue
@@ -91,9 +102,12 @@ class CompleteProfile : AppCompatActivity() {
             userProfile.userENSkill = enRatingValue
             userProfile.userCHSkill = chRatingValue
 
+            var database2 = Firebase.database.reference
+            database2.child("users").child(id).child("profileOk").setValue(true)
+
             // Call a function to upload the user profile to Firebase
             var database = Firebase.database.reference
-            database.child("User Profiles").child("12345").setValue(userProfile)
+            database.child("User Profiles").child(id).setValue(userProfile)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         // Data write operation successful
@@ -106,6 +120,10 @@ class CompleteProfile : AppCompatActivity() {
                     }
                     uploadImage()
                 }
+            val intent = Intent(this, MainActivity::class.java
+            ).also { it.putExtra("id", id)
+                startActivity(it)
+            }
         }
     }
 
@@ -136,7 +154,7 @@ class CompleteProfile : AppCompatActivity() {
     }
 
     private fun uploadImage() {
-        val imageId = "12345" // Replace with your desired ID or use a dynamic ID
+        val imageId = id // Replace with your desired ID or use a dynamic ID
         val imageRef = storageRef.child("UserProfilePics").child(imageId)
 
         try {
@@ -168,4 +186,43 @@ class CompleteProfile : AppCompatActivity() {
         }
     }
 
+    private fun getName() {
+        var database1 = Firebase.database.reference
+        var ref = database1.child("users").child(id).child("fullName")
+
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val stringValue = snapshot.getValue(String::class.java)
+                if (stringValue != null) {
+                    // Use the retrieved string value
+                    namePass = stringValue
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle any errors that occur during data retrieval
+                Log.e(TAG, "Failed to retrieve string value: ${error.message}")
+            }
+        })
+    }
+
+    private fun getEmail() {
+        var database1 = Firebase.database.reference
+        var ref = database1.child("users").child(id).child("email")
+
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val stringValue = snapshot.getValue(String::class.java)
+                if (stringValue != null) {
+                    // Use the retrieved string value
+                    emailPass = stringValue
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle any errors that occur during data retrieval
+                Log.e(TAG, "Failed to retrieve string value: ${error.message}")
+            }
+        })
+    }
 }

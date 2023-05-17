@@ -1,6 +1,7 @@
 package my.rjtechnology.apprenticestreet
 
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -49,11 +50,17 @@ class LoginActivity : AppCompatActivity() {
                                     find = true
                                     if (user.status == "User")
                                     {
-                                        val intent = Intent(this@LoginActivity, MainActivity::class.java).also {
-                                            it.putExtra("id",user.id)
-                                            startActivity(it)
+                                        if (user.profileOk == true) {
+                                            val intent = Intent(this@LoginActivity, MainActivity::class.java
+                                            ).also { it.putExtra("id", user.id)
+                                                startActivity(it)
+                                            }
+                                        }else {
+                                            val intent = Intent(this@LoginActivity, CompleteProfile::class.java
+                                            ).also { it.putExtra("id", user.id)
+                                                startActivity(it)
+                                            }
                                         }
-
                                         Toast.makeText(this@LoginActivity, "Login Successful", Toast.LENGTH_SHORT).show()
                                         lifecycleScope.launch { AppDatabase.get(this@LoginActivity).loginDao().insert(user)}
                                         break
@@ -120,9 +127,10 @@ class LoginActivity : AppCompatActivity() {
         val password: String,
         val fullName: String,
         val username: String,
+        val profileOk: Boolean
     )
     {
-        constructor() : this("", "", "", "", "", "")
+        constructor() : this("", "", "", "", "", "", false)
     }
 
     @Entity(tableName = "company") data class Company(

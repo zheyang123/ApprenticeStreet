@@ -3,6 +3,7 @@ package my.rjtechnology.apprenticestreet.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
@@ -14,7 +15,10 @@ class CompanyApprovalAdapter (private val context: LifecycleOwner, private val d
     RecyclerView.Adapter<CompanyApprovalAdapter.ViewHolder>() {
 
     var onItemClick:((CompanyApproval)->Unit)?=null
-  //  var onDeleteClick:((AppiledProgress)->Unit)?=null
+
+    var onDelineClick:((CompanyApproval)->Unit)?=null
+    var onDeleteClick:((CompanyApproval)->Unit)?=null
+    var onApproveClick:((CompanyApproval)->Unit)?=null
     var pos = 0
     public
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,6 +35,7 @@ class CompanyApprovalAdapter (private val context: LifecycleOwner, private val d
 
         }
 
+
     }
 
     override fun getItemCount(): Int {
@@ -41,11 +46,21 @@ class CompanyApprovalAdapter (private val context: LifecycleOwner, private val d
         private val traineeName: TextView = itemView.findViewById(R.id.traineeName)
         private val appliedJob: TextView = itemView.findViewById(R.id.jobName)
         val profilePicture: ImageView =itemView.findViewById(R.id.profileImage1)
-
+        val apBtn: Button = itemView.findViewById(R.id.approveBtn)
+        val deBtn: Button = itemView.findViewById(R.id.delineBtn)
         fun bind(item: CompanyApproval, index: Int) {
             traineeName.text = item.traineeName
             appliedJob.text= item.job
             profilePicture.setImageBitmap(item.profileImage)
+
+            apBtn.setOnClickListener{
+                onApproveClick?.invoke(item)
+                pos = index
+            }
+            deBtn.setOnClickListener{
+                onDelineClick?.invoke(item)
+                pos = index
+            }
             //companyStatus.text=item.status
 //            delete.setOnClickListener{
 //                pos = index

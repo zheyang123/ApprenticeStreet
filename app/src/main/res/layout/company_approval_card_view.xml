@@ -18,17 +18,17 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/approveBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="2dp"
             android:text="@string/Approve"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button2" />
+            app:layout_constraintEnd_toStartOf="@+id/delineBtn" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/delineBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"

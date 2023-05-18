@@ -51,7 +51,6 @@ class UserProfileFragment : Fragment() {
     private lateinit var enRating: RatingBar
     private lateinit var chRating: RatingBar
     private lateinit var username: EditText
-    private lateinit var userID: TextView
     private lateinit var editProfileButton: Button
     private lateinit var logoutButton: Button
 
@@ -89,7 +88,6 @@ class UserProfileFragment : Fragment() {
         enRating = binding.englishRatingBarEdit
         chRating = binding.chineseRatingBarEdit
         username = binding.userNameEdit
-        userID = binding.userIDGet
         editProfileButton = binding.userEditProfButton
         logoutButton = binding.userLogoutButton
 
@@ -147,7 +145,6 @@ class UserProfileFragment : Fragment() {
 
         username.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
         email.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-        userID.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
         age.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
         contact.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
         workExp.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))

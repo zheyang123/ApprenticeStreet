@@ -62,53 +62,10 @@
         android:layout_marginBottom="4dp" />
 
     <LinearLayout
-        android:id="@+id/companyHomeLinear3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/userProfileLinear2"
-        android:orientation="horizontal"
-        android:layout_marginTop="8dp"
-        android:paddingLeft="10dp" >
-
-        <ImageView
-            android:id="@+id/emailImg"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            app:srcCompat="@drawable/ic_grid_3x3_24" />
-
-        <TextView
-            android:id="@+id/companyHomeLabel5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:text="User ID:"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/userIDGet"
-            android:textColor="@color/black"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:text="UID"
-            android:textSize="18sp" />
-
-    </LinearLayout>
-
-    <View
-        android:layout_below="@id/companyHomeLinear3"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/gray"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp" />
-
-    <LinearLayout
         android:id="@+id/companyHomeLinear4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/companyHomeLinear3"
+        android:layout_below="@id/userProfileLinear2"
         android:orientation="horizontal"
         android:layout_marginTop="8dp"
         android:paddingLeft="10dp" >

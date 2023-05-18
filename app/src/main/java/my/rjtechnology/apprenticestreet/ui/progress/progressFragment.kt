@@ -56,24 +56,19 @@ class progressFragment : Fragment() {
         mViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         val root: View = binding.root
         var progressAdapter:AppiledCompanyProgressAdapter  = AppiledCompanyProgressAdapter(viewLifecycleOwner,viewModel.appliedJobList)
-        var progressAdapter1:HaveJobAdapter  = HaveJobAdapter(viewLifecycleOwner,viewModel.learningOutcome,requireContext())
 
+        val companyRecycler: RecyclerView = binding.comapanyRecycle
         //Toast.makeText(requireContext(), viewModel.id, Toast.LENGTH_SHORT).show()
         viewModel.haveJob.observe(viewLifecycleOwner){
-            if(!viewModel.haveJob.value!!)
+            if(!it)
             {
-
-                val companyRecycler: RecyclerView = binding.comapanyRecycle
                 val layoutManager = LinearLayoutManager(activity)
-
-                // Toast.makeText(context,id, Toast.LENGTH_SHORT).show()
-//
-
                 companyRecycler.layoutManager = layoutManager
                 companyRecycler.setHasFixedSize(true)
                 companyRecycler.adapter = progressAdapter
+
                 progressAdapter.onItemClick = {
-                    Toast.makeText(context,"asd", Toast.LENGTH_SHORT).show()
+                   // Toast.makeText(context,"asd", Toast.LENGTH_SHORT).show()
                 }
 
                 progressAdapter.onDeleteClick = {
@@ -98,44 +93,25 @@ class progressFragment : Fragment() {
                 }
 
             }
-            else
+            else if(it)
             {
-                val companyRecycler: RecyclerView = binding.comapanyRecycle
+                var progressAdapter1:HaveJobAdapter  = HaveJobAdapter(viewLifecycleOwner,viewModel.learningOutcome,requireContext())
                 val layoutManager = LinearLayoutManager(activity)
-
-//
-
                 companyRecycler.layoutManager = layoutManager
-                companyRecycler.setHasFixedSize(true)
-                companyRecycler.adapter = progressAdapter1
 
+                companyRecycler.setHasFixedSize(true)
+
+                companyRecycler.adapter = progressAdapter1
 
             }
         }
 
         mViewModel.id.observe(viewLifecycleOwner) { id ->
-            // 在此处使用获取到的 ID 值进行后续操作
+
             viewModel.id = id
             read(progressAdapter)
-            Firebase.database.reference
-                .child("traineeJob").child(id)
-                .addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        val job = snapshot.getValue(TraineeJob::class.java)
-                        if (job != null) {
-                            viewModel.haveJob.value = true;
-                            viewModel.learningOutcome= job.learningOutcome
-                            progressAdapter1.notifyDataSetChanged()
-                        }
-                        else
-                        {
-                            viewModel.haveJob.value = false;
-                            progressAdapter.notifyDataSetChanged()
-                        }
-                    }
-                    override fun onCancelled(error: DatabaseError) {
-                    }
-                })
+            readProgress()
+
 
         }
         //viewModel.id.value
@@ -188,6 +164,31 @@ class progressFragment : Fragment() {
                 }
                 override fun onCancelled(error: DatabaseError) {
                     // 在这里处理取消事件的逻辑（如果需要）
+                }
+            })
+    }
+    fun readProgress()
+    {
+        Firebase.database.reference
+            .child("traineeJob").child(viewModel.id)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val job = snapshot.getValue(TraineeJob::class.java)
+                    if (job != null) {
+
+                        viewModel.learningOutcome= job.learningOutcome
+
+
+                        viewModel.haveJob.value = true;
+                    }
+                    else
+                    {
+                        viewModel.haveJob.value = false;
+
+                      //  progressAdapter.notifyDataSetChanged()
+                    }
+                }
+                override fun onCancelled(error: DatabaseError) {
                 }
             })
     }

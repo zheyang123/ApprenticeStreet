@@ -134,7 +134,7 @@ fun read(progressAdapter:traineeListAdapter)
                     }
                 }
                 override fun onCancelled(error: DatabaseError) {
-                    // 在这里处理取消事件的逻辑（如果需要）
+
                 }
             })
     }

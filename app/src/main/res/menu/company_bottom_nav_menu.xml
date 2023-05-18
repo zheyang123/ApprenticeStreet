@@ -11,10 +11,11 @@
 
     <item android:id="@+id/navigation_company_help"
         android:title="Help"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/ic_help_24_black"
         ></item>
     <item android:id="@+id/navigation_company_joblist"
         android:title="Job List"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:iconTint="@color/black"
+        android:icon="@drawable/ic_work_24"
         ></item>
 </menu>

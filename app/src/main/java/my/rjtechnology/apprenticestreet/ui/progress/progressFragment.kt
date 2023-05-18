@@ -23,9 +23,7 @@ import my.rjtechnology.apprenticestreet.Constants
 import my.rjtechnology.apprenticestreet.LoginActivity
 import my.rjtechnology.apprenticestreet.MainViewModel
 import my.rjtechnology.apprenticestreet.databinding.FragmentProgressBinding
-import my.rjtechnology.apprenticestreet.models.AppiledProgress
-import my.rjtechnology.apprenticestreet.models.JobApplication
-import my.rjtechnology.apprenticestreet.models.LearningOutcome
+import my.rjtechnology.apprenticestreet.models.*
 
 import my.rjtechnology.apprenticestreet.ui.adapters.AppiledCompanyProgressAdapter
 import my.rjtechnology.apprenticestreet.ui.adapters.HaveJobAdapter
@@ -57,71 +55,87 @@ class progressFragment : Fragment() {
         _binding = FragmentProgressBinding.inflate(inflater, container, false)
         mViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         val root: View = binding.root
-        //Toast.makeText(requireContext(), viewModel.id, Toast.LENGTH_SHORT).show()
-
         var progressAdapter:AppiledCompanyProgressAdapter  = AppiledCompanyProgressAdapter(viewLifecycleOwner,viewModel.appliedJobList)
         var progressAdapter1:HaveJobAdapter  = HaveJobAdapter(viewLifecycleOwner,viewModel.learningOutcome,requireContext())
-        if(!viewModel.haveJob)
-        {
 
-            val companyRecycler: RecyclerView = binding.comapanyRecycle
-            val layoutManager = LinearLayoutManager(activity)
+        //Toast.makeText(requireContext(), viewModel.id, Toast.LENGTH_SHORT).show()
+        viewModel.haveJob.observe(viewLifecycleOwner){
+            if(!viewModel.haveJob.value!!)
+            {
 
-           // Toast.makeText(context,id, Toast.LENGTH_SHORT).show()
+                val companyRecycler: RecyclerView = binding.comapanyRecycle
+                val layoutManager = LinearLayoutManager(activity)
+
+                // Toast.makeText(context,id, Toast.LENGTH_SHORT).show()
 //
 
-            companyRecycler.layoutManager = layoutManager
-            companyRecycler.setHasFixedSize(true)
-            companyRecycler.adapter = progressAdapter
-            progressAdapter.onItemClick = {
-                Toast.makeText(context,"asd", Toast.LENGTH_SHORT).show()
-            }
-//
-//
-            progressAdapter.onDeleteClick = {
-                var a = progressAdapter.pos
-                val builder = AlertDialog.Builder(requireActivity() as Context)
-                builder.setTitle("Confirmation")
-                builder.setMessage("Are you sure you want to perform this action?")
-                builder.setPositiveButton("Yes") { dialog, which ->
-
-                    Toast.makeText(context, a.toString(), Toast.LENGTH_SHORT).show()
-                    viewModel.appliedJobList.removeAt(a)
-                    val ref = FirebaseDatabase.getInstance().getReference("jobApplications").child(viewModel.id).child(it.companyId)
-
-                    ref.removeValue()
-                    progressAdapter.notifyDataSetChanged()
+                companyRecycler.layoutManager = layoutManager
+                companyRecycler.setHasFixedSize(true)
+                companyRecycler.adapter = progressAdapter
+                progressAdapter.onItemClick = {
+                    Toast.makeText(context,"asd", Toast.LENGTH_SHORT).show()
                 }
-                builder.setNegativeButton("No") { dialog, which ->
 
+                progressAdapter.onDeleteClick = {
+                    var a = progressAdapter.pos
+                    val builder = AlertDialog.Builder(requireActivity() as Context)
+                    builder.setTitle("Confirmation")
+                    builder.setMessage("Are you sure you want to perform this action?")
+                    builder.setPositiveButton("Yes") { dialog, which ->
+
+                        Toast.makeText(context, a.toString(), Toast.LENGTH_SHORT).show()
+                        viewModel.appliedJobList.removeAt(a)
+                        val ref = FirebaseDatabase.getInstance().getReference("jobApplications").child(viewModel.id).child(it.companyId)
+
+                        ref.removeValue()
+                        progressAdapter.notifyDataSetChanged()
+                    }
+                    builder.setNegativeButton("No") { dialog, which ->
+
+                    }
+                    builder.show()
+                    //companyRecycler.adapter=progressAdapter
                 }
-                builder.show()
-                //companyRecycler.adapter=progressAdapter
-            }
 
-        }
-        else
-        {
-            val companyRecycler: RecyclerView = binding.comapanyRecycle
-            val layoutManager = LinearLayoutManager(activity)
-            val learningOutcome= LearningOutcome()
-            learningOutcome.desc = "asdasd"
-            viewModel.learningOutcome.add(learningOutcome)
-            learningOutcome.desc ="asddddsss"
-            viewModel.learningOutcome.add(learningOutcome)
-            // Toast.makeText(context,id, Toast.LENGTH_SHORT).show()
+            }
+            else
+            {
+                val companyRecycler: RecyclerView = binding.comapanyRecycle
+                val layoutManager = LinearLayoutManager(activity)
+
 //
 
-            companyRecycler.layoutManager = layoutManager
-            companyRecycler.setHasFixedSize(true)
-            companyRecycler.adapter = progressAdapter1
+                companyRecycler.layoutManager = layoutManager
+                companyRecycler.setHasFixedSize(true)
+                companyRecycler.adapter = progressAdapter1
 
 
+            }
         }
+
         mViewModel.id.observe(viewLifecycleOwner) { id ->
             // 在此处使用获取到的 ID 值进行后续操作
             viewModel.id = id
             read(progressAdapter)
+            Firebase.database.reference
+                .child("traineeJob").child(id)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val job = snapshot.getValue(TraineeJob::class.java)
+                        if (job != null) {
+                            viewModel.haveJob.value = true;
+                            viewModel.learningOutcome= job.learningOutcome
+                            progressAdapter1.notifyDataSetChanged()
+                        }
+                        else
+                        {
+                            viewModel.haveJob.value = false;
+                            progressAdapter.notifyDataSetChanged()
+                        }
+                    }
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+                })
 
         }
         //viewModel.id.value

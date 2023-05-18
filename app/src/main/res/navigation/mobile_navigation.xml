@@ -37,7 +37,7 @@
 
     <fragment
         android:id="@+id/navigation_locations"
-        android:name="my.rjtechnology.apprenticestreet.ui.locations.LocationsFragment"
+        android:name="my.rjtechnology.apprenticestreet.ui.jobView.locations.LocationsFragment"
         android:label="@string/locations"
         tools:layout="@layout/fragment_locations" />
 
@@ -88,7 +88,7 @@
 
     <fragment
         android:id="@+id/navigation_industries"
-        android:name="my.rjtechnology.apprenticestreet.ui.locations.industries.IndustriesFragment"
+        android:name="my.rjtechnology.apprenticestreet.ui.jobView.locations.industries.IndustriesFragment"
         android:label="@string/industries"
         tools:layout="@layout/fragment_industries" />
 

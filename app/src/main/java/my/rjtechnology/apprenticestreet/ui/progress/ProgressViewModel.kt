@@ -14,7 +14,7 @@ class ProgressViewModel ( private val application: Application):AndroidViewModel
 //
     var appliedJobList = ArrayList<AppiledProgress>()
     var id = ""
-    val haveJob:Boolean = true
+    var haveJob:MutableLiveData<Boolean> = MutableLiveData()
     var learningOutcome = ArrayList<LearningOutcome>()
 
 

@@ -47,9 +47,9 @@ class traineeListAdapter(private val context: LifecycleOwner, private val data: 
 
         fun bind(item:Trainee, index: Int) {
             traineeName.text= item.name
-            traineeAge.text=item.Age.toString()
+            traineeAge.text=item.age.toString()
             traineeJob.text=item.job
-            profileImage.setImageBitmap(item.profileImage)
+            //profileImage.setImageBitmap(item.profileImage)
 
            // companyName.text = item.companyName
             //companyStatus.text=item.status

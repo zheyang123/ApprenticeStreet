@@ -155,7 +155,7 @@ class progressFragment : Fragment() {
                 {
                     var a = AppiledProgress()
 
-                    a.companyName = jobApp.userId
+                    readJobName(progressAdapter,jobApp.jobId)
                     a.companyId = jobApp.jobId
                     a.status = jobApp.status
 
@@ -163,6 +163,33 @@ class progressFragment : Fragment() {
                 }
                 progressAdapter.notifyDataSetChanged()
             }
+    }
+    fun readJobName(progressAdapter:AppiledCompanyProgressAdapter,jobID:String)
+    {
+        Firebase.database.reference
+            .child("jobs").child(jobID).child("job")
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val job = snapshot.getValue(Job::class.java)
+
+                    if (job != null) {
+                        var index = 0
+
+                        for(u in viewModel.appliedJobList)
+                        {
+                            if(u.companyId==jobID)
+                            {
+                                viewModel.appliedJobList[index].companyName= job.title
+                            }
+                            index++
+                        }
+                        progressAdapter.notifyDataSetChanged()
+                    }
+                }
+                override fun onCancelled(error: DatabaseError) {
+                    // 在这里处理取消事件的逻辑（如果需要）
+                }
+            })
     }
     override fun onDestroyView() {
         super.onDestroyView()

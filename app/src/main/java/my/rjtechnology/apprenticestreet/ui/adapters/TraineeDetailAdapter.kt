@@ -16,7 +16,7 @@ class TraineeDetailAdapter(private val context: LifecycleOwner, private val data
     RecyclerView.Adapter<TraineeDetailAdapter.ViewHolder>() {
 
     var onItemClick:((LearningOutcome)->Unit)?=null
-  //  var onDeleteClick:((AppiledProgress)->Unit)?=null
+    var onCheckClick:((LearningOutcome)->Unit)?=null
     var pos = 0
     public
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -46,10 +46,11 @@ class TraineeDetailAdapter(private val context: LifecycleOwner, private val data
         fun bind(item: LearningOutcome, index: Int) {
           learningOutcome.setText(item.desc)
             learningOutcome.isChecked = item.progress
-//            delete.setOnClickListener{
-//                pos = index
-//                onDeleteClick?.invoke(item)
-//            }
+            learningOutcome.setOnClickListener{
+              pos = index
+               onCheckClick?.invoke(item)
+
+            }
         }
     }
 }

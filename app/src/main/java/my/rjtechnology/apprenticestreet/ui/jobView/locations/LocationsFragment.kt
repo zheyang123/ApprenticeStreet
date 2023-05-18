@@ -1,4 +1,4 @@
-package my.rjtechnology.apprenticestreet.ui.locations
+package my.rjtechnology.apprenticestreet.ui.jobView.locations
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

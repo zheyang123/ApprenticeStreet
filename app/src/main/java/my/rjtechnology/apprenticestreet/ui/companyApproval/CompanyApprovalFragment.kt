@@ -47,7 +47,7 @@ class CompanyApprovalFragment : Fragment() {
 
         progressAdapter.onApproveClick={
             var database = Firebase.database.reference
-            database.child("companyTraineeList").child(viewModel.id).setValue(it.traineeID)
+            database.child("companyTraineeList").child(viewModel.id).child(it.traineeID).setValue(it.traineeID)
             var traineeJob = TraineeJob()
             traineeJob.jobName = it.job
             traineeJob.learningOutcome = it.learningOutcome
@@ -101,7 +101,7 @@ class CompanyApprovalFragment : Fragment() {
                     readJobName(apList.jobId,progressAdapter)
                    a.learningOutcome = readlearningOutcome(apList.jobId)
                     if(apList.status != "Rejected")
-                    viewModel.approvalList.add(a)
+                        viewModel.approvalList.add(a)
                 }
                 progressAdapter.notifyDataSetChanged()
             }
@@ -137,7 +137,7 @@ class CompanyApprovalFragment : Fragment() {
     }
     fun readTraineeName(userID:String,progressAdapter:CompanyApprovalAdapter) {
         var traineeName = ""
-        viewModel.approvalList.clear()
+       // viewModel.approvalList.clear()
         Firebase.database.reference
             .child("users").child(userID)
             .addListenerForSingleValueEvent(object : ValueEventListener {

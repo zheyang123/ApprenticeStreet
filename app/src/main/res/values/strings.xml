@@ -8,7 +8,7 @@
 
     <!-- Titles -->
     <string name="title_progress">Progress</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_dashboard">Help</string>
     <string name="title_search_job">Search Job</string>
     <string name="title_profile">Profile</string>
     <string name="title_post_job">Post Job</string>
